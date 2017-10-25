@@ -1,0 +1,9 @@
+# IntelliJ
+/out/
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# .DS_Store files (Mac users)
+*.DS_Store
