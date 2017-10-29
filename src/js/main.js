@@ -23,7 +23,7 @@
 		    //console.log("rendering");
     }
 
-    function updateSimulation() {
+    function updateSimulation(du) {
         //console.log("updating");
     }
 
