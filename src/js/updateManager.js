@@ -1,8 +1,8 @@
 function UpdateManager(updater) {
   this.updater = updater;
 
-  const KEY_PAUSE = 'P'.charCodeAt(0);
-  const KEY_STEP = 'O'.charCodeAt(0);
+  this.KEY_PAUSE = 'P'.charCodeAt(0);
+  this.KEY_STEP = 'O'.charCodeAt(0);
 
   this.isUpdatePaused = false;
   this.NOMINAL_UPDATE_INTERVAL = 16.666;

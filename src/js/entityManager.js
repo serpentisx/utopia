@@ -1,0 +1,6 @@
+class EntityManager {
+
+  constructor() {
+
+  }
+}

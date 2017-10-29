@@ -5,8 +5,6 @@ window.requestAnimationFrame = window.requestAnimationFrame ||
   window.webkitRequestAnimationFrame ||
   window.msRequestAnimationFrame;
 
-let g_gameManager;
-
 function GameManager(game) {
   this.ctx = game.ctx;
   this.renderManager = new RenderManager(game.render)
@@ -20,13 +18,6 @@ function GameManager(game) {
 
   this.frameTime_ms = null;
   this.frameTimeDelta_ms = null;
-
-  g_gameManager = this;
-}
-
-// This needs to be a "global" function, for the "window" APIs to callback to
-function mainIterFrame(frameTime) {
-  g_gameManager.iter(frameTime);
 }
 
 GameManager.prototype.iter = function(frameTime) {
@@ -66,8 +57,12 @@ GameManager.prototype.mainIterFrame = function(frameTime) {
   this.iter(frameTime);
 };
 
+GameManager.prototype.mainIterFrame = function(frameTime) {
+  this.iter(frameTime);
+}
+
 GameManager.prototype.requestNextIteration = function() {
-  window.requestAnimationFrame(mainIterFrame);
+  window.requestAnimationFrame(this.mainIterFrame.bind(this));
 };
 
 GameManager.prototype.start = function() {
