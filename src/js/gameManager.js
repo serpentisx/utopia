@@ -7,11 +7,10 @@ window.requestAnimationFrame = window.requestAnimationFrame ||
 
 let g_gameManager;
 
-function GameManager(ctx, renderManager, updateManager) {
-  this.ctx = ctx;
-
-  this.updateManager = updateManager;
-  this.renderManager = renderManager;
+function GameManager(game) {
+  this.ctx = game.ctx;
+  this.renderManager = new RenderManager(game.render)
+  this.updateManager = new UpdateManager(game.update);
 
   this.KEY_QUIT = 'Q'.charCodeAt(0);
   this.TOGGLE_TIMER_SHOW = 'T'.charCodeAt(0);
