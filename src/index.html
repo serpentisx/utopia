@@ -16,16 +16,24 @@
     padding: 0;
     margin: 0;
   ">
+  <section class= "instruction">
+    <p>This game is the simplifying version of the hollow knight bla bla</p>
+    <button type="button" id="fullscreen" name="button">Fullscreen</button>
+  </section>
 
-  <canvas id="myCanvas" width="960" height="640"></canvas>
-  <script src="js/globals.js"></script>
-  <script src="js/util.js"></script>
-  <script src="js/keyController.js"></script>
-  <script src="js/hollowKnightGame.js"></script>
-  <script src="js/renderManager.js"></script>
-  <script src="js/updateManager.js"></script>
-  <script src="js/gameManager.js"></script>
-  <script src="js/main.js"></script>
+  <canvas id="myCanvas" width="500" height="500" style="border: 2px solid black; background-color: #F5EDE5"></canvas>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+
+  <!-- Game script, might want to set into one js file later. -->
+  <script src="js/Globals.js"></script>
+  <script src="js/Util.js"></script>
+  <script src="js/Controls.js"></script>
+  <script src="js/GameManager.js"></script>
+  <script src="js/Main.js"></script>
 </body>
 
 </html>

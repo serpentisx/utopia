@@ -1,8 +1,5 @@
 "use strict";
 
-let canvas = document.getElementById("myCanvas");
-let ctx = canvas.getContext("2d");
-
 Image.prototype.asyncLoad = function (src, asyncCallback) {
 
   this.onload = asyncCallback;
