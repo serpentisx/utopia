@@ -7,6 +7,8 @@ class Controls {
     this.key_step = false
     window.addEventListener("keydown", this.handleKeydown.bind(this));
     window.addEventListener("keyup", this.handleKeyup.bind(this));
+
+    this.initializeFullscreenListener();
   }
   checkKey(e) {
     switch (KEYS[e.keyCode]) {
@@ -63,7 +65,8 @@ class Controls {
 
   initializeFullscreenListener() {
     $("#fullscreen").on("click", () => {
-        this.toggleFullscreen();
+      console.log("click");
+      this.toggleFullscreen();
     });
   }
   toggleFullscreen() {
@@ -81,7 +84,7 @@ class Controls {
         }
 
     } else {
-        const element = $("#map").get(0);
+        const element = $("#myCanvas").get(0);
         if (element.requestFullscreen) {
             element.requestFullscreen();
         } else if (element.mozRequestFullScreen) {

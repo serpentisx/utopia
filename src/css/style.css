@@ -1,0 +1,20 @@
+
+/* --------------------------------- */
+/*     STYLES FOR THE FULLSCREEN     */
+/* --------------------------------- */
+
+#myCanvas:-moz-full-screen {
+    height: 100%;
+    width: 100%;
+}
+#myCanvas:-webkit-full-screen {
+    height: 100%;
+    width: 100%;
+}
+#myCanvas:-ms-fullscreen {
+    height: 100%;
+    width: 100%;
+}
+#myCanvas:fullscreen {
+    height: 100%;
+    width: 100%;

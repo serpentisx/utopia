@@ -45,7 +45,7 @@ class GameManager {
    */
   renderSimulation(ctx) {
     //TODO Updating the sprite, and something here
-    console.log("updating")
+    //console.log("updating")
 
   }
   render(ctx) {
@@ -152,7 +152,7 @@ class GameManager {
    * @return {[type]}    [description]
    */
   updateSimulation(du) {
-    console.log("updating");
+    //console.log("updating");
   }
 
   update(dt) {
