@@ -1,23 +1,23 @@
 "use strict";
+
 class Sprite {
-  constructor(image, x, y, rotation) {
-    this.image = image
-    this.x = x
-    this.y = y
-    this.rotation
+  constructor(image) {
+    this.image = image;
 
     this.width = image.width;
     this.height = image.height;
-    this.scale = 1;
+    this.canvas = document.getElementById("myCanvas");
   }
-  drawAt() {
-    ctx.drawImage(this.image,x, y);
+
+  drawAt(ctx, x, y) {
+    ctx.drawImage(this.image, x, y);
   }
-  drawCentredAt() {
+
+  drawCentredAt(ctx, cx, cy, rotation) {
     if (rotation === undefined) rotation = 0;
 
-    let w = this.width,
-      h = this.height;
+    var w = this.width,
+        h = this.height;
 
     ctx.save();
     ctx.translate(cx, cy);
@@ -25,23 +25,29 @@ class Sprite {
     ctx.scale(this.scale, this.scale);
 
     ctx.drawImage(this.image,
-      -w / 2, -h / 2);
+      -w/2, -h/2);
 
     ctx.restore();
   }
-  drawWrappedCentredAt() {
-    let sw = g_canvas.width;
+
+  drawWrappedCentredAt(ctx, cx, cy, rotation) {
+
+    let sw = this.canvas.width;
 
     this.drawWrappedVerticalCentredAt(ctx, cx, cy, rotation);
     this.drawWrappedVerticalCentredAt(ctx, cx - sw, cy, rotation);
     this.drawWrappedVerticalCentredAt(ctx, cx + sw, cy, rotation);
   }
 
-  drawWrappedVerticalCentredAt() {
-    let sh = g_canvas.height;
+  drawWrappedVerticalCentredAt(ctx, cx, cy, rotation) {
+    let sh = this.canvas.height;
 
     this.drawCentredAt(ctx, cx, cy, rotation);
     this.drawCentredAt(ctx, cx, cy - sh, rotation);
-    this.drawCentredAt(ctx, cx, cy + sh, rotation);
+    this.drawCentredAt(ctx, cx, cy + sh, rotation)
   }
+
 }
+
+
+

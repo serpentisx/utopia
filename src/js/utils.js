@@ -18,5 +18,4 @@ class Utils {
     ctx.fillRect(x, y, w, h);
     ctx.fillStyle = oldStyle;
   }
-
 }

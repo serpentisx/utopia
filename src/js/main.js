@@ -6,8 +6,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   "use strict";
 
-  const gameManager = new GameManager()
-  const controls = new Controls()
-  gameManager.requestNextIteration()
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
 
+  const controls = new Controls();
+
+  const hollowKnightGame = new HollowKnightGame(ctx);
+  const gameManager = new GameManager(hollowKnightGame);
+
+  gameManager.start();
 });
