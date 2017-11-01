@@ -8,9 +8,11 @@ window.requestAnimationFrame = window.requestAnimationFrame ||
 class GameManager {
 
   constructor(game) {
+    game.loadSprites();
+
     this.ctx = game.ctx;
-    this.renderManager = new RenderManager(game.render);
-    this.updateManager = new UpdateManager(game.update);
+    this.renderManager = new RenderManager(game.render.bind(game));
+    this.updateManager = new UpdateManager(game.update.bind(game));
 
     this.isGameOver = false;
     this.frameTime_ms = null;
