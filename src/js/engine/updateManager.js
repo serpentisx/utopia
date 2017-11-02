@@ -7,6 +7,7 @@ class UpdateManager {
   }
 
   update(dt) {
+    
     if (this.shouldSkipUpdate()) return;
 
     let original_dt = dt;

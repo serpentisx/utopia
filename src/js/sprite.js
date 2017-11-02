@@ -6,6 +6,7 @@ class Sprite {
 
     this.width = image.width;
     this.height = image.height;
+
   }
 
   drawAt(ctx, x, y) {

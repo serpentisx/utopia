@@ -4,6 +4,7 @@
 class RenderManager {
 
   constructor(renderer) {
+
     this.renderer = renderer;
     this.doClear = true;
     this.doRender = true;

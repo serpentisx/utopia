@@ -2,23 +2,9 @@
 /* --------------------------------- */
 /*     STYLES FOR THE FULLSCREEN     */
 /* --------------------------------- */
-#myCanvas {
-  display: flex;
-  border: 2px solid black;
+html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0px;
   background-color: #F5EDE5
 }
-#myCanvas:-moz-full-screen {
-    height: 100%;
-    width: 100%;
-}
-#myCanvas:-webkit-full-screen {
-    height: 100%;
-    width: 100%;
-}
-#myCanvas:-ms-fullscreen {
-    height: 100%;
-    width: 100%;
-}
-#myCanvas:fullscreen {
-    height: 100%;
-    width: 100%;

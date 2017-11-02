@@ -6,6 +6,7 @@ class EntityManager extends SpatialManager {
   }
 
   createKnight(sprite, prop) {
+    this.sprite = sprite
     return this.registerEntity(new Knight(sprite, prop));
   }
 
@@ -23,6 +24,7 @@ class EntityManager extends SpatialManager {
         this.entities[i].splice(i--, 1);
         return;
       }
+
       entity.update(du);
       this.register(entity);
     }

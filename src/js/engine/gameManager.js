@@ -16,6 +16,7 @@ class GameManager {
     this.isGameOver = false;
     this.frameTime_ms = null;
     this.frameTimeDelta_ms = null;
+
   }
 
   iter(frameTime) {
@@ -45,10 +46,6 @@ class GameManager {
   gameOver() {
     this.isGameOver = true;
     console.log("gameOver: quitting...");
-  }
-
-  requestedQuit() {
-    return this.isGameOver;
   }
 
   mainIterFrame(frameTime) {
