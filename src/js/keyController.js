@@ -1,5 +1,5 @@
 class KeyController {
-  constructor(flag) {
+  constructor() {
     this.keys = [];
     window.addEventListener("keydown", this.handleKeyDown.bind(this));
     window.addEventListener("keyup", this.handleKeyUp.bind(this));

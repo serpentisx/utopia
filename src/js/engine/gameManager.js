@@ -10,7 +10,6 @@ class GameManager {
   constructor(game) {
     game.loadSprites();
 
-    this.ctx = game.ctx;
     this.renderManager = new RenderManager(game.render.bind(game));
     this.updateManager = new UpdateManager(game.update.bind(game));
 
@@ -34,13 +33,13 @@ class GameManager {
   }
 
   iterCore(dt) {
-    if (this.requestedQuit()) {
+    if (stopKey) {
       this.gameOver();
       return;
     }
 
     this.updateManager.update(dt);
-    this.renderManager.render(this.ctx);
+    this.renderManager.render(ctx);
   }
 
   gameOver() {

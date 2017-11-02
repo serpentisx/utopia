@@ -1,5 +1,6 @@
 "use strict";
 
+
 class Utils {
 
   static clearCanvas(ctx) {

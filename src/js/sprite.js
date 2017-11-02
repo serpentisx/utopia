@@ -6,7 +6,6 @@ class Sprite {
 
     this.width = image.width;
     this.height = image.height;
-    this.canvas = document.getElementById("myCanvas");
   }
 
   drawAt(ctx, x, y) {
@@ -32,7 +31,7 @@ class Sprite {
 
   drawWrappedCentredAt(ctx, cx, cy, rotation) {
 
-    let sw = this.canvas.width;
+    let sw = canvas.width;
 
     this.drawWrappedVerticalCentredAt(ctx, cx, cy, rotation);
     this.drawWrappedVerticalCentredAt(ctx, cx - sw, cy, rotation);
@@ -40,7 +39,7 @@ class Sprite {
   }
 
   drawWrappedVerticalCentredAt(ctx, cx, cy, rotation) {
-    let sh = this.canvas.height;
+    let sh = canvas.height;
 
     this.drawCentredAt(ctx, cx, cy, rotation);
     this.drawCentredAt(ctx, cx, cy - sh, rotation);
@@ -48,6 +47,3 @@ class Sprite {
   }
 
 }
-
-
-

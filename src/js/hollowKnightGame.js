@@ -3,8 +3,7 @@
 
 class HollowKnightGame {
 
-  constructor(ctx) {
-    this.ctx = ctx;
+  constructor() {
     this.entityManager = new EntityManager();
     this.sprites = {};
   }

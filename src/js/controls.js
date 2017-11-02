@@ -10,31 +10,13 @@ class Controls {
 
     this.initializeFullscreenListener();
   }
-  checkKey(e) {
+  gameEngineKey(e) {
     switch (KEYS[e.keyCode]) {
       case "q":
         stopKey = true
         break;
-      case "t":
-        doTimerShow = !doTimerShow
-        break;
-      case "p":
-        isUpdatePaused = !isUpdatePaused
-        break;
-      case "o":
-        return !step
-        break;
       case "c":
         doClear = !doClear
-        break;
-      case "b":
-        doBox = !doBox
-        break;
-      case "u":
-        undoBox = !undoBox
-        break;
-      case "f":
-        doFlipFlop = !doFlipFlop
         break;
       case "r":
         doRender = !doRender
@@ -43,9 +25,15 @@ class Controls {
     }
   }
 
+  knightKey(e) {
+    if(KEYS[e.keyCode] == "a") {}
+  }
+
   handleKeydown(e) {
-    //Checking which key to use
-    this.checkKey(e)
+    //Check which key to use
+    this.gameEngineKey(e)
+    this.knightKey(e)
+
     // Remember that this key is down.
     if (e.keyCode in KEYS) {
         const keyName = KEYS[e.keyCode]

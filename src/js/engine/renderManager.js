@@ -1,3 +1,6 @@
+
+//For rendering
+
 class RenderManager {
 
   constructor(renderer) {
@@ -14,4 +17,3 @@ class RenderManager {
     this.frameCounter++;
   }
 }
-
