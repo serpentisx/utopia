@@ -5,13 +5,10 @@
 document.addEventListener("DOMContentLoaded", (e) => {
 
   "use strict";
-
-  const canvas = document.getElementById("myCanvas");
-  const ctx = canvas.getContext("2d");
-
+  
   const controls = new Controls();
 
-  const hollowKnightGame = new HollowKnightGame(ctx);
+  const hollowKnightGame = new HollowKnightGame();
   const gameManager = new GameManager(hollowKnightGame);
 
   gameManager.start();
