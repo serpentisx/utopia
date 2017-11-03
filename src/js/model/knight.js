@@ -22,10 +22,11 @@ class Knight extends Entity {
   }
 
   update(du, worldWidth, worldHeight) {
-    if (this.kc.isPressing('A')) this.x -= this.velX * du;
+	  console.log(this.kc.keys)
+    if (this.kc.keys['A'.charCodeAt(0)]) this.x -= this.velX * du;
     // Jump
-    if (this.kc.eatKey('W')) this.y -= this.velY * du;
-    if (this.kc.isPressing('D')) this.x += this.velX * du;
+    if (this.kc.keys['W'.charCodeAt(0)]) this.y -= this.velY * du;
+    if (this.kc.keys['D'.charCodeAt(0)]) this.x += this.velX * du;
     // Should not be able to move down
     //if (this.kc.isPressing('S')) this.y += this.velY * du;
 
