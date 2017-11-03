@@ -22,7 +22,6 @@ class Knight extends Entity {
   }
 
   update(du, worldWidth, worldHeight) {
-	  console.log(this.kc.keys)
     if (this.kc.keys['A'.charCodeAt(0)]) this.x -= this.velX * du;
     // Jump
     if (this.kc.keys['W'.charCodeAt(0)]) this.y -= this.velY * du;
@@ -30,9 +29,9 @@ class Knight extends Entity {
     // Should not be able to move down
     //if (this.kc.isPressing('S')) this.y += this.velY * du;
 
-    //Always update gravity 
-    this.y += gravity; 
-      
+    //Always update gravity
+    this.y += gravity;
+
     // don't let player leaves the world's boundary
       if(this.x - this.sprite.width/2 < 0){
         this.x = this.sprite.width/2;
