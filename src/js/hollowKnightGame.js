@@ -14,7 +14,7 @@ class HollowKnightGame {
   }
 
   init() {
-    var knight = this.entityManager.createKnight(this.sprites.knight, {x: 100, y: 1220});
+    var knight = this.entityManager.createKnight(this.sprites.knight, {x: 100, y: 100});
     // Set the camera up to follow the knight
     this.camera.follow(knight, canvas.width/2, canvas.height/2);
     this.room = {
