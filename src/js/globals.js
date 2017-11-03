@@ -19,7 +19,7 @@ const NOMINAL_UPDATE_INTERVAL = 16
 const step = true
 
 //Game variables - will place elsewhere
-const gravity = 5;
+const gravity = 10;
 
 
 let isGameOver, stopKey, isUpdatePaused = false

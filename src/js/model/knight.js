@@ -8,10 +8,11 @@ class Knight extends Entity {
     }
     this.sprite = sprite;
     this.rotation = 0;
-    this.velX = 20;
-    this.velY = 20;
+    this.velX = 10;
+    this.velY = 0;
     this.accelX = 0;
     this.accelY = 0;
+    this.isJumping = false;
 
     this.kc = new KeyController();
 
@@ -21,10 +22,15 @@ class Knight extends Entity {
     return (this.sprite.width / 2) * 0.9;
   }
 
+
+
   update(du, worldWidth, worldHeight) {
     if (this.kc.keys['A'.charCodeAt(0)]) this.x -= this.velX * du;
     // Jump
-    if (this.kc.keys['W'.charCodeAt(0)]) this.y -= this.velY * du;
+    if (this.kc.keys['W'.charCodeAt(0)]) {
+      this.y -= 20;
+    }
+    
     if (this.kc.keys['D'.charCodeAt(0)]) this.x += this.velX * du;
     // Should not be able to move down
     //if (this.kc.isPressing('S')) this.y += this.velY * du;

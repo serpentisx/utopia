@@ -33,9 +33,15 @@ class Camera {
 		
 	}
 
-	setDimensions(worldWidth, worldHeight) {
+	setWorldDimensions(worldWidth, worldHeight) {
 		// rectangle that represents the world's boundary (room's boundary)
 	 	this.worldRect = new Rectangle(0, 0, worldWidth, worldHeight);		
+	}
+
+	resetDimensions(canvasWidth, canvasHeight) {
+		this.wView = canvasWidth;
+		this.hView = canvasHeight;
+		this.viewportRect = new Rectangle(this.xView, this.yView, this.wView, this.hView);
 	}
 
 

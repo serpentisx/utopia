@@ -20,7 +20,6 @@ class KeyController {
     return isDown;
   }
 
-
   eatKey(key) {
     let keyCode = key.charCodeAt(0)
     var isDown = keys[keyCode];

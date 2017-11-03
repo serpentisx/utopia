@@ -12,8 +12,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
   ctx.canvas.width  = window.innerWidth
   ctx.canvas.height = window.innerHeight
 
+
+
   const hollowKnightGame = new HollowKnightGame();
   const gameManager = new GameManager(hollowKnightGame);
+
+
+  initializeWindowListener();
+
 
   gameManager.start();
 });

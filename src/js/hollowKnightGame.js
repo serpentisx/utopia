@@ -23,7 +23,7 @@ class HollowKnightGame {
     };
     console.log(this.room.width + " x " + this.room.height);
     this.map = new Map(this.sprites.background);
-    this.camera.setDimensions(this.room.width, this.room.height);
+    this.camera.setWorldDimensions(this.room.width, this.room.height);
   }
 
   loadSprites() {
@@ -41,12 +41,18 @@ class HollowKnightGame {
     }.bind(this));
   }
 
+
   update(du) {
     if(this.room !== null) {
       this.entityManager.update(du, this.room.width, this.room.height);
       this.camera.update();
 
+      // I don't know where to call this with a listener
+      this.camera.resetDimensions(canvas.width, canvas.height);
+      //console.log("Camera pos " + this.camera.xView + " x " + this.camera.yView);
+
     }
+
   }
 
   render(ctx) {
