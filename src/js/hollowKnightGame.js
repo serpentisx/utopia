@@ -30,7 +30,7 @@ class HollowKnightGame {
     let images = {};
     let requiredImages = {
       knight : 'assets/knight.png',
-      background : 'assets/hugeBackground.png'
+      background : 'assets/game_background_1/game_background_1.png'
     };
 
     imagesPreload(requiredImages, images, function() {
