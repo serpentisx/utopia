@@ -9,7 +9,7 @@ class HollowKnightGame {
 
     this.room = null;
 
-    this.camera = new Camera(0, 0, canvas.width, canvas.height);   
+    this.camera = new Camera(0, 0, canvas.width, canvas.height);
 
   }
 
@@ -30,7 +30,7 @@ class HollowKnightGame {
     let images = {};
     let requiredImages = {
       knight : 'assets/knight.png',
-      background : 'assets/game_background_1/game_background_1.png'
+      background : 'assets/large-background.png'
     };
 
     imagesPreload(requiredImages, images, function() {
@@ -54,6 +54,6 @@ class HollowKnightGame {
       this.map.render(ctx, this.camera.xView, this.camera.yView);
       this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
     }
-    
+
   }
 }
