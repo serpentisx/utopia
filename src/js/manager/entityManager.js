@@ -13,9 +13,10 @@ class EntityManager extends SpatialManager {
   registerEntity(entity) {
     entity.spatialID = this.getNewSpatialID();
     this.entities.push(entity);
+    return entity;
   }
 
-  update(du) {
+  update(du, worldwidth, worldheight) {
     for (var i = 0; i < this.entities.length; i++) {
       let entity = this.entities[i];
       this.unregister(entity);
@@ -24,13 +25,14 @@ class EntityManager extends SpatialManager {
         this.entities[i].splice(i--, 1);
         return;
       }
+        entity.update(du, worldwidth, worldheight);
+     // entity.update(du);
 
-      entity.update(du);
       this.register(entity);
     }
   }
 
-  render(ctx) {
-    this.entities.forEach(entity => entity.render(ctx));
+  render(ctx, xView, yView) {
+    this.entities.forEach(entity => entity.render(ctx, xView, yView));
   }
 }

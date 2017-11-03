@@ -53,10 +53,10 @@ class Controls {
 
   initializeFullscreenListener() {
     $("#fullscreen").on("click", () => {
-      console.log("click");
       this.toggleFullscreen();
     });
   }
+
   toggleFullscreen() {
     if (document.fullscreenElement || document.webkitFullscreenElement ||
         document.mozFullScreenElement || document.msFullscreenElement) {

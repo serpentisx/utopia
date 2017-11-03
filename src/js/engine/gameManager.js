@@ -52,10 +52,6 @@ class GameManager {
     this.iter(frameTime);
   }
 
-  mainIterFrame(frameTime) {
-    this.iter(frameTime);
-  }
-
   requestNextIteration() {
     window.requestAnimationFrame(this.mainIterFrame.bind(this));
   }
