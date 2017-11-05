@@ -12,9 +12,20 @@ class Knight extends Entity {
     this.velY = 0;
     this.accelX = 0;
     this.accelY = 0;
+    this.gravity = 0.32;
     this.isJumping = false;
 
     this.kc = new KeyController();
+  }
+
+  applyGravity(du) {
+    var finalVelY = this.velY + this.gravity * du;
+    var avgVelY = (this.velY + finalVelY) / 2;
+
+    var dPosY = avgVelY * du;
+
+    this.y += dPosY;
+    this.velY = finalVelY;
   }
 
   getRadius() {
@@ -26,12 +37,13 @@ class Knight extends Entity {
     if (this.kc.keys['D'.charCodeAt(0)]) this.x += this.velX * du;
 
     // Jump
-    if (this.kc.keys['W'.charCodeAt(0)]) {
-      this.y -= 20;
+    if (this.kc.keys['W'.charCodeAt(0)] && !this.isJumping) {
+      this.isJumping = true;
+      this.velY = -10;
     }
 
     //Always update gravity
-    this.y += gravity;
+    this.applyGravity(du);
 
     // don't let player leaves the world's boundary
     if(this.x - this.sprite.width/2 < 0){
@@ -45,6 +57,7 @@ class Knight extends Entity {
     }
     if(this.y + this.sprite.height/2 > worldHeight){
       this.y = worldHeight - this.sprite.height/2;
+      this.isJumping = false; // might want to change this later
     }
   }
 
