@@ -6,60 +6,36 @@ class HollowKnightGame {
   constructor() {
     this.entityManager = new EntityManager();
     this.sprites = {};
-
-    this.room = null;
-
     this.camera = new Camera(0, 0, canvas.width, canvas.height);
 
+    this.isStarted = false;
   }
 
   init() {
-    var knight = this.entityManager.createKnight(this.sprites.knight, {x: 100, y: 100});
+    this.knight = this.entityManager.createKnight(this.sprites.knight, {x: 3000, y: 100});
     // Set the camera up to follow the knight
-    this.camera.follow(knight, canvas.width/2, canvas.height/2);
-    this.room = {
-      width : this.sprites.background.width,
-      height : this.sprites.background.height
-    };
-    console.log(this.room.width + " x " + this.room.height);
+    this.camera.follow(this.knight, canvas.width/2, canvas.height/2);
     this.map = new Map(this.sprites.background);
-    this.camera.setWorldDimensions(this.room.width, this.room.height);
+    this.camera.setWorldDimensions(this.sprites.background.width, this.sprites.background.height);
+
+    this.isStarted = true;
   }
 
   loadSprites() {
-    let images = {};
     let requiredImages = {
       knight : 'assets/knight.png',
       background : 'assets/large-background.png'
     };
-
-    imagesPreload(requiredImages, images, function() {
-      for (let key in requiredImages) {
-        this.sprites[key] = new Sprite(images[key]);
-      }
-      this.init();
-    }.bind(this));
+    imagesPreload(requiredImages, this.sprites, this.init.bind(this));
   }
 
-
   update(du) {
-    if(this.room !== null) {
-      this.entityManager.update(du, this.room.width, this.room.height);
-      this.camera.update();
-
-      // I don't know where to call this with a listener
-      this.camera.resetDimensions(canvas.width, canvas.height);
-      //console.log("Camera pos " + this.camera.xView + " x " + this.camera.yView);
-
-    }
-
+    this.entityManager.update(du, this.camera.worldRect.width, this.camera.worldRect.height);
+    this.camera.update();
   }
 
   render(ctx) {
-    if(this.room !== null) {
-      this.map.render(ctx, this.camera.xView, this.camera.yView);
-      this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
-    }
-
+    this.map.render(ctx, this.camera.xView, this.camera.yView);
+    this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
   }
 }

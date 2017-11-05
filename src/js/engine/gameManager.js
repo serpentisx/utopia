@@ -16,7 +16,7 @@ class GameManager {
     this.isGameOver = false;
     this.frameTime_ms = null;
     this.frameTimeDelta_ms = null;
-
+    this.game = game;
   }
 
   iter(frameTime) {
@@ -39,8 +39,10 @@ class GameManager {
       return;
     }
 
-    this.updateManager.update(dt);
-    this.renderManager.render(ctx);
+    if (this.game.isStarted) {
+      this.updateManager.update(dt);
+      this.renderManager.render(ctx);
+    }
   }
 
   gameOver() {

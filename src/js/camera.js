@@ -24,13 +24,13 @@ class Camera {
 		// Allow both vertical and horizontal movement
 		this.axis = this.AXIS.BOTH;
 
-		//object that should be followed
+		// object that should be followed
 		this.followed = null; 
 
-		//rectangle that represents the viewport
-		this.viewportRect = new Rectangle(this.xView, this.yView, this.wView, this.hView);				
-								
-		
+		// rectangle that represents the viewport
+		this.viewportRect = new Rectangle(this.xView, this.yView, this.wView, this.hView);
+
+		window.addEventListener('resize', this.resetDimensionsToCanvas.bind(this));
 	}
 
 	setWorldDimensions(worldWidth, worldHeight) {
@@ -42,8 +42,13 @@ class Camera {
 		this.wView = canvasWidth;
 		this.hView = canvasHeight;
 		this.viewportRect = new Rectangle(this.xView, this.yView, this.wView, this.hView);
+    this.xDeadZone = canvasWidth / 2;
+    this.yDeadZone = canvasHeight / 2;
 	}
 
+	resetDimensionsToCanvas() {
+    this.resetDimensions(canvas.width, canvas.height);
+	}
 
 	follow(player, xDeadZone, yDeadZone) {
 		this.followed = player;
@@ -90,7 +95,6 @@ class Camera {
 					this.xView = this.worldRect.right - this.wView;
 				if(this.viewportRect.bottom > this.worldRect.bottom)					
 					this.yView = this.worldRect.bottom - this.hView;
-			}  
-			
+			}
 	}
 }

@@ -9,8 +9,8 @@ class Sprite {
 
   }
 
-    //This is for the map drawing
-   drawAt(ctx, x, y, sWidth, sHeight, dx, dy, dWidth, dHeight) {
+  //This is for the map drawing
+  drawAt(ctx, x, y, sWidth, sHeight, dx, dy, dWidth, dHeight) {
     ctx.drawImage(this.image, x, y, sWidth, sHeight, dx, dy, dWidth, dHeight);
   }
   //Sprite

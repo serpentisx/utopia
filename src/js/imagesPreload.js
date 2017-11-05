@@ -10,7 +10,7 @@ Image.prototype.asyncLoad = function (src, asyncCallback) {
 };
 
 function imagesPreload(requiredImages,
-                       loadedImages,
+                       sprites,
                        completionCallback) {
 
   let numImagesRequired,
@@ -23,7 +23,8 @@ function imagesPreload(requiredImages,
 
   preloadHandler = function () {
     console.log("preloadHandler called with this=", this);
-    loadedImages[this.name] = this;
+    sprites[this.name] = new Sprite(this);
+    console.log('loeadd', sprites)
 
     if (0 === this.width) {
       console.log("loading failed for", this.name);
@@ -36,7 +37,7 @@ function imagesPreload(requiredImages,
 
     if (numImagesHandled === numImagesRequired) {
       console.log("all preload images handled");
-      console.log("loadedImages=", loadedImages);
+      console.log("loadedSprites=", sprites);
       console.log("");
       console.log("performing completion callback");
 
@@ -48,7 +49,6 @@ function imagesPreload(requiredImages,
   };
 
   for (currentName in requiredImages) {
-
     if (requiredImages.hasOwnProperty(currentName)) {
 
       console.log("preloading image", currentName);

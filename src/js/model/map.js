@@ -2,16 +2,14 @@ class Map {
 
 	constructor(mapImage) {
 		this.sprite = mapImage;
-		console.log("sprite " + this.sprite);
 		this.width = this.sprite.width;
 		this.height = this.sprite.height;
-		console.log("image " + this.width);
 	}
 
 	render(ctx, xView, yView) {
-	    //context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height);
+		//context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height);
 		var sx, sy, dx, dy;
-			var sWidth, sHeight, dWidth, dHeight;
+		var sWidth, sHeight, dWidth, dHeight;
 
 		// Offset point to crop image	
 		sx = xView;

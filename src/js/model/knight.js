@@ -15,43 +15,37 @@ class Knight extends Entity {
     this.isJumping = false;
 
     this.kc = new KeyController();
-
   }
 
   getRadius() {
     return (this.sprite.width / 2) * 0.9;
   }
 
-
-
   update(du, worldWidth, worldHeight) {
     if (this.kc.keys['A'.charCodeAt(0)]) this.x -= this.velX * du;
+    if (this.kc.keys['D'.charCodeAt(0)]) this.x += this.velX * du;
+
     // Jump
     if (this.kc.keys['W'.charCodeAt(0)]) {
       this.y -= 20;
     }
-    
-    if (this.kc.keys['D'.charCodeAt(0)]) this.x += this.velX * du;
-    // Should not be able to move down
-    //if (this.kc.isPressing('S')) this.y += this.velY * du;
 
     //Always update gravity
     this.y += gravity;
 
     // don't let player leaves the world's boundary
-      if(this.x - this.sprite.width/2 < 0){
-        this.x = this.sprite.width/2;
-      }
-      if(this.y - this.sprite.height/2 < 0){
-        this.y = this.sprite.height/2;
-      }
-      if(this.x + this.sprite.width/2 > worldWidth){
-        this.x = worldWidth - this.sprite.width/2;
-      }
-      if(this.y + this.sprite.height/2 > worldHeight){
-        this.y = worldHeight - this.sprite.height/2;
-      }
-
+    if(this.x - this.sprite.width/2 < 0){
+      this.x = this.sprite.width/2;
+    }
+    if(this.y - this.sprite.height/2 < 0){
+      this.y = this.sprite.height/2;
+    }
+    if(this.x + this.sprite.width/2 > worldWidth){
+      this.x = worldWidth - this.sprite.width/2;
+    }
+    if(this.y + this.sprite.height/2 > worldHeight){
+      this.y = worldHeight - this.sprite.height/2;
+    }
   }
 
   render(ctx, xView, yView) {
