@@ -23,6 +23,8 @@ class Knight extends Entity {
     var avgVelY = (this.velY + finalVelY) / 2;
 
     var dPosY = avgVelY * du;
+    console.log("dPos " , dPosY);
+    
 
     this.y += dPosY;
     this.velY = finalVelY;
@@ -41,6 +43,8 @@ class Knight extends Entity {
       this.isJumping = true;
       this.velY = -10;
     }
+
+    console.log(this.y);
 
     //Always update gravity
     this.applyGravity(du);

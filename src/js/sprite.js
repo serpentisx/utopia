@@ -18,6 +18,11 @@ class Sprite {
     ctx.drawImage(this.image, x, y);
   }
 
+  //Sprite
+  drawHeightAndWidth(ctx, x, y, width, height) {
+    ctx.drawImage(this.image, x, y, width, height);
+  }
+
   drawCentredAt(ctx, cx, cy, rotation) {
     if (rotation === undefined) rotation = 0;
 

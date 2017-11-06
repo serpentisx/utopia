@@ -8,7 +8,7 @@ window.requestAnimationFrame = window.requestAnimationFrame ||
 class GameManager {
 
   constructor(game) {
-    game.loadSprites();
+    //game.loadSprites();
 
     this.renderManager = new RenderManager(game.render.bind(game));
     this.updateManager = new UpdateManager(game.update.bind(game));
@@ -39,10 +39,8 @@ class GameManager {
       return;
     }
 
-    if (this.game.isStarted) {
       this.updateManager.update(dt);
       this.renderManager.render(ctx);
-    }
   }
 
   gameOver() {

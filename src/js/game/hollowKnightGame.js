@@ -1,14 +1,16 @@
 // The game itself. Every game objects and managers (entity, spatial, ... )
 // should be handled here
 
-class HollowKnightGame {
+class HollowKnightGame extends Scene {
 
   constructor() {
+    super();
     this.entityManager = new EntityManager();
     this.sprites = {};
     this.camera = new Camera(0, 0, canvas.width, canvas.height);
 
     this.isStarted = false;
+    this.loadSprites();
   }
 
   init() {
@@ -30,12 +32,16 @@ class HollowKnightGame {
   }
 
   update(du) {
-    this.entityManager.update(du, this.camera.worldRect.width, this.camera.worldRect.height);
-    this.camera.update();
+    if(!this.isPaused) {
+      this.entityManager.update(du, this.camera.worldRect.width, this.camera.worldRect.height);
+      this.camera.update();
+    }
   }
 
   render(ctx) {
+    if(!this.isPaused) {
     this.map.render(ctx, this.camera.xView, this.camera.yView);
     this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
   }
+}
 }
