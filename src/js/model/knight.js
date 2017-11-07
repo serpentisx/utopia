@@ -20,7 +20,6 @@ class Knight extends Entity {
 
     this.isJumping = false;
 
-    this.kc = new KeyController();
   }
 
   applyGravity(du) {
@@ -43,8 +42,8 @@ class Knight extends Entity {
 		if (keys[this.GO_LEFT]) this.x -= this.velX * du;
 		if (keys[this.GO_RIGHT]) this.x += this.velX * du;
 
-    // Jump
-    if (this.kc.keys['W'.charCodeAt(0)] && !this.isJumping) {
+		// Jump
+		if (keys[this.JUMP] && !this.isJumping) {
       this.isJumping = true;
       this.velY = -10;
     }
