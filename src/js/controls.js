@@ -52,7 +52,9 @@ class Controls {
     });
   }
 
-  toggleFullscreen() {
+	toggleFullscreen() {
+		ctx.canvas.width = window.innerWidth
+		ctx.canvas.height = window.innerHeight
     if (document.fullscreenElement || document.webkitFullscreenElement ||
         document.mozFullScreenElement || document.msFullscreenElement) {
         if (document.exitFullscreen) {
