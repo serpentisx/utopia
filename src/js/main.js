@@ -20,12 +20,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   sceneManager.setCurrentScene('menu');
 
-  
+
   const gameManager = new GameManager(sceneManager);
 
   //Reset canvas width and height
   //initializeWindowListener();
+	gameManager.start();
 
-
-  gameManager.start();
 });
