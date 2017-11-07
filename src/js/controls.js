@@ -4,7 +4,6 @@
  */
 class Controls {
   constructor() {
-    this.key_step = false
     window.addEventListener("keydown", this.handleKeydown.bind(this));
     window.addEventListener("keyup", this.handleKeyup.bind(this));
 
@@ -25,14 +24,10 @@ class Controls {
     }
   }
 
-  knightKey(e) {
-    if(KEYS[e.keyCode] == "a") {}
-  }
 
   handleKeydown(e) {
     //Check which key to use
     this.gameEngineKey(e)
-    this.knightKey(e)
 
     // Remember that this key is down.
     if (e.keyCode in KEYS) {
@@ -52,15 +47,14 @@ class Controls {
   }
 
   initializeFullscreenListener() {
-    $("#fullscreen").on("click", () => {
-      this.toggleFullscreen();
+		$("#play").on("click", () => {
+			this.toggleFullscreen();
     });
   }
 
   toggleFullscreen() {
     if (document.fullscreenElement || document.webkitFullscreenElement ||
         document.mozFullScreenElement || document.msFullscreenElement) {
-
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.mozCancelFullScreen) {

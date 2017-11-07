@@ -22,9 +22,9 @@ class MainMenu extends Scene {
     }
 
     // This is for the event listener
-    var self = this;
+    let self = this;
 
-    document.getElementById('play').addEventListener("click", function() {
+    document.getElementById('play').addEventListener("click", () => {
       // Change scene to game once button is pressed
       self.changeScene('game');
       document.getElementById('menu').style.visibility = 'hidden';

@@ -13,10 +13,10 @@ const KEYS = {
 }
 const KEY_A = 'A'.charCodeAt(0)
 const KEY_D = 'D'.charCodeAt(0)
+const KEY_W = 'W'.charCodeAt(0)
 
 //For updating
 const NOMINAL_UPDATE_INTERVAL = 16
-const step = true
 
 //Game variables - will place elsewhere
 const gravity = 10;
@@ -27,5 +27,4 @@ let isGameOver, stopKey, isUpdatePaused = false
 
 //For rendering
 let doClear, doRender = true
-let doBox, undoBox, doFlipFlop = false
-let frameCounter = 1
+

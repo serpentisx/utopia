@@ -4,10 +4,15 @@ window.requestAnimationFrame = window.requestAnimationFrame ||
   window.mozRequestAnimationFrame ||
   window.webkitRequestAnimationFrame ||
   window.msRequestAnimationFrame;
+let instance = null;
 
 class GameManager {
 
-  constructor(game) {
+	constructor(game) {
+		if (instance) {
+			return instance;
+		}
+		instance = this;
 
     this.renderManager = new RenderManager(game.render.bind(game));
     this.updateManager = new UpdateManager(game.update.bind(game));
@@ -15,8 +20,13 @@ class GameManager {
     this.isGameOver = false;
     this.frameTime_ms = null;
     this.frameTimeDelta_ms = null;
-    this.game = game;
+		this.game = game;
+
+		instance = this;
   }
+	static getInstance() {
+		return instance;
+	}
 
   iter(frameTime) {
     this.updateClocks(frameTime);
@@ -55,7 +65,7 @@ class GameManager {
     window.requestAnimationFrame(this.mainIterFrame.bind(this));
   }
 
-  start() {
+	start() {
     this.requestNextIteration();
   }
 }

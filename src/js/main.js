@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   const gameManager = new GameManager(sceneManager);
 
   //Reset canvas width and height
-  initializeWindowListener();
+  //initializeWindowListener();
 
 
   gameManager.start();

@@ -2,7 +2,6 @@ class UpdateManager {
 
   constructor(updater) {
     this.updater = updater;
-    this.NOMINAL_UPDATE_INTERVAL = 16.666;
     this.isUpdatePaused = false;
   }
 
@@ -13,10 +12,13 @@ class UpdateManager {
     let original_dt = dt;
     if (dt > 200) {
       console.log("Big dt =", dt, ": CLAMPING TO NOMINAL");
-      dt = this.NOMINAL_UPDATE_INTERVAL;
+      dt = NOMINAL_UPDATE_INTERVAL;
     }
 
-    let du = (dt / this.NOMINAL_UPDATE_INTERVAL);
+		let du = (dt / NOMINAL_UPDATE_INTERVAL);
+
+		//console.log(ctx.canvas.height)
+
     this.updater(du);
   }
 

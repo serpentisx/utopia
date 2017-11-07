@@ -12,7 +12,12 @@ class Knight extends Entity {
     this.velY = 0;
     this.accelX = 0;
     this.accelY = 0;
-    this.gravity = 0.32;
+		this.gravity = 0.32;
+
+		this.GO_LEFT = KEY_A
+		this.GO_RIGHT = KEY_D
+		this.JUMP = KEY_W
+
     this.isJumping = false;
 
     this.kc = new KeyController();
@@ -23,7 +28,7 @@ class Knight extends Entity {
     var avgVelY = (this.velY + finalVelY) / 2;
 
     var dPosY = avgVelY * du;
-    console.log("dPos " , dPosY);
+    //console.log("dPos " , dPosY);
     
 
     this.y += dPosY;
@@ -34,9 +39,9 @@ class Knight extends Entity {
     return (this.sprite.width / 2) * 0.9;
   }
 
-  update(du, worldWidth, worldHeight) {
-    if (this.kc.keys['A'.charCodeAt(0)]) this.x -= this.velX * du;
-    if (this.kc.keys['D'.charCodeAt(0)]) this.x += this.velX * du;
+	update(du, worldWidth, worldHeight) {
+		if (keys[this.GO_LEFT]) this.x -= this.velX * du;
+		if (keys[this.GO_RIGHT]) this.x += this.velX * du;
 
     // Jump
     if (this.kc.keys['W'.charCodeAt(0)] && !this.isJumping) {
@@ -44,7 +49,7 @@ class Knight extends Entity {
       this.velY = -10;
     }
 
-    console.log(this.y);
+    //console.log(this.y);
 
     //Always update gravity
     this.applyGravity(du);
