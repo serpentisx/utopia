@@ -14,17 +14,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   const sceneManager = new SceneManager();
 
-  sceneManager.createScene('menu', new TitleScene());
+  sceneManager.createScene('menu', new MainMenu());
 
   sceneManager.createScene('game', new HollowKnightGame());
 
   sceneManager.setCurrentScene('menu');
 
-  //const hollowKnightGame = new HollowKnightGame();
+  
   const gameManager = new GameManager(sceneManager);
 
-
- // initializeWindowListener();
+  //Reset canvas width and height
+  initializeWindowListener();
 
 
   gameManager.start();

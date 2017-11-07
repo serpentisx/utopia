@@ -57,4 +57,11 @@ class Sprite {
     this.drawCentredAt(ctx, cx, cy + sh, rotation)
   }
 
+  render(ctx){
+    ctx.drawImage(this.image, 0, 0, this.width, this.height, 0, 0, this.width, this.height);
+
+  }
+
+ 
+
 }

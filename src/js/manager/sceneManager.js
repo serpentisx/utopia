@@ -4,17 +4,6 @@ class SceneManager {
     this.currentScene;
   }
 
-  register(entity) {
-    this.scenes.push(scene);
-  }
-
-  loadNextScene() {
-
-  }
-
- 
-
-
   render(ctx) {
     this.currentScene.render(ctx);
   }
@@ -52,9 +41,9 @@ class SceneManager {
 
          update(du) {
 
-    // Check whether scene is dead, if so load next scene?
-    //update the current scene
-    if(!this.currentScene.isChangingScenes) {
+    // Check whether scene should change, if so load next scene?
+    // Else update the current scene
+    if(!this.currentScene.isChangingScene) {
       this.currentScene.update(du);
     } else {
       this.setCurrentScene(this.currentScene.getNextScene());

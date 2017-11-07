@@ -1,11 +1,8 @@
 class Scene {
 	constructor() {
 		this.isPaused = false;
-	}
-
-	getNextScene() {
-		this.shouldChange = false;
-		return this.nextScene;
+		this.isChangingScene = false;
+		this.nextScene = false;
 	}
 
 	pause() {
@@ -20,13 +17,17 @@ class Scene {
 		return this.isPaused;
 	}
 
-	update() {
-		if(!this.isPaused) {
-				//Do we need this
-		}
+	changeScene(nextScene) { 
+		console.log(nextScene);
+		this.isChangingScene = true;
+		this.nextScene =nextScene;
 	}
 
-	render(ctx) {
-		this.render(ctx);
-	}
+	getNextScene() {
+	    this.isChangingScenes = false;
+	    var next = this.nextScene;
+	    this.nextScene = false;
+	    return next;
+  }
+
 }

@@ -8,7 +8,6 @@ window.requestAnimationFrame = window.requestAnimationFrame ||
 class GameManager {
 
   constructor(game) {
-    //game.loadSprites();
 
     this.renderManager = new RenderManager(game.render.bind(game));
     this.updateManager = new UpdateManager(game.update.bind(game));
