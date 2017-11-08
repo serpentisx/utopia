@@ -84,7 +84,6 @@ class Knight extends Entity {
 	update(du) {
     var worldWidth = this.map.width;
     var worldHeight = this.map.height;
-
 		if (keys[this.GO_LEFT]) {
       this.x -= this.velX * du;
       this.dirX = -this.velX;
@@ -123,6 +122,6 @@ class Knight extends Entity {
   }
 
   render(ctx, xView, yView) {
-      this.sprite.drawAtCenter(ctx, (this.x-this.sprite.width/2) - xView, (this.y-this.sprite.height/2) - yView);
+      this.sprite.drawAtCenter(ctx, this.x - xView, this.y - yView);
   }
 }

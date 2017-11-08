@@ -19,9 +19,9 @@ class Map {
     //Create 2D array that fills out image/map size - we will split the array to
     //represent background and foreground (this is if we want the player to
     // walk behind objects)
-    this.layer = new Array(this.cols+1);
+    this.layer = new Array(this.cols + 1);
     for (var i = 0; i < this.layer.length; i++) {
-      this.layer[i] = new Array(this.rows+1);
+      this.layer[i] = new Array(this.rows + 1);
     }
 
 
@@ -34,22 +34,22 @@ class Map {
 
     //Place random bricks
 
-        this.layer[2][7] = 1;
-        this.layer[9][6] = 1;
-        this.layer[5][6] = 1;
-        this.layer[4][7] = 1;
-        this.layer[3][6] = 1;
-        this.layer[7][22] = 1;
-        this.layer[7][23] = 1;
-        this.layer[6][24] = 1;
-        this.layer[5][25] = 1;
+    this.layer[2][7] = 1;
+    this.layer[9][6] = 1;
+    this.layer[5][6] = 1;
+    this.layer[4][7] = 1;
+    this.layer[3][6] = 1;
+    this.layer[7][22] = 1;
+    this.layer[7][23] = 1;
+    this.layer[6][24] = 1;
+    this.layer[5][25] = 1;
 
 
 
 
-        this.layer[7][43] = 1;
-        this.layer[7][34] = 1;
-        this.layer[8][33] = 1;
+    this.layer[7][43] = 1;
+    this.layer[7][34] = 1;
+    this.layer[8][33] = 1;
 
     ////////////////////////////////////////////
   }
@@ -119,77 +119,35 @@ class Map {
 
 
 
-    drawGrid(ctx, xView, yView) {
-      // dimensions of cropped image
-      var cameraWidth = ctx.canvas.width;
-      var cameraHeight = ctx.canvas.height;
+  drawGrid(ctx, xView, yView) {
+    // dimensions of cropped image
+    var cameraWidth = ctx.canvas.width;
+    var cameraHeight = ctx.canvas.height;
 
-      //I should have about 6 x 10 tiles for a full screen
-      //  console.log("Row estimate " + cameraHeight / 128);
-      //  console.log("Col estimate " + cameraWidth / 128);
+    //I should have about 6 x 10 tiles for a full screen
+    //  console.log("Row estimate " + cameraHeight / 128);
+    //  console.log("Col estimate " + cameraWidth / 128);
 
-      var startCol = Math.floor(xView / this.tsize);
-      //console.log(startCol);
-      var endCol = startCol + (cameraWidth / this.tsize);
+    var startCol = Math.floor(xView / this.tsize);
+    //console.log(startCol);
+    var endCol = startCol + (cameraWidth / this.tsize);
 
-      //	console.log(endCol);
-      var startRow = Math.floor(yView / this.tsize);
-      var endRow = startRow + (cameraHeight / this.tsize);
-      var offsetX = -xView + startCol * this.tsize;
-      var offsetY = -yView + startRow * this.tsize;
-      for (var c = startCol; c <= endCol; c++) {
-        for (var r = startRow; r <= endRow; r++) {
-          var tile = this.getTile(c, r);
-          var x = (c - startCol) * this.tsize + offsetX;
-          var y = (r - startRow) * this.tsize + offsetY;
-          ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
-          if (tile == 1) { // 0 => empty tile
-            this.tile.drawAtCenter(ctx, x, y);
+    //	console.log(endCol);
+    var startRow = Math.floor(yView / this.tsize);
+    var endRow = startRow + (cameraHeight / this.tsize);
+    var offsetX = -xView + startCol * this.tsize;
+    var offsetY = -yView + startRow * this.tsize;
+    for (var c = startCol; c <= endCol; c++) {
+      for (var r = startRow; r <= endRow; r++) {
+        var tile = this.getTile(c, r);
+        var x = (c - startCol) * this.tsize + offsetX;
+        var y = (r - startRow) * this.tsize + offsetY;
+        ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
+        if (tile == 1) { // 0 => empty tile
+          this.tile.drawAtCorner(ctx, x, y);
+        }
 
-            /*this.ctx.drawImage(
-                      this.tileAtlas, // image
-                      (tile - 1) * map.tsize, // source x
-                      0, // source y
-                      map.tsize, // source width
-                      map.tsize, // source height
-                      Math.round(x),  // target x
-                      Math.round(y), // target y
-                      map.tsize, // target width
-                      map.tsize // target height
-                  ); */
-     }
       }
     }
   }
-/*
-  drawGrid(ctx, xView, yView) {
-    var width = this.cols * this.tsize;
-    var height = this.rows * this.tsize;
-    var x, y;
-    for (var r = 0; r < this.rows; r++) {
-      x = -xView;
-      y = r * this.tsize - yView;
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(width, y);
-      ctx.stroke();
-    }
-    for (var c = 0; c < this.cols; c++) {
-      x = c * this.tsize - xView;
-      y = -yView;
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(x, height);
-      ctx.stroke();
-    }
-  }
-
-*/
-
-
-
-
-
-
-
 }

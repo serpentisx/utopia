@@ -13,9 +13,14 @@ class Sprite {
   drawAt(ctx, x, y, sWidth, sHeight, dx, dy, dWidth, dHeight) {
     ctx.drawImage(this.image, x, y, sWidth, sHeight, dx, dy, dWidth, dHeight);
   }
-  //Sprite
-  drawAtCenter(ctx, x, y) {
+
+  drawAtCorner(ctx, x, y) {
     ctx.drawImage(this.image, x, y);
+  }
+
+  // No rotation, sprite image dimensions used
+  drawAtCenter(ctx, x, y) {
+    ctx.drawImage(this.image, x-this.width/2, y -this.height/2);
   }
 
   //Sprite
