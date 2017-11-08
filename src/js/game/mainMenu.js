@@ -9,6 +9,7 @@ class MainMenu extends Scene {
 
     this.loadSprites();
     this.music = new Audio('sounds/intro.wav');
+    this.buttonhover = new Audio('sounds/buttonhover.wav');
     this.music.loop = true;
 
     this.clouds = {
@@ -30,6 +31,15 @@ class MainMenu extends Scene {
       document.getElementById('menu').style.visibility = 'hidden';
 
     }, false); 
+
+    // Play sound on button hover - change the sound because its horrible
+    var buttonsound = this.buttonhover;
+
+    $("button").mouseenter(function(){
+      buttonsound.play();
+    });
+
+
   }
 
   init() {

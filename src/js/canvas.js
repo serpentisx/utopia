@@ -12,7 +12,5 @@ function initializeWindowListener() {
         function resizeCanvas() {
             ctx.canvas.width = window.innerWidth;
             ctx.canvas.height = window.innerHeight;
-            redraw();
-
         }
 

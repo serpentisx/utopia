@@ -10,9 +10,9 @@ class Knight extends Entity {
     this.rotation = 0;
     this.velX = 8;
     this.velY = 0;
-    this.accelX = 0;
-    this.accelY = 0;
 		this.gravity = 0.32;
+    this.dirX = 0;
+    this.dirY = 0;
 
 		this.GO_LEFT = KEY_A
 		this.GO_RIGHT = KEY_D
@@ -22,13 +22,16 @@ class Knight extends Entity {
 
   }
 
+  setMap(map) {
+    this.map = map;
+  }
+
   applyGravity(du) {
     var finalVelY = this.velY + this.gravity * du;
     var avgVelY = (this.velY + finalVelY) / 2;
 
     var dPosY = avgVelY * du;
-    //console.log("dPos " , dPosY);
-    
+    this.dirY = dPosY;
 
     this.y += dPosY;
     this.velY = finalVelY;
@@ -38,20 +41,68 @@ class Knight extends Entity {
     return (this.sprite.width / 2) * 0.9;
   }
 
-	update(du, worldWidth, worldHeight) {
-		if (keys[this.GO_LEFT]) this.x -= this.velX * du;
-		if (keys[this.GO_RIGHT]) this.x += this.velX * du;
+  //Could put this in entities
+  collide(du) {
+
+    var row, col;
+
+   var left = this.x - this.sprite.width / 2;
+   var right = this.x + this.sprite.width / 2;
+   var top = this.y - this.sprite.height / 2;
+   var bottom = this.y + this.sprite.height / 2;
+   // check for collisions on sprite sides
+   var collision =
+       this.map.isSolidTileAtXY(left, top) ||
+       this.map.isSolidTileAtXY(right, top) ||
+       this.map.isSolidTileAtXY(right, bottom) ||
+       this.map.isSolidTileAtXY(left, bottom);
+       
+   if (!collision) { return; }
+
+   if (this.dirY > 0) {
+       row = this.map.getRow(bottom);
+       this.y = -this.sprite.height / 2 + this.map.getY(row);
+   }
+   else if (this.dirY < 0) {
+       row = this.map.getRow(top);
+       this.y = this.sprite.height / 2 + this.map.getY(row + 1);
+   }
+   else if (this.dirX > 0) {
+       col = this.map.getCol(right);
+       this.x = -this.sprite.width / 2 + this.map.getX(col);
+   }
+   else if (this.dirX < 0) {
+       col = this.map.getCol(left);
+       this.x = this.sprite.width / 2 + this.map.getX(col + 1);
+   }
+
+  }
+
+	update(du) {
+    var worldWidth = this.map.width;
+    var worldHeight = this.map.height;
+
+		if (keys[this.GO_LEFT]) {
+      this.x -= this.velX * du;
+      this.dirX = -this.velX;
+    } else if (keys[this.GO_RIGHT]) {
+      this.x += this.velX * du;
+      this.dirX = this.velX;
+    } else this.dirX = 0;
 
 		// Jump
 		if (keys[this.JUMP] && !this.isJumping) {
       this.isJumping = true;
       this.velY = -10;
+      this.ddirY = -this.velY;
     }
-
-    //console.log(this.y);
 
     //Always update gravity
     this.applyGravity(du);
+
+    //console.log(this.y);
+    this.collide(du);
+
 
     // don't let player leaves the world's boundary
     if(this.x - this.sprite.width/2 < 0){

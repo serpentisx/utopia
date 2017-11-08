@@ -2,7 +2,7 @@ class EntityManager extends SpatialManager {
 
   constructor() {
     super();
-    this.KILL_ME_NOW  = -1;
+    this.KILL_ME_NOW = -1;
   }
 
   createKnight(sprite, prop) {
@@ -16,17 +16,18 @@ class EntityManager extends SpatialManager {
     return entity;
   }
 
-  update(du, worldwidth, worldheight) {
+  update(du) {
     for (var i = 0; i < this.entities.length; i++) {
       let entity = this.entities[i];
       this.unregister(entity);
-
       if (entity.isDeadNow) {
         this.entities[i].splice(i--, 1);
         return;
       }
-        entity.update(du, worldwidth, worldheight);
-     // entity.update(du);
+
+      // kind of done for the knight as there are no other entities right now
+      entity.update(du);
+      // entity.update(du);
 
       this.register(entity);
     }
