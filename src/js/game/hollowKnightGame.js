@@ -42,6 +42,6 @@ class HollowKnightGame extends Scene {
     if(!this.isPaused) {
     this.map.render(ctx, this.camera.xView, this.camera.yView);
     this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
-  }
-}
+		}
+	}
 }
