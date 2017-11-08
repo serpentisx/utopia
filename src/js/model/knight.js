@@ -27,10 +27,10 @@ class Knight extends Entity {
   }
 
   applyGravity(du) {
-    var finalVelY = this.velY + this.gravity * du;
-    var avgVelY = (this.velY + finalVelY) / 2;
+		let finalVelY = this.velY + this.gravity * du,
+			avgVelY = (this.velY + finalVelY) / 2,
+			dPosY = avgVelY * du;
 
-    var dPosY = avgVelY * du;
     this.dirY = dPosY;
 
     this.y += dPosY;
@@ -44,17 +44,17 @@ class Knight extends Entity {
   //Could put this in entities
   handleCollision(du) {
 
-   var row, col;
+   let row, col;
 
-   var left = this.x - this.sprite.width / 2;
-   var right = this.x + this.sprite.width / 2;
-   var top = this.y - this.sprite.height / 2;
-   var bottom = this.y + this.sprite.height / 2;
+	 let left = this.x - this.sprite.width / 2,
+		 right = this.x + this.sprite.width / 2,
+		 top = this.y - this.sprite.height / 2,
+		 bottom = this.y + this.sprite.height / 2;
 
 
    // check for collisions on sprite sides
 
-   var collision =
+   let collision =
        this.map.isSolidTileAtXY(left, top) ||
        this.map.isSolidTileAtXY(right, top) ||
        this.map.isSolidTileAtXY(right, bottom) ||

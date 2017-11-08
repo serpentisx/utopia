@@ -20,7 +20,7 @@ class Map {
     //represent background and foreground (this is if we want the player to
     // walk behind objects)
     this.layer = new Array(this.cols + 1);
-    for (var i = 0; i < this.layer.length; i++) {
+    for (let i = 0; i < this.layer.length; i++) {
       this.layer[i] = new Array(this.rows + 1);
     }
 
@@ -59,10 +59,10 @@ class Map {
   }
 
   isSolidTileAtXY(x, y) {
-    var col = Math.floor(x / this.tsize);
-    var row = Math.floor(y / this.tsize);
+    let col = Math.floor(x / this.tsize);
+    let row = Math.floor(y / this.tsize);
 
-    var tile = this.getTile(col, row);
+    let tile = this.getTile(col, row);
 
     return (tile === 1);
   }
@@ -84,8 +84,8 @@ class Map {
 
   render(ctx, xView, yView) {
     //context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height);
-    var sx, sy, dx, dy;
-    var sWidth, sHeight, dWidth, dHeight;
+		let sx, sy, dx, dy,
+			sWidth, sHeight, dWidth, dHeight;
 
     // Offset point to crop image
     sx = xView;
@@ -121,24 +121,24 @@ class Map {
 
   drawGrid(ctx, xView, yView) {
     // dimensions of cropped image
-    var cameraWidth = ctx.canvas.width;
-    var cameraHeight = ctx.canvas.height;
+		let cameraWidth = ctx.canvas.width,
+			cameraHeight = ctx.canvas.height;
 
     //I should have about 6 x 10 tiles for a full screen
     //  console.log("Row estimate " + cameraHeight / 128);
     //  console.log("Col estimate " + cameraWidth / 128);
 
-    var startCol = Math.floor(xView / this.tsize);
+    let startCol = Math.floor(xView / this.tsize);
     //console.log(startCol);
-    var endCol = startCol + (cameraWidth / this.tsize);
+    let endCol = startCol + (cameraWidth / this.tsize);
 
     //	console.log(endCol);
-    var startRow = Math.floor(yView / this.tsize);
-    var endRow = startRow + (cameraHeight / this.tsize);
-    var offsetX = -xView + startCol * this.tsize;
-    var offsetY = -yView + startRow * this.tsize;
-    for (var c = startCol; c <= endCol; c++) {
-      for (var r = startRow; r <= endRow; r++) {
+    let startRow = Math.floor(yView / this.tsize);
+    let endRow = startRow + (cameraHeight / this.tsize);
+    let offsetX = -xView + startCol * this.tsize;
+    let offsetY = -yView + startRow * this.tsize;
+    for (let c = startCol; c <= endCol; c++) {
+      for (let r = startRow; r <= endRow; r++) {
         var tile = this.getTile(c, r);
         var x = (c - startCol) * this.tsize + offsetX;
         var y = (r - startRow) * this.tsize + offsetY;

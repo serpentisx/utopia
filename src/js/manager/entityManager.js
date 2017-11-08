@@ -17,7 +17,7 @@ class EntityManager extends SpatialManager {
   }
 
   update(du) {
-    for (var i = 0; i < this.entities.length; i++) {
+    for (let i = 0; i < this.entities.length; i++) {
       let entity = this.entities[i];
       this.unregister(entity);
       if (entity.isDeadNow) {

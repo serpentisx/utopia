@@ -62,7 +62,7 @@ class Sprite {
     this.drawCentredAt(ctx, cx, cy + sh, rotation)
   }
 
-  drawRect(ctx, x, y) {
+  drawBoundary(ctx, x, y) {
     ctx.strokeRect(x-this.width/2, y-this.height/2, this.width, this.height);
   }
 

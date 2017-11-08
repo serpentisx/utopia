@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\assets",
+    "\\src\\css",
+    "\\src\\js",
+    "\\src\\js\\engine",
+    "\\src\\js\\game",
+    "\\src\\js\\manager",
+    "\\src\\js\\model"
+  ],
+  "SelectedNode": "\\src\\js\\game\\HollowKnightGame.js",
+  "PreviewInSolutionExplorer": false
+}
