@@ -24,7 +24,7 @@ class Map {
       this.layer[i] = new Array(this.rows);
     }
 
-
+    console.log(this.layer)
     //Place the ground
     for (var i = 0; i < this.layer.length; i++) {
       this.layer[this.rows][i] = 1;
@@ -55,7 +55,7 @@ class Map {
 
 
     var tile = this.getTile(col, row);
-    console.log("here " + tile);
+
     return (tile === 1);
   }
 
@@ -127,6 +127,7 @@ class Map {
     var endRow = startRow + (cameraHeight / this.tsize);
     var offsetX = -xView + startCol * this.tsize;
     var offsetY = -yView + startRow * this.tsize;
+
     for (var c = startCol; c <= endCol; c++) {
       for (var r = startRow; r <= endRow; r++) {
         var tile = this.getTile(c, r);

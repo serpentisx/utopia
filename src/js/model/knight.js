@@ -56,6 +56,8 @@ class Knight extends Entity {
        this.map.isSolidTileAtXY(right, top) ||
        this.map.isSolidTileAtXY(right, bottom) ||
        this.map.isSolidTileAtXY(left, bottom);
+
+   if (collision) this.velY = 0;
        
    if (!collision) { return; }
 
@@ -116,6 +118,9 @@ class Knight extends Entity {
     }
     if(this.y + this.sprite.height/2 > worldHeight){
       this.y = worldHeight - this.sprite.height/2;
+    }
+
+    if (this.velY === 0) {
       this.isJumping = false; // might want to change this later
     }
   }
