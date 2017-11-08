@@ -122,7 +122,7 @@ class Map {
   drawGrid(ctx, xView, yView) {
     // dimensions of cropped image
 		let cameraWidth = ctx.canvas.width + 300,
-			cameraHeight = ctx.canvas.height + 300;
+		   	cameraHeight = ctx.canvas.height + 300;
 
     //I should have about 6 x 10 tiles for a full screen
     //  console.log("Row estimate " + cameraHeight / 128);

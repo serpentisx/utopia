@@ -71,7 +71,6 @@ class Knight extends Entity {
 
     if (rightBottom || leftBottom) this.velY = 0;
 
-    console.log("leftTop " + leftTop);
     // console.log("rightMiddle " + rightMiddle);
     // console.log("bottomMiddle " + bottomMiddle);
     // console.log("topMiddle " + topMiddle);
