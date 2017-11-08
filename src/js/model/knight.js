@@ -5,7 +5,7 @@ class Knight extends Entity {
 
     for (let prop in obj) {
       this[prop] = obj[prop];
-    }
+		}
     this.sprite = sprite;
     this.rotation = 0;
     this.velX = 8;

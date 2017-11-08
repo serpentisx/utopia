@@ -1,13 +1,11 @@
-/**Some variables**/
+/**Some constants**/
 
 //For the canvas and ctx
 const canvas = document.getElementById("myCanvas")
 const ctx = canvas.getContext("2d")
 
 //For keys
-let keys = {}
 const KEYS = {
-  81: "q",
   67: "c",
   82: "r"
 }
@@ -18,13 +16,5 @@ const KEY_W = 'W'.charCodeAt(0)
 //For updating
 const NOMINAL_UPDATE_INTERVAL = 16
 
-//Game variables - will place elsewhere
+//Game variables
 const gravity = 10;
-
-
-let isGameOver, stopKey, isUpdatePaused = false
-
-
-//For rendering
-let doClear, doRender = true
-

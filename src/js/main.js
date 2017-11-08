@@ -4,9 +4,7 @@
  */
 document.addEventListener("DOMContentLoaded", (e) => {
 
-  "use strict";
-
-  const controls = new Controls();
+	"use strict";
 
   //Set canvas size
   ctx.canvas.width  = window.innerWidth
@@ -22,6 +20,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 
   const gameManager = new GameManager(sceneManager);
+	const controls = new Controls();
 
   //Reset canvas width and height
   //initializeWindowListener();

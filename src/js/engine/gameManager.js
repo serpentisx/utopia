@@ -14,6 +14,9 @@ class GameManager {
 		}
 		instance = this;
 
+		this.keys = {};
+		this.stopKey = false;
+
     this.renderManager = new RenderManager(game.render.bind(game));
     this.updateManager = new UpdateManager(game.update.bind(game));
 
@@ -43,7 +46,7 @@ class GameManager {
   }
 
   iterCore(dt) {
-    if (stopKey) {
+    if (this.stopKey) {
       this.gameOver();
       return;
     }

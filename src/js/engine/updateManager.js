@@ -17,8 +17,6 @@ class UpdateManager {
 
 		let du = (dt / NOMINAL_UPDATE_INTERVAL);
 
-		//console.log(ctx.canvas.height)
-
     this.updater(du);
   }
 

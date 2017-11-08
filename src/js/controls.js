@@ -2,23 +2,24 @@
  * All the controls are done here
  * Keys, mouse evt etc
  */
+let keys = {}
+
 class Controls {
-  constructor() {
+	constructor() {
+		this.gm = GameManager.getInstance();
     window.addEventListener("keydown", this.handleKeydown.bind(this));
     window.addEventListener("keyup", this.handleKeyup.bind(this));
 
-    this.initializeFullscreenListener();
+		this.initializeFullscreenListener()
+		this.quitGame()
   }
   gameEngineKey(e) {
     switch (KEYS[e.keyCode]) {
-      case "q":
-        stopKey = true
-        break;
       case "c":
-        doClear = !doClear
+				this.gm.renderManager.doClear = !this.gm.renderManager.doClear
         break;
       case "r":
-        doRender = !doRender
+				this.gm.renderManager.doRender = !this.gm.renderManager.doRender
         break;
       default: break
     }
@@ -50,7 +51,12 @@ class Controls {
 		$("#play").on("click", () => {
 			this.toggleFullscreen();
     });
-  }
+	}
+	quitGame() {
+		$("#quit").on("click", () => {
+			this.gm.stopKey = true
+		});
+	}
 
 	toggleFullscreen() {
 		ctx.canvas.width = window.innerWidth
