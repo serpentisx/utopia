@@ -10,7 +10,7 @@ class Knight extends Entity {
     this.rotation = 0;
     this.velX = 8;
     this.velY = 0;
-		this.gravity = 0.32;
+		this.gravity = 10;
     this.dirX = 0;
     this.dirY = 0;
 
@@ -27,14 +27,8 @@ class Knight extends Entity {
   }
 
   applyGravity(du) {
-    var finalVelY = this.velY + this.gravity * du;
-    var avgVelY = (this.velY + finalVelY) / 2;
-
-    var dPosY = avgVelY * du;
-    this.dirY = dPosY;
-
-    this.y += dPosY;
-    this.velY = finalVelY;
+    this.dirY = this.gravity;
+    this.y += this.gravity;
   }
 
   getRadius() {
@@ -51,12 +45,13 @@ class Knight extends Entity {
    var top = this.y - this.sprite.height / 2;
    var bottom = this.y + this.sprite.height / 2;
    // check for collisions on sprite sides
+
    var collision =
        this.map.isSolidTileAtXY(left, top) ||
        this.map.isSolidTileAtXY(right, top) ||
        this.map.isSolidTileAtXY(right, bottom) ||
        this.map.isSolidTileAtXY(left, bottom);
-       
+
    if (!collision) { return; }
 
    if (this.dirY > 0) {
@@ -90,18 +85,16 @@ class Knight extends Entity {
       this.dirX = this.velX;
     } else this.dirX = 0;
 
-		// Jump
-		if (keys[this.JUMP] && !this.isJumping) {
-      this.isJumping = true;
-      this.velY = -10;
-      this.ddirY = -this.velY;
-    }
-
     //Always update gravity
     this.applyGravity(du);
 
-    //console.log(this.y);
-    this.collide(du);
+		// Jump
+		if (keys[this.JUMP] && !this.isJumping) {
+      this.isJumping = true;
+      this.dirY = -this.velY;
+    }
+
+     this.collide(du);
 
 
     // don't let player leaves the world's boundary
