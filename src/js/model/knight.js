@@ -125,7 +125,7 @@ class Knight extends Entity {
 
   render(ctx, xView, yView) {
       this.sprite.drawAtCenter(ctx, this.x - xView, this.y - yView);
-      this.sprite.drawRect(ctx, this.x - xView, this.y - yView);
+			this.sprite.drawBoundary(ctx, this.x - xView, this.y - yView);
   //    ctx.fillRect(this.x, this.y, 50, 50);
   }
 }

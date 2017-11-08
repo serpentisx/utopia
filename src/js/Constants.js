@@ -6,6 +6,7 @@ const ctx = canvas.getContext("2d")
 
 //For keys
 const KEYS = {
+	1: "leftClick",
   67: "c",
   82: "r"
 }
