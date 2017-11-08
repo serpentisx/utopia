@@ -31,6 +31,7 @@ class Camera {
 		this.viewportRect = new Rectangle(this.xView, this.yView, this.wView, this.hView);
 
 		window.addEventListener('resize', this.resetDimensionsToCanvas.bind(this));
+		window.addEventListener('click', this.getCord.bind(this));
 	}
 
 	setWorldDimensions(worldWidth, worldHeight) {
@@ -47,13 +48,21 @@ class Camera {
 	}
 
 	resetDimensionsToCanvas() {
-    this.resetDimensions(canvas.width, canvas.height);
+		ctx.canvas.width = window.innerWidth;
+		ctx.canvas.height = window.innerHeight;
+    this.resetDimensions(ctx.canvas.width, ctx.canvas.height);
 	}
 
 	follow(player, xDeadZone, yDeadZone) {
 		this.followed = player;
 		this.xDeadZone = xDeadZone;
 		this.yDeadZone = yDeadZone;
+	}
+
+	getCord(e) {
+    var x = e.clientX - ctx.canvas.offsetLeft + this.xView;
+    var y = e.clientY - ctx.canvas.offsetTop + this.yView;
+		console.log("x: " + x + "  y: " + y);
 	}
 
 	update() {

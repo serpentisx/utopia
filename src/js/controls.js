@@ -9,10 +9,10 @@ class Controls {
 		this.gm = GameManager.getInstance();
     window.addEventListener("keydown", this.handleKeydown.bind(this));
 		window.addEventListener("keyup", this.handleKeyup.bind(this));
-		canvas.addEventListener("mousedown", this.handleMouseDown.bind(this));
-		canvas.addEventListener("mouseup", this.handleMouseUp.bind(this));
+		//canvas.addEventListener("mousedown", this.handleMouseDown.bind(this));
+		//canvas.addEventListener("mouseup", this.handleMouseUp.bind(this));
 
-		this.initializeFullscreenListener()
+		// this.initializeFullscreenListener()
 		this.quitGame()
   }
   gameEngineKey(e) {
