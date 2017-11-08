@@ -7,8 +7,8 @@ let keys = {}
 class Controls {
 	constructor() {
 		this.gm = GameManager.getInstance();
-    canvas.addEventListener("keydown", this.handleKeydown.bind(this));
-		canvas.addEventListener("keyup", this.handleKeyup.bind(this));
+    window.addEventListener("keydown", this.handleKeydown.bind(this));
+		window.addEventListener("keyup", this.handleKeyup.bind(this));
 		canvas.addEventListener("mousedown", this.handleMouseDown.bind(this));
 		canvas.addEventListener("mouseup", this.handleMouseUp.bind(this));
 
@@ -79,8 +79,6 @@ class Controls {
 			this.gm.stopKey = true
 		});
 	}
-
-
 
 	toggleFullscreen() {
 		ctx.canvas.width = window.innerWidth

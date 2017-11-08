@@ -6,6 +6,7 @@ class Knight extends Entity {
     for (let prop in obj) {
       this[prop] = obj[prop];
 		}
+
     this.sprite = sprite;
     this.rotation = 0;
     this.velX = 8;
@@ -51,9 +52,7 @@ class Knight extends Entity {
 		 top = this.y - this.sprite.height / 2,
 		 bottom = this.y + this.sprite.height / 2;
 
-
    // check for collisions on sprite sides
-
    let collision =
        this.map.isSolidTileAtXY(left, top) ||
        this.map.isSolidTileAtXY(right, top) ||
