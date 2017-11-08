@@ -50,6 +50,8 @@ class Knight extends Entity {
    var right = this.x + this.sprite.width / 2;
    var top = this.y - this.sprite.height / 2;
    var bottom = this.y + this.sprite.height / 2;
+
+
    // check for collisions on sprite sides
 
    var collision =
@@ -123,5 +125,7 @@ class Knight extends Entity {
 
   render(ctx, xView, yView) {
       this.sprite.drawAtCenter(ctx, this.x - xView, this.y - yView);
+      this.sprite.drawRect(ctx, this.x - xView, this.y - yView);
+  //    ctx.fillRect(this.x, this.y, 50, 50);
   }
 }
