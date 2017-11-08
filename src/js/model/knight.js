@@ -42,15 +42,16 @@ class Knight extends Entity {
   }
 
   //Could put this in entities
-  collide(du) {
+  handleCollision(du) {
 
-    var row, col;
+   var row, col;
 
    var left = this.x - this.sprite.width / 2;
    var right = this.x + this.sprite.width / 2;
    var top = this.y - this.sprite.height / 2;
    var bottom = this.y + this.sprite.height / 2;
    // check for collisions on sprite sides
+
    var collision =
        this.map.isSolidTileAtXY(left, top) ||
        this.map.isSolidTileAtXY(right, top) ||
@@ -58,7 +59,7 @@ class Knight extends Entity {
        this.map.isSolidTileAtXY(left, bottom);
 
    if (collision) this.velY = 0;
-       
+
    if (!collision) { return; }
 
    if (this.dirY > 0) {
@@ -92,19 +93,15 @@ class Knight extends Entity {
       this.dirX = this.velX;
     } else this.dirX = 0;
 
-		// Jump
+    //Always update gravity
+    this.applyGravity(du);
+    this.handleCollision(du);
+
+    // Jump
 		if (keys[this.JUMP] && !this.isJumping) {
       this.isJumping = true;
       this.velY = -10;
-      this.ddirY = -this.velY;
     }
-
-    //Always update gravity
-    this.applyGravity(du);
-
-    //console.log(this.y);
-    this.collide(du);
-
 
     // don't let player leaves the world's boundary
     if(this.x - this.sprite.width/2 < 0){
