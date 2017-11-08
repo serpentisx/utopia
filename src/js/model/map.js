@@ -7,7 +7,7 @@ class Map {
 
     //Change this  -- we need to load all the tiles in an effective way
     this.brick = new Image();
-    this.brick.src = 'assets/_ground/ground01.png';
+    this.brick.src = 'assets/_ground/ground07.png';
     this.tile = new Sprite(this.brick);
     ///
     //tile size
@@ -33,16 +33,23 @@ class Map {
 
 
     //Place random bricks
-    /*
+
         this.layer[2][7] = 1;
         this.layer[9][6] = 1;
         this.layer[5][6] = 1;
         this.layer[4][7] = 1;
         this.layer[3][6] = 1;
         this.layer[7][22] = 1;
+        this.layer[7][23] = 1;
+        this.layer[6][24] = 1;
+        this.layer[5][25] = 1;
+
+
+
+
         this.layer[7][43] = 1;
         this.layer[7][34] = 1;
-        this.layer[8][33] = 1; */
+        this.layer[8][33] = 1;
 
     ////////////////////////////////////////////
   }
