@@ -36,9 +36,9 @@ class Knight extends Entity {
   }
 
   //Could put this in entities
-  collide(du) {
+  handleCollision(du) {
 
-    var row, col;
+   var row, col;
 
    var left = this.x - this.sprite.width / 2;
    var right = this.x + this.sprite.width / 2;
@@ -94,7 +94,7 @@ class Knight extends Entity {
       this.dirY = -this.velY;
     }
 
-     this.collide(du);
+     this.handleCollision(du);
 
 
     // don't let player leaves the world's boundary

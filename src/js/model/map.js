@@ -19,9 +19,9 @@ class Map {
     //Create 2D array that fills out image/map size - we will split the array to
     //represent background and foreground (this is if we want the player to
     // walk behind objects)
-    this.layer = new Array(this.cols);
+    this.layer = new Array(this.cols+1);
     for (var i = 0; i < this.layer.length; i++) {
-      this.layer[i] = new Array(this.rows);
+      this.layer[i] = new Array(this.rows+1);
     }
 
 
