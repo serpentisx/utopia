@@ -45,7 +45,6 @@ class Knight extends Entity {
 
   //Could put this in entities
   handleCollision(du) {
-
     let row, col;
 
     let left = this.x - this.sprite.width / 2,
@@ -70,9 +69,11 @@ class Knight extends Entity {
     }
     if (rightBottom || leftBottom) this.velY = 0;
 
-//     console.log("leftBottom " + leftBottom);
-  //   console.log("bottomMiddle " + bottomMiddle);
-    //  console.log("rightBottom " + rightBottom);
+    if(rightTop && !topMiddle && !leftTop) console.log("RIGHT");
+    if(!rightTop && topMiddle && !leftTop) console.log("MIDDLE");
+    if(!rightTop && !topMiddle && leftTop) console.log("LEFT");
+
+
 
     //Bottom collider logic
 
@@ -88,7 +89,9 @@ class Knight extends Entity {
     if (rightMiddle || leftMiddle || leftTop || rightTop) {
       if (this.dirX > 0) {
         col = this.map.getCol(right);
-        this.x = -this.sprite.width / 2 + this.map.getX(col);
+        // the minus one below is so that once it resets the player
+        // it isnt still colliding
+        this.x = -this.sprite.width / 2 + this.map.getX(col) -1;
       } else if (this.dirX < 0) {
         col = this.map.getCol(left);
         this.x = this.sprite.width / 2 + this.map.getX(col + 1);
