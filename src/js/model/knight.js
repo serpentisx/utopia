@@ -22,6 +22,7 @@ class Knight extends Entity {
     this.JUMP = KEY_W
 
     this.isJumping = false;
+    this.something = [];
   }
 
   setMap(map) {
@@ -52,6 +53,16 @@ class Knight extends Entity {
       top = this.y - this.sprite.height / 2,
       bottom = this.y + this.sprite.height / 2;
 
+      // Debugging burposes
+      this.something[0] = [this.map.getCol(left), this.map.getRow(top)];
+      this.something[1] = [this.map.getCol(left), this.map.getRow(bottom)];
+      this.something[2] = [this.map.getCol(right), this.map.getRow(top)];
+      this.something[3] = [this.map.getCol(right), this.map.getRow(top)];
+      this.something[4] = [this.map.getCol(left), this.map.getRow(this.y)];
+      this.something[5] = [this.map.getCol(right), this.map.getRow(this.y)];
+      this.something[6] = [this.map.getCol(this.x), this.map.getRow(top)];
+      this.something[7] = [this.map.getCol(this.x), this.map.getRow(bottom)];
+
 
     // check for collision on corners
     let leftTop = this.map.isSolidTileAtXY(left, top),
@@ -69,22 +80,15 @@ class Knight extends Entity {
     }
     if (rightBottom || leftBottom) this.velY = 0;
 
-    if(rightTop && !topMiddle && !leftTop) console.log("RIGHT");
-    if(!rightTop && topMiddle && !leftTop) console.log("MIDDLE");
-    if(!rightTop && !topMiddle && leftTop) console.log("LEFT");
+  //  if(rightTop && !topMiddle && !leftTop) console.log("RIGHT");
+  //  if(!rightTop && topMiddle && !leftTop) console.log("MIDDLE");
+  //  if(!rightTop && !topMiddle && leftTop) console.log("LEFT");
 
 
 
     //Bottom collider logic
 
-    if (rightBottom || leftBottom) {
-      if (this.dirY >= 0) {
-        row = this.map.getRow(bottom);
-        this.y = -this.sprite.height / 2 + this.map.getY(row);
-      } if (this.yVel < 0) {
-        console.log( "jumping and i hit a corner");
-      }
-    }
+
 
     if (rightMiddle || leftMiddle || leftTop || rightTop) {
       if (this.dirX > 0) {
@@ -95,6 +99,15 @@ class Knight extends Entity {
       } else if (this.dirX < 0) {
         col = this.map.getCol(left);
         this.x = this.sprite.width / 2 + this.map.getX(col + 1);
+      }
+    }
+
+    if (rightBottom || leftBottom) {
+      if (this.dirY >= 0) {
+        row = this.map.getRow(bottom);
+        this.y = -this.sprite.height / 2 + this.map.getY(row);
+      } if (this.yVel < 0) {
+        console.log( "jumping and i hit a corner");
       }
     }
     /*
@@ -167,6 +180,9 @@ class Knight extends Entity {
   }
 
   render(ctx, xView, yView) {
+    for(var i = 0; i < this.something.length; i++ ){
+      this.map.drawTile(this.something[i][0], this.something[i][1]);
+    }
     this.sprite.drawAtCenter(ctx, this.x - xView, this.y - yView);
     this.sprite.drawBoundary(ctx, this.x - xView, this.y - yView);
     //    ctx.fillRect(this.x, this.y, 50, 50);

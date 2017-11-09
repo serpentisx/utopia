@@ -86,8 +86,11 @@ class Map {
   }
 
   drawTile(x, y) {
-    ctx.fillRect(this.getCol(x), this.getRow(y), 128, 128);
-
+    ctx.strokeStyle = "green";
+    ctx.lineWidth = 5;
+    ctx.strokeRect(x*128 - this.xView, y* 128-this.yView, 128, 128);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "black";
   }
 
 
