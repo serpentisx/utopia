@@ -12,15 +12,16 @@ class Knight extends Entity {
     this.velX = 8;
     this.velY = 0;
     this.gravity = 0.32;
+
     this.dirX = 0;
     this.dirY = 0;
+    this.collidedCells = [];
 
     this.GO_LEFT = KEY_A
     this.GO_RIGHT = KEY_D
     this.JUMP = KEY_W
 
     this.isJumping = false;
-
   }
 
   setMap(map) {
@@ -58,30 +59,29 @@ class Knight extends Entity {
       leftBottom = this.map.isSolidTileAtXY(left, bottom),
       rightTop = this.map.isSolidTileAtXY(right, top),
       rightBottom = this.map.isSolidTileAtXY(right, bottom),
-
-      // check for collisions on sprite sides
       leftMiddle = this.map.isSolidTileAtXY(left, this.y),
       rightMiddle = this.map.isSolidTileAtXY(right, this.y),
-      topMiddle = this.map.isSolidTileAtXY(top, this.x),
-      bottomMiddle = this.map.isSolidTileAtXY(bottom, this.x);
+      topMiddle = this.map.isSolidTileAtXY(this.x, top),
+      bottomMiddle = this.map.isSolidTileAtXY(this.x, bottom);
+
 
     if (!(rightMiddle || rightBottom || leftMiddle || leftBottom)) {
       return;
     }
-
     if (rightBottom || leftBottom) this.velY = 0;
 
-    // console.log("rightMiddle " + rightMiddle);
-    // console.log("bottomMiddle " + bottomMiddle);
-    // console.log("topMiddle " + topMiddle);
+//     console.log("leftBottom " + leftBottom);
+  //   console.log("bottomMiddle " + bottomMiddle);
+    //  console.log("rightBottom " + rightBottom);
 
-    if (rightBottom || leftBottom || topMiddle) {
-      if (this.dirY > 0) {
+    //Bottom collider logic
+
+    if (rightBottom || leftBottom) {
+      if (this.dirY >= 0) {
         row = this.map.getRow(bottom);
         this.y = -this.sprite.height / 2 + this.map.getY(row);
-      } else if (this.dirY < 0) {
-        row = this.map.getRow(top);
-        this.y = this.sprite.height / 2 + this.map.getY(row + 1);
+      } if (this.yVel < 0) {
+        console.log( "jumping and i hit a corner");
       }
     }
 
@@ -94,6 +94,13 @@ class Knight extends Entity {
         this.x = this.sprite.width / 2 + this.map.getX(col + 1);
       }
     }
+    /*
+    if(topMiddle || rightTop || leftTop) {
+      if (this.velY < 0) {
+        row = this.map.getRow(top);
+        this.y = this.sprite.height / 2 + this.map.getY(row + 1);
+      }
+    }*/
 
     /*
    if (this.dirY > 0) {
