@@ -1,4 +1,3 @@
-
 //For rendering
 
 class RenderManager {

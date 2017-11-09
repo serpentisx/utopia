@@ -22,10 +22,10 @@ class Entity {
     return this.spatialID;
   }
 
-  getPos () {
+  getPos() {
     return {
-      x : this.x,
-      y : this.y
+      x: this.x,
+      y: this.y
     };
   }
 }

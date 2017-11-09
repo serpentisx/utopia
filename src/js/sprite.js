@@ -20,7 +20,7 @@ class Sprite {
 
   // No rotation, sprite image dimensions used
   drawAtCenter(ctx, x, y) {
-    ctx.drawImage(this.image, x-this.width/2, y -this.height/2);
+    ctx.drawImage(this.image, x - this.width / 2, y - this.height / 2);
   }
 
   //Sprite
@@ -32,7 +32,7 @@ class Sprite {
     if (rotation === undefined) rotation = 0;
 
     var w = this.width,
-        h = this.height;
+      h = this.height;
 
     ctx.save();
     ctx.translate(cx, cy);
@@ -40,7 +40,7 @@ class Sprite {
     ctx.scale(this.scale, this.scale);
 
     ctx.drawImage(this.image,
-      -w/2, -h/2);
+      -w / 2, -h / 2);
 
     ctx.restore();
   }
@@ -63,13 +63,10 @@ class Sprite {
   }
 
   drawBoundary(ctx, x, y) {
-    ctx.strokeRect(x-this.width/2, y-this.height/2, this.width, this.height);
+    ctx.strokeRect(x - this.width / 2, y - this.height / 2, this.width, this.height);
   }
 
-  render(ctx){
+  render(ctx) {
     ctx.drawImage(this.image, 0, 0, this.width, this.height, 0, 0, this.width, this.height);
   }
-
-
-
 }

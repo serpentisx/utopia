@@ -35,7 +35,6 @@ class Knight extends Entity {
       dPosY = avgVelY * du;
 
     this.dirY = dPosY;
-
     this.y += dPosY;
     this.velY = finalVelY;
   }
@@ -49,9 +48,9 @@ class Knight extends Entity {
     let row, col;
     // Get coordinates
     let left = this.x - this.sprite.width / 2,
-        right = this.x + this.sprite.width / 2,
-        top = this.y - this.sprite.height / 2,
-        bottom = this.y + this.sprite.height / 2;
+      right = this.x + this.sprite.width / 2,
+      top = this.y - this.sprite.height / 2,
+      bottom = this.y + this.sprite.height / 2;
 
     // Debugging purposes
     this.something[0] = [this.map.getCol(left), this.map.getRow(top)];
@@ -65,47 +64,49 @@ class Knight extends Entity {
 
 
     /***** VERTICAL MOVEMENT ******/
+
     // CHECK BOTTOM-LEFT OR BOTTOM-RIGHT
-    if(this.dirY >= 0) {
-      if(this.map.isSolidTileAtXY(left, bottom) || this.map.isSolidTileAtXY(right, bottom)){
+    if (this.dirY >= 0) {
+      if (this.map.isSolidTileAtXY(left, bottom) || this.map.isSolidTileAtXY(right, bottom)) {
         row = this.map.getRow(bottom);
         this.y = -this.sprite.height / 2 + this.map.getY(row);
         this.velY = 0;
       }
-    } else if(this.dirY < 0) {
+    } else if (this.dirY < 0) {
       // CHECK TOP-LEFT OR TOP-RIGHT
       if (this.map.isSolidTileAtXY(left, top) || this.map.isSolidTileAtXY(right, top)) {
         //change velocity so he doesnt keep jumping, looks like he is frozen
-        this.velY +=4;
+        this.velY += 4;
         row = this.map.getRow(top);
         this.y = this.sprite.height / 2 + this.map.getY(row + 1);
       }
     }
+
     /***** HORIZONTAL MOVEMENT******/
-    if(this.dirX > 0) {
+    if (this.dirX > 0) {
       // CHECK RIGHT-MIDDLE OR TOP RIGHT
-      if(this.map.isSolidTileAtXY(right, this.y) || this.map.isSolidTileAtXY(right, top)){
+      if (this.map.isSolidTileAtXY(right, this.y) || this.map.isSolidTileAtXY(right, top)) {
         col = this.map.getCol(right);
         // the minus one below is so that once it resets the player
         // it isnt still colliding
         this.x = -this.sprite.width / 2 + this.map.getX(col) - 1;
       }
-    } else if(this.dirX < 0){
+    } else if (this.dirX < 0) {
       // CHECK LEFT-MIDDLE OR TOP LEFT
-      if(this.map.isSolidTileAtXY(left, this.y) || this.map.isSolidTileAtXY(left, top)){
+      if (this.map.isSolidTileAtXY(left, this.y) || this.map.isSolidTileAtXY(left, top)) {
         col = this.map.getCol(left);
         this.x = this.sprite.width / 2 + this.map.getX(col + 1);
+      }
     }
   }
-}
 
   update(du) {
     var worldWidth = this.map.width;
     var worldHeight = this.map.height;
-    if (keys[this.GO_LEFT] && (this.x > this.sprite.width/2)) {
+    if (keys[this.GO_LEFT] && (this.x > this.sprite.width / 2)) {
       this.x -= this.velX * du;
       this.dirX = -this.velX;
-    } else if (keys[this.GO_RIGHT] && (this.x < worldWidth - this.sprite.width/2)) {
+    } else if (keys[this.GO_RIGHT] && (this.x < worldWidth - this.sprite.width / 2)) {
       this.x += this.velX * du;
       this.dirX = this.velX;
     } else this.dirX = 0;

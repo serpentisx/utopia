@@ -1,33 +1,32 @@
 class Scene {
-	constructor() {
-		this.isPaused = false;
-		this.isChangingScene = false;
-		this.nextScene = false;
-	}
+  constructor() {
+    this.isPaused = false;
+    this.isChangingScene = false;
+    this.nextScene = false;
+  }
 
-	pause() {
-		this.isPaused = true;
-	}
+  pause() {
+    this.isPaused = true;
+  }
 
-	resume() {
-		this.isPaused = false;
-	}
- 
-	isPaused() {
-		return this.isPaused;
-	}
+  resume() {
+    this.isPaused = false;
+  }
 
-	changeScene(nextScene) { 
-		console.log(nextScene);
-		this.isChangingScene = true;
-		this.nextScene =nextScene;
-	}
+  isPaused() {
+    return this.isPaused;
+  }
 
-	getNextScene() {
-	    this.isChangingScenes = false;
-	    var next = this.nextScene;
-	    this.nextScene = false;
-	    return next;
+  changeScene(nextScene) {
+    this.isChangingScene = true;
+    this.nextScene = nextScene;
+  }
+
+  getNextScene() {
+    this.isChangingScenes = false;
+    var next = this.nextScene;
+    this.nextScene = false;
+    return next;
   }
 
 }

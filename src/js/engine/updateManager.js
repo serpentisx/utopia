@@ -6,16 +6,15 @@ class UpdateManager {
   }
 
   update(dt) {
-    
+
     if (this.shouldSkipUpdate()) return;
 
     let original_dt = dt;
     if (dt > 200) {
-      console.log("Big dt =", dt, ": CLAMPING TO NOMINAL");
       dt = NOMINAL_UPDATE_INTERVAL;
     }
 
-		let du = (dt / NOMINAL_UPDATE_INTERVAL);
+    let du = (dt / NOMINAL_UPDATE_INTERVAL);
 
     this.updater(du);
   }

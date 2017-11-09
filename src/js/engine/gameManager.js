@@ -8,14 +8,18 @@ let instance = null;
 
 class GameManager {
 
-	constructor(game) {
-		if (instance) {
-			return instance;
-		}
-		instance = this;
+  static getInstance() {
+    return instance;
+  }
 
-		this.keys = {};
-		this.stopKey = false;
+  constructor(game) {
+    if (instance) {
+      return instance;
+    }
+    instance = this;
+
+    this.keys = {};
+    this.stopKey = false;
 
     this.renderManager = new RenderManager(game.render.bind(game));
     this.updateManager = new UpdateManager(game.update.bind(game));
@@ -23,13 +27,10 @@ class GameManager {
     this.isGameOver = false;
     this.frameTime_ms = null;
     this.frameTimeDelta_ms = null;
-		this.game = game;
+    this.game = game;
 
-		instance = this;
+    instance = this;
   }
-	static getInstance() {
-		return instance;
-	}
 
   iter(frameTime) {
     this.updateClocks(frameTime);
@@ -51,8 +52,8 @@ class GameManager {
       return;
     }
 
-      this.updateManager.update(dt);
-      this.renderManager.render(ctx);
+    this.updateManager.update(dt);
+    this.renderManager.render(ctx);
   }
 
   gameOver() {
@@ -68,7 +69,7 @@ class GameManager {
     window.requestAnimationFrame(this.mainIterFrame.bind(this));
   }
 
-	start() {
+  start() {
     this.requestNextIteration();
   }
 }

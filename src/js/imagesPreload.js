@@ -5,7 +5,6 @@ Image.prototype.asyncLoad = function (src, asyncCallback) {
   this.onload = asyncCallback;
   this.onerror = asyncCallback;
 
-  console.log("requesting image src of ", src);
   this.src = src;
 };
 
@@ -22,9 +21,7 @@ function imagesPreload(requiredImages,
   numImagesRequired = Object.keys(requiredImages).length;
 
   preloadHandler = function () {
-    console.log("preloadHandler called with this=", this);
     sprites[this.name] = new Sprite(this);
-    console.log('loeadd', sprites)
 
     if (0 === this.width) {
       console.log("loading failed for", this.name);
@@ -36,22 +33,21 @@ function imagesPreload(requiredImages,
     numImagesHandled += 1;
 
     if (numImagesHandled === numImagesRequired) {
-      console.log("all preload images handled");
+     /* console.log("all preload images handled");
       console.log("loadedSprites=", sprites);
       console.log("");
-      console.log("performing completion callback");
+      console.log("performing completion callback");*/
 
       completionCallback();
 
-      console.log("completion callback done");
-      console.log("");
+     // console.log("completion callback done");
+     // console.log("");
     }
   };
 
   for (currentName in requiredImages) {
     if (requiredImages.hasOwnProperty(currentName)) {
 
-      console.log("preloading image", currentName);
       currentImage = new Image();
       currentImage.name = currentName;
       currentImage.asyncLoad(requiredImages[currentName], preloadHandler);
