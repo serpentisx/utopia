@@ -145,10 +145,10 @@ class Knight extends Entity {
   update(du) {
     var worldWidth = this.map.width;
     var worldHeight = this.map.height;
-    if (keys[this.GO_LEFT]) {
+    if (keys[this.GO_LEFT] && (this.x > this.sprite.width/2)) {
       this.x -= this.velX * du;
       this.dirX = -this.velX;
-    } else if (keys[this.GO_RIGHT]) {
+    } else if (keys[this.GO_RIGHT] && (this.x < worldWidth - this.sprite.width/2)) {
       this.x += this.velX * du;
       this.dirX = this.velX;
     } else this.dirX = 0;
@@ -165,15 +165,11 @@ class Knight extends Entity {
     }
 
     // don't let player leaves the world's boundary
-    if (this.x - this.sprite.width / 2 < 0) {
-      this.x = this.sprite.width / 2;
-    }
+
     if (this.y - this.sprite.height / 2 < 0) {
       this.y = this.sprite.height / 2;
     }
-    if (this.x + this.sprite.width / 2 > worldWidth) {
-      this.x = worldWidth - this.sprite.width / 2;
-    }
+
     if (this.y + this.sprite.height / 2 > worldHeight) {
       this.y = worldHeight - this.sprite.height / 2;
     }
