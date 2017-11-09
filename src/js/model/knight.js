@@ -47,13 +47,13 @@ class Knight extends Entity {
   //Could put this in entities
   handleCollision(du) {
     let row, col;
-
+    // Get coordinates
     let left = this.x - this.sprite.width / 2,
-      right = this.x + this.sprite.width / 2,
-      top = this.y - this.sprite.height / 2,
-      bottom = this.y + this.sprite.height / 2;
+        right = this.x + this.sprite.width / 2,
+        top = this.y - this.sprite.height / 2,
+        bottom = this.y + this.sprite.height / 2;
 
-    // Debugging burposes
+    // Debugging purposes
     this.something[0] = [this.map.getCol(left), this.map.getRow(top)];
     this.something[1] = [this.map.getCol(left), this.map.getRow(bottom)];
     this.something[2] = [this.map.getCol(right), this.map.getRow(top)];
@@ -62,85 +62,42 @@ class Knight extends Entity {
     this.something[5] = [this.map.getCol(right), this.map.getRow(this.y)];
     this.something[6] = [this.map.getCol(this.x), this.map.getRow(top)];
     this.something[7] = [this.map.getCol(this.x), this.map.getRow(bottom)];
-  //  console.log(this.map.isSolidTileAtXY(left, top));
-
-    // check for collision on corners
-    let leftTop = this.map.isSolidTileAtXY(left, top),
-      leftBottom = this.map.isSolidTileAtXY(left, bottom),
-      rightTop = this.map.isSolidTileAtXY(right, top),
-      rightBottom = this.map.isSolidTileAtXY(right, bottom),
-
-      leftMiddle = this.map.isSolidTileAtXY(left, this.y),
-      rightMiddle = this.map.isSolidTileAtXY(right, this.y),
-      topMiddle = this.map.isSolidTileAtXY(this.x, top),
-      bottomMiddle = this.map.isSolidTileAtXY(this.x, bottom);
-
-    if (!(rightTop || rightBottom || leftTop || leftBottom ||
-        topMiddle || rightMiddle || bottomMiddle || leftMiddle
-      )) {
-      return;
-    }
-    if (rightBottom || leftBottom) this.velY = 0;
-
-    //  if(rightTop && !topMiddle && !leftTop) console.log("RIGHT");
-    //  if(!rightTop && topMiddle && !leftTop) console.log("MIDDLE");
-    //  if(!rightTop && !topMiddle && leftTop) console.log("LEFT");
 
 
-    //Bottom collider logic
-
-    if (topMiddle || rightTop || leftTop) {
-      if (this.velY < 0) {
+    /***** VERTICAL MOVEMENT ******/
+    // CHECK BOTTOM-LEFT OR BOTTOM-RIGHT
+    if(this.dirY >= 0) {
+      if(this.map.isSolidTileAtXY(left, bottom) || this.map.isSolidTileAtXY(right, bottom)){
+        row = this.map.getRow(bottom);
+        this.y = -this.sprite.height / 2 + this.map.getY(row);
+        this.velY = 0;
+      }
+    } else if(this.dirY < 0) {
+      // CHECK TOP-LEFT OR TOP-RIGHT
+      if (this.map.isSolidTileAtXY(left, top) || this.map.isSolidTileAtXY(right, top)) {
         //change velocity so he doesnt keep jumping, looks like he is frozen
         this.velY +=4;
         row = this.map.getRow(top);
         this.y = this.sprite.height / 2 + this.map.getY(row + 1);
       }
     }
-
-    if (rightMiddle || leftMiddle || leftTop || rightTop) {
-      if (this.dirX > 0 /*&& this.dirY >= 0*/) {
+    /***** HORIZONTAL MOVEMENT******/
+    if(this.dirX > 0) {
+      // CHECK RIGHT-MIDDLE OR TOP RIGHT
+      if(this.map.isSolidTileAtXY(right, this.y) || this.map.isSolidTileAtXY(right, top)){
         col = this.map.getCol(right);
         // the minus one below is so that once it resets the player
         // it isnt still colliding
         this.x = -this.sprite.width / 2 + this.map.getX(col) - 1;
-      } else if (this.dirX < 0 /* && this.dirY >= 0 */) {
+      }
+    } else if(this.dirX < 0){
+      // CHECK LEFT-MIDDLE OR TOP LEFT
+      if(this.map.isSolidTileAtXY(left, this.y) || this.map.isSolidTileAtXY(left, top)){
         col = this.map.getCol(left);
         this.x = this.sprite.width / 2 + this.map.getX(col + 1);
-      }
     }
-
-    if (rightBottom || leftBottom) {
-      if (this.dirY >= 0) {
-        row = this.map.getRow(bottom);
-        this.y = -this.sprite.height / 2 + this.map.getY(row);
-      }
-      if (this.yVel < 0) {
-        console.log("jumping and i hit a corner");
-      }
-    }
-
-
-
-    /*
-   if (this.dirY > 0) {
-       row = this.map.getRow(bottom);
-       this.y = -this.sprite.height / 2 + this.map.getY(row);
-   }
-   else if (this.dirY < 0) {
-       row = this.map.getRow(top);
-       this.y = this.sprite.height / 2 + this.map.getY(row + 1);
-   }
-  else if (this.dirX > 0) {
-       col = this.map.getCol(right);
-       this.x = -this.sprite.width / 2 + this.map.getX(col);
-   }
-   else if (this.dirX < 0) {
-       col = this.map.getCol(left);
-       this.x = this.sprite.width / 2 + this.map.getX(col + 1);
-   } */
-
   }
+}
 
   update(du) {
     var worldWidth = this.map.width;
