@@ -43,6 +43,9 @@ class Map {
     this.layer[6][24] = 1;
     this.layer[4][25] = 1;
     this.layer[5][25] = 1;
+    this.layer[7][28] = 1;
+    this.layer[6][27] = 1;
+    this.layer[6][26] = 1;
 
     this.layer[7][43] = 1;
     this.layer[7][34] = 1;

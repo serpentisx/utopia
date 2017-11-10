@@ -38,7 +38,7 @@ class Knight extends Entity {
   }
 
   drawCollisions(collisions) {
-    for (var i in collisions) {
+    for (let i in collisions) {
       this.map.drawTile(collisions[i].x, collisions[i].y);
     }
   }
@@ -47,12 +47,15 @@ class Knight extends Entity {
 
     let halfWidth = this.sprite.width / 2;
     let halfHeight = this.sprite.height / 2;
+
     this.applyGravity(du);
 
     let collisions = this.detectCollisionsWithPlatform();
     this.collisions = collisions;
 
     let offSet = 3;
+
+
 
     if (collisions["left"]) {
       this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
@@ -61,16 +64,22 @@ class Knight extends Entity {
       this.x = collisions["right"].x - halfWidth - offSet;
     }
     if (collisions["top"]) {
+      console.log("sdf")
       this.velY = 0.01;
       this.y = halfHeight + collisions["top"].y + collisions["top"].h;
     }
-    if (collisions["bottom"]) {
+
+    if (collisions["bottom"] && this.velY > 0) {
       // hard coded
-      if (collisions["right"] && Math.abs(collisions["bottom"].x - this.x + halfWidth) == 83) return;
+      if ((collisions["right"] || collisions["left"]) &&
+        Math.abs(this.velY) > du * this.gravity &&
+        (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 83 ||
+          Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;
 
       this.velY = 0;
       this.y = collisions["bottom"].y - halfHeight + 1;
     }
+
   }
 
   detectCollisionsWithPlatform() {
@@ -89,17 +98,17 @@ class Knight extends Entity {
 
   // Two rectangles collision check
   collidesWithPlatform(p) {
-    var x = this.x - this.sprite.width / 2;
-    var y = this.y - this.sprite.height / 2;
-    var w = this.sprite.width;
-    var h = this.sprite.height;
-    var dx = (x + w / 2) - (p.x + p.w / 2);
-    var dy = (y + h / 2) - (p.y + p.h / 2);
-    var width = (w + p.w) / 2;
-    var height = (h + p.h) / 2;
-    var crossWidth = width * dy;
-    var crossHeight = height * dx;
-    var collision = null;
+    let x = this.x - this.sprite.width / 2;
+    let y = this.y - this.sprite.height / 2;
+    let w = this.sprite.width;
+    let h = this.sprite.height;
+    let dx = (x + w / 2) - (p.x + p.w / 2);
+    let dy = (y + h / 2) - (p.y + p.h / 2);
+    let width = (w + p.w) / 2;
+    let height = (h + p.h) / 2;
+    let crossWidth = width * dy;
+    let crossHeight = height * dx;
+    let collision = null;
     //
     if (Math.abs(dx) <= width && Math.abs(dy) <= height) {
       if (crossWidth > crossHeight) {
@@ -124,7 +133,7 @@ class Knight extends Entity {
   update(du) {
 
     if (keys[this.GO_LEFT])  this.x -= this.velX * du;
-    if (keys[this.GO_RIGHT]) this.x += this.velX * du;
+    else if (keys[this.GO_RIGHT]) this.x += this.velX * du;
 
     if (keys[this.JUMP] && !this.isJumping) {
       this.velY = -11;
