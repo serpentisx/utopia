@@ -53,6 +53,27 @@ class Map {
     return this.layer[row][col];
   }
 
+  // this function can be optimized, we don't need to check that much
+  getRectTiles(x, y) {
+    var row = Math.max(0, this.getRow(y) - 3);
+    var col = Math.max(0, this.getCol(x) - 3);
+
+    var tiles = [];
+    for (var i = row; i <= row + 4; i++) {
+      for( var k = col; k <= col + 4; k++) {
+        if (this.layer[i][k] !== undefined) {
+          tiles.push({
+            y: i * this.tsize,
+            x: k * this.tsize,
+            w: this.tsize,
+            h: this.tsize
+          });
+        }
+      }
+    }
+    return tiles;
+  }
+
   isSolidTileAtXY(x, y) {
     let col = Math.floor(x / this.tsize);
     let row = Math.floor(y / this.tsize);
@@ -80,7 +101,7 @@ class Map {
   drawTile(x, y) {
     ctx.strokeStyle = "green";
     ctx.lineWidth = 5;
-    ctx.strokeRect(x * 128 - this.xView, y * 128 - this.yView, 128, 128);
+    ctx.strokeRect(x - this.xView, y - this.yView, 128, 128);
     ctx.lineWidth = 1;
     ctx.strokeStyle = "black";
   }
@@ -130,7 +151,6 @@ class Map {
     //  console.log("Col estimate " + cameraWidth / 128);
 
     let startCol = Math.floor(xView / this.tsize);
-    //console.log(startCol);
     let endCol = startCol + (cameraWidth / this.tsize);
 
     //	console.log(endCol);
@@ -150,8 +170,5 @@ class Map {
 
       }
     }
-
-    ctx.strokeStyle = "green";
-    ctx.strokeStyle = "black";
   }
 }
