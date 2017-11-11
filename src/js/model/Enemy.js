@@ -1,5 +1,5 @@
 /**
- * Enemy
+ * Enemy class
  */
 class Enemy {
   constructor(sprite, obj) {

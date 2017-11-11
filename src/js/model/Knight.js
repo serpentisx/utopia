@@ -121,19 +121,18 @@ class Knight extends Entity {
   }
 
   handleBoundary() {
-    let halfWidth = this.sprite.width / 2;
-    let halfHeight = this.sprite.height / 2;
+    const halfWidth = this.sprite.width / 2;
+    const halfHeight = this.sprite.height / 2;
 
     if (this.y - halfHeight < 0) this.y = halfHeight;
     if (this.y + halfHeight > this.map.height) this.y = this.map.height - halfHeight;
-    if (this.x - halfWidth < 0) this.x = halfWidth;
-    if (this.x + halfWidth > this.map.width) this.x = this.map.width - halfWidth;
   }
 
   update(du) {
-
-    if (keys[this.GO_LEFT])  this.x -= this.velX * du;
-    else if (keys[this.GO_RIGHT]) this.x += this.velX * du;
+    if (keys[this.GO_LEFT] && (this.x > this.sprite.width/2))  this.x -= this.velX * du;
+    else if (keys[this.GO_RIGHT] && (this.x < this.map.width - this.sprite.width/2)) {
+      this.x += this.velX * du;
+    }
 
     if (keys[this.JUMP] && !this.isJumping) {
       this.velY = -11;
