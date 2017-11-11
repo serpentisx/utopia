@@ -5,9 +5,8 @@ class EntityManager extends SpatialManager {
     this.KILL_ME_NOW = -1;
   }
 
-  createKnight(sprite, prop) {
-    this.sprite = sprite
-    return this.registerEntity(new Knight(sprite, prop));
+  createKnight(prop) {
+    return this.registerEntity(new Knight(prop));
   }
 
   registerEntity(entity) {
@@ -24,11 +23,7 @@ class EntityManager extends SpatialManager {
         this.entities[i].splice(i--, 1);
         return;
       }
-
-      // kind of done for the knight as there are no other entities right now
       entity.update(du);
-      // entity.update(du);
-
       this.register(entity);
     }
   }

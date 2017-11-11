@@ -2,8 +2,6 @@ class KnightSprite {
 
   constructor() {
     this.sprites = {};
-    this.width;
-    this.height;
 
     this.numSprite = 5;
     this.walkIndex = 0;

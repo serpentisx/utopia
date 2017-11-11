@@ -41,10 +41,10 @@ class Map {
     //Create 2D array that fills out image/map size - we will split the array to
     //represent background and foreground (this is if we want the player to
     // walk behind objects)
-    this.layer = new Array(this.rows);
+    this.layer = new Array(this.rows + 2);
 
     for (let i = 0; i < this.layer.length; i++) {
-      this.layer[i] = new Array(this.cols);
+      this.layer[i] = new Array(this.cols + 2);
       this.layer[i].fill(0);
     }
 
@@ -167,8 +167,8 @@ class Map {
 
   drawGrid(ctx, xView, yView) {
     // dimensions of cropped image
-    let cameraWidth = ctx.canvas.width,
-      cameraHeight = ctx.canvas.height;
+    let cameraWidth = ctx.canvas.width + 200,
+      cameraHeight = ctx.canvas.height + 200;
 
     let startCol = Math.floor(xView / this.tsize);
     let endCol = startCol + (cameraWidth / this.tsize);
