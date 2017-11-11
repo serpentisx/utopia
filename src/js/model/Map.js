@@ -4,11 +4,30 @@ class Map {
     this.sprite = mapImage;
     this.width = this.sprite.width;
     this.height = this.sprite.height;
-
     this.tsize = 128;
+
+    this.rocks = new Image();
+    this.rocks.src = 'assets/platformer_background_3/Layers/layer06_Rocks.png';
+    this.rocks = new Sprite(this.rocks);
+
+    this.hills = new Image();
+    this.hills.src = 'assets/platformer_background_3/Layers/layer04_Hills_2.png';
+    this.hills = new Sprite(this.hills);
+
+    this.hills2 = new Image();
+    this.hills2.src = 'assets/platformer_background_3/Layers/layer03_Hills_1.png';
+    this.hills2 = new Sprite(this.hills2);
+
+    this.clouds = new Image();
+    this.clouds.src = 'assets/platformer_background_3/Layers/layer05_Clouds.png';
+    this.clouds = new Sprite(this.clouds);
+    this.clouds.x = -1000;
+    this.clouds.y = 0;
+
 
     this.cols = Math.ceil(this.width / this.tsize); //Divide by map tile size
     this.rows = Math.ceil(this.height / this.tsize); //Divide by map tile size
+    console.log(this.rows);
 
     //Change this  -- we need to load all the tiles in an effective way
     this.imgArray = new Array();
@@ -139,7 +158,7 @@ class Map {
     // Offset point to crop image
     this.xView = xView;
     this.yView = yView;
-
+    console.log(this.xView);
     // dimensions of cropped image
     sWidth = ctx.canvas.width;
     sHeight = ctx.canvas.height;
@@ -162,6 +181,16 @@ class Map {
     dHeight = sHeight;
 
     this.sprite.drawAt(ctx, this.xView, this.yView, sWidth, sHeight, dx, dy, dWidth, dHeight);
+    this.rocks.drawAtCorner(ctx, 0, 0);
+    this.hills2.drawAtCorner(ctx, -this.xView, -this.yView+ (this.sprite.height-this.hills.image.height*0.923));
+    this.hills.drawAtCorner(ctx, -this.xView+this.hills.image.width, -this.yView+ (this.sprite.height-this.hills.image.height/1.5));
+    this.hills.drawAtCorner(ctx, -this.xView+this.hills.image.width*2, -this.yView+ (this.sprite.height-this.hills.image.height/1.5));
+    if(this.clouds.x > this.xView) {
+      this.clouds.x = -this.xView;
+    }
+    this.clouds.drawAtCorner(ctx, this.clouds.x++, this.clouds.y);
+  //  this.hills.drawAtCorner(ctx, this.xView, -this.yView+ (this.sprite.height-this.hills.image.height/2));
+
     this.drawGrid(ctx, this.xView, this.yView);
   }
 

@@ -149,7 +149,7 @@ class Knight extends Entity {
 
     if (keys[this.JUMP] && !this.isJumping) {
       this.isIdle = false;
-      this.velY = -11;
+      this.velY = -15;
       this.isJumping = true;
     }
 
