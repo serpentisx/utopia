@@ -8,46 +8,72 @@ class KnightSprite {
     this.numSprite = 5;
     this.walkIndex = 0;
     this.idleIndex = 0;
+    this.jumpingIndex = 0;
     this.updateRate = 0.2;
+
+    this.width = 140;
+    this.height = 108;
 
     this.loadSprites();
   }
 
   loadSprites() {
     let requiredImages = {
-      idle0: 'assets/knight/1_IDLE_000.png',
-      idle1: 'assets/knight/1_IDLE_001.png',
-      idle2: 'assets/knight/1_IDLE_002.png',
-      idle3: 'assets/knight/1_IDLE_003.png',
-      idle4: 'assets/knight/1_IDLE_004.png',
-      walk0: 'assets/knight/2_WALK_000.png',
-      walk1: 'assets/knight/2_WALK_001.png',
-      walk2: 'assets/knight/2_WALK_002.png',
-      walk3: 'assets/knight/2_WALK_003.png',
-      walk4: 'assets/knight/2_WALK_004.png',
-      knight: 'assets/knight/knight.png'
+      idle0: 'assets/model/ork/IDLE_000.png',
+      idle1: 'assets/model/ork/IDLE_001.png',
+      idle2: 'assets/model/ork/IDLE_002.png',
+      idle3: 'assets/model/ork/IDLE_003.png',
+      idle4: 'assets/model/ork/IDLE_004.png',
+      walk0: 'assets/model/ork/WALK_000.png',
+      walk1: 'assets/model/ork/WALK_001.png',
+      walk2: 'assets/model/ork/WALK_002.png',
+      walk3: 'assets/model/ork/WALK_003.png',
+      walk4: 'assets/model/ork/WALK_004.png',
+      jump0: 'assets/model/ork/JUMP_000.png',
+      jump1: 'assets/model/ork/JUMP_001.png',
+      jump2: 'assets/model/ork/JUMP_002.png',
+      jump3: 'assets/model/ork/JUMP_003.png',
+      jump4: 'assets/model/ork/JUMP_004.png',
     };
-    imagesPreload(requiredImages, this.sprites, this.scale.bind(this));
+    imagesPreload(requiredImages, this.sprites, function empty() {});
   }
 
-  scale() {
-    for (let sprite in this.sprites) {
-      this.sprites[sprite].scale = 0.25;
-    }
-    console.log(this.sprites)
-  }
-
-  renderWalk(ctx, x, y) {
-    this.width = this.sprites.knight.width;
-    this.height = this.sprites.knight.height;
+  renderWalkRight(ctx, x, y) {
     let index = Math.floor(this.walkIndex += this.updateRate) % this.numSprite;
     this.sprites[`walk${index}`].drawAtCenter(ctx, x, y);
-    //console.log(index);
-
   }
 
-  renderIdle(ctx, x, y) {
-    this.sprites[`idle${this.walkIndex}`].drawAtCenter(ctx, x, y);
-    (this.idleIndex += this.updateRate) % this.numSprite;
+  renderWalkLeft(ctx, x, y) {
+    let index = Math.floor(this.walkIndex += this.updateRate) % this.numSprite;
+    this.sprites[`walk${index}`].drawAtCenterFlipped(ctx, x, y);
+  }
+
+  renderJumpingRight(ctx, x, y) {
+    let index = Math.floor(this.jumpingIndex += this.updateRate) % this.numSprite;
+    this.sprites[`jump${index}`].drawAtCenter(ctx, x, y);
+  }
+
+  renderJumpingLeft(ctx, x, y) {
+    let index = Math.floor(this.jumpingIndex += this.updateRate) % this.numSprite;
+    this.sprites[`jump${index}`].drawAtCenterFlipped(ctx, x, y);
+  }
+
+  renderIdleRight(ctx, x, y) {
+    let index = Math.floor(this.idleIndex += this.updateRate) % this.numSprite;
+    this.sprites[`idle${index}`].drawAtCenter(ctx, x, y);
+  }
+
+  renderIdleLeft(ctx, x, y) {
+    let index = Math.floor(this.idleIndex += this.updateRate) % this.numSprite;
+    this.sprites[`idle${index}`].drawAtCenterFlipped(ctx, x, y);
+  }
+
+  render(ctx, x, y, dir, jumping, isIdle) {
+    if (jumping && dir > 0) this.renderJumpingRight(ctx, x, y);
+    else if (jumping && dir < 0) this.renderJumpingLeft(ctx, x, y);
+    else if (isIdle && dir > 0) this.renderIdleRight(ctx, x, y);
+    else if (isIdle && dir < 0) this.renderIdleLeft(ctx, x, y);
+    else if (dir > 0) this.renderWalkRight(ctx, x, y);
+    else this.renderWalkLeft(ctx, x, y);
   }
 }
