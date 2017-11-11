@@ -16,8 +16,6 @@ class GameManager {
     if (instance) {
       return instance;
     }
-    instance = this;
-
     this.keys = {};
     this.stopKey = false;
 

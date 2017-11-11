@@ -6,7 +6,7 @@ class Sprite {
 
     this.width = image.width;
     this.height = image.height;
-
+    this.scale = 1;
   }
 
   //This is for the map drawing
@@ -20,7 +20,10 @@ class Sprite {
 
   // No rotation, sprite image dimensions used
   drawAtCenter(ctx, x, y) {
+    ctx.save();
+    ctx.scale(this.scale, this.scale);
     ctx.drawImage(this.image, x - this.width / 2, y - this.height / 2);
+    ctx.restore();
   }
 
   //Sprite

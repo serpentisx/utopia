@@ -1,13 +1,13 @@
 class Knight extends Entity {
 
-  constructor(sprite, obj) {
+  constructor(obj) {
     super();
 
     for (let prop in obj) {
       this[prop] = obj[prop];
     }
 
-    this.sprite = sprite;
+    this.sprite = new KnightSprite();
     this.rotation = 0;
     this.velX = 8;
     this.velY = 0;
@@ -55,8 +55,6 @@ class Knight extends Entity {
 
     let offSet = 3;
 
-
-
     if (collisions["left"]) {
       this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
     }
@@ -64,7 +62,6 @@ class Knight extends Entity {
       this.x = collisions["right"].x - halfWidth - offSet;
     }
     if (collisions["top"]) {
-      console.log("sdf")
       this.velY = 0.01;
       this.y = halfHeight + collisions["top"].y + collisions["top"].h;
     }
@@ -150,7 +147,7 @@ class Knight extends Entity {
 
   render(ctx, xView, yView) {
     this.drawCollisions(this.collisions);
-    this.sprite.drawAtCenter(ctx, this.x - xView, this.y - yView);
-    this.sprite.drawBoundary(ctx, this.x - xView, this.y - yView);
+    //this.sprite.drawBoundary(ctx, this.x - xView, this.y - yView);
+    this.sprite.renderWalk(ctx, this.x - xView, this.y - yView);
   }
 }
