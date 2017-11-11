@@ -55,8 +55,6 @@ class Knight extends Entity {
 
     let offSet = 3;
 
-
-
     if (collisions["left"]) {
       this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
     }
@@ -132,7 +130,7 @@ class Knight extends Entity {
 
   update(du) {
 
-    if (keys[this.GO_LEFT])  this.x -= this.velX * du;
+    if (keys[this.GO_LEFT]) this.x -= this.velX * du;
     else if (keys[this.GO_RIGHT]) this.x += this.velX * du;
 
     if (keys[this.JUMP] && !this.isJumping) {
