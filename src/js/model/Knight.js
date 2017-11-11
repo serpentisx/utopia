@@ -1,13 +1,13 @@
 class Knight extends Entity {
 
-  constructor(sprite, obj) {
+  constructor(obj) {
     super();
 
     for (let prop in obj) {
       this[prop] = obj[prop];
     }
 
-    this.sprite = sprite;
+    this.sprite = new KnightSprite();
     this.rotation = 0;
     this.velX = 8;
     this.velY = 0;
@@ -18,6 +18,7 @@ class Knight extends Entity {
     this.JUMP = KEY_W;
 
     this.isJumping = false;
+    this.isIdle = true;
   }
 
   setMap(map) {
@@ -61,8 +62,12 @@ class Knight extends Entity {
     if (collisions["right"]) {
       this.x = collisions["right"].x - halfWidth - offSet;
     }
+
+    if ((collisions["right"] || collisions["left"]) && collisions["top"]) {
+      return;
+    }
+
     if (collisions["top"]) {
-      console.log("sdf")
       this.velY = 0.01;
       this.y = halfHeight + collisions["top"].y + collisions["top"].h;
     }
@@ -71,7 +76,7 @@ class Knight extends Entity {
       // hard coded
       if ((collisions["right"] || collisions["left"]) &&
         Math.abs(this.velY) > du * this.gravity &&
-        (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 83 ||
+        (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 143 ||
           Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;
 
       this.velY = 0;
@@ -129,11 +134,21 @@ class Knight extends Entity {
   }
 
   update(du) {
+    this.isIdle = true;
 
-    if (keys[this.GO_LEFT]) this.x -= this.velX * du;
-    else if (keys[this.GO_RIGHT]) this.x += this.velX * du;
+    if (keys[this.GO_LEFT])  {
+      this.isIdle = false;
+      this.dirX = -1;
+      this.x -= this.velX * du;
+    }
+    else if (keys[this.GO_RIGHT]) {
+      this.isIdle = false;
+      this.dirX = 1;
+      this.x += this.velX * du;
+    }
 
     if (keys[this.JUMP] && !this.isJumping) {
+      this.isIdle = false;
       this.velY = -11;
       this.isJumping = true;
     }
@@ -148,7 +163,6 @@ class Knight extends Entity {
 
   render(ctx, xView, yView) {
     this.drawCollisions(this.collisions);
-    this.sprite.drawAtCenter(ctx, this.x - xView, this.y - yView);
-    this.sprite.drawBoundary(ctx, this.x - xView, this.y - yView);
+    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle);
   }
 }

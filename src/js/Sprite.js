@@ -6,7 +6,7 @@ class Sprite {
 
     this.width = image.width;
     this.height = image.height;
-
+    this.scale = 1;
   }
 
   //This is for the map drawing
@@ -18,14 +18,22 @@ class Sprite {
     ctx.drawImage(this.image, x, y);
   }
 
+  //Sprite
+  drawHeightAndWidth(ctx, x, y, width, height) {
+    ctx.drawImage(this.image, x, y, width, height);
+  }
+
   // No rotation, sprite image dimensions used
   drawAtCenter(ctx, x, y) {
     ctx.drawImage(this.image, x - this.width / 2, y - this.height / 2);
   }
 
-  //Sprite
-  drawHeightAndWidth(ctx, x, y, width, height) {
-    ctx.drawImage(this.image, x, y, width, height);
+  drawAtCenterFlipped(ctx, x, y) {
+    ctx.save();
+    ctx.translate(ctx.canvas.width / 2 + x, 0);
+    ctx.scale(-1,1);
+    ctx.drawImage(this.image, x - this.width / 2, y - this.height / 2);
+    ctx.restore();
   }
 
   drawCentredAt(ctx, cx, cy, rotation) {

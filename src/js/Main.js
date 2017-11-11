@@ -1,12 +1,10 @@
 /**
- * The main method that loads everthing
+ * The main method that loads everything
  * once the document is ready.
  */
-document.addEventListener("DOMContentLoaded", (e) => {
 
-	"use strict";
-
-  //Set canvas size
+window.onload = function () {
+	//Set canvas size
   ctx.canvas.width  = window.innerWidth
   ctx.canvas.height = window.innerHeight
 
@@ -25,5 +23,4 @@ document.addEventListener("DOMContentLoaded", (e) => {
   //Reset canvas width and height
   //initializeWindowListener();
 	gameManager.start();
-
-});
+}
