@@ -5,54 +5,74 @@ class Map {
     this.width = this.sprite.width;
     this.height = this.sprite.height;
 
-    //Change this  -- we need to load all the tiles in an effective way
-    this.brick = new Image();
-    this.brick.src = 'assets/_ground/ground07.png';
-    this.tile = new Sprite(this.brick);
-    ///
-    //tile size
     this.tsize = 128;
 
-    this.cols = Math.floor(this.width / this.tsize); //Divide by map tile size
-    this.rows = Math.floor(this.height / this.tsize); //Divide by map tile size
+    this.cols = Math.ceil(this.width / this.tsize); //Divide by map tile size
+    this.rows = Math.ceil(this.height / this.tsize); //Divide by map tile size
+
+    //Change this  -- we need to load all the tiles in an effective way
+    this.imgArray = new Array();
+
+    this.imgArray[0] = new Image();
+    this.imgArray[0].src = 'assets/_ground/ground06.png';
+
+    this.imgArray[1] = new Image();
+    this.imgArray[1].src = 'assets/_ground/ground02.png';
+
+    this.imgArray[2] = new Image();
+    this.imgArray[2].src = 'assets/_lava/lava01.png';
+
+    this.imgArray[3] = new Image();
+    this.imgArray[3].src = 'assets/_leafy_ground/leafy_ground01.png';
+
+    this.imgArray[4] = new Image();
+    this.imgArray[4].src = 'assets/_rocky/rocky03.png';
+
+    this.imgArray[5] = new Image();
+    this.imgArray[5].src = 'assets/_water/water1.png';
+
+    this.tiles = new Array();
+
+    for(var i = 0; i < this.imgArray.length; i ++ ) {
+      this.tiles[i] = new Sprite(this.imgArray[i]);
+    }
+
 
     //Create 2D array that fills out image/map size - we will split the array to
     //represent background and foreground (this is if we want the player to
     // walk behind objects)
-    this.layer = new Array(this.cols + 1);
+    this.layer = new Array(this.rows);
+
     for (let i = 0; i < this.layer.length; i++) {
-      this.layer[i] = new Array(this.rows + 1);
+      this.layer[i] = new Array(this.cols);
+      this.layer[i].fill(0);
     }
+
 
     //Place the ground
-    for (var i = 0; i < this.layer.length; i++) {
-      this.layer[this.rows][i] = 1;
-
+    for (var i = 0; i < this.cols; i++) {
+      this.layer[this.rows-1][i] = 1;
     }
 
-    //Place random bricks
 
-    this.layer[2][7] = 1;
-    this.layer[9][6] = 1;
-    this.layer[5][6] = 1;
-    this.layer[4][7] = 1;
-    this.layer[3][6] = 1;
-    this.layer[4][6] = 1;
-    this.layer[7][22] = 1;
-    this.layer[7][23] = 1;
-    this.layer[6][24] = 1;
-    this.layer[4][25] = 1;
-    this.layer[5][25] = 1;
-    this.layer[7][28] = 1;
-    this.layer[6][27] = 1;
-    this.layer[6][26] = 1;
+    window.addEventListener('mousedown', this.addOrRemoveTile.bind(this));
+}
 
-    this.layer[7][43] = 1;
-    this.layer[7][34] = 1;
-    this.layer[8][33] = 1;
+  addOrRemoveTile(e) {
+    let x = e.clientX - ctx.canvas.offsetLeft + this.xView;
+    let y = e.clientY - ctx.canvas.offsetTop + this.yView;
+    let r = this.getRow(y);
+    let c = this.getCol(x);
+
+    if(keys[KEY_1]) this.layer[r][c] = 1;
+    else if(keys[KEY_2]) this.layer[r][c] = 2;
+    else if(keys[KEY_3]) this.layer[r][c] = 3;
+    else if(keys[KEY_4]) this.layer[r][c] = 4;
+    else if(keys[KEY_5]) this.layer[r][c] = 5;
+    else if(keys[KEY_6]) this.layer[r][c] = 6;
+    else this.layer[r][c] = 0;
   }
-
-  getTile(col, row) {
+  getTile(row, col) {
     return this.layer[row][col];
   }
 
@@ -80,9 +100,9 @@ class Map {
   isSolidTileAtXY(x, y) {
     let col = Math.floor(x / this.tsize);
     let row = Math.floor(y / this.tsize);
-    let tile = this.getTile(col, row);
+    let tile = this.getTile(row, col);
 
-    return (tile === 1);
+    return (tile != 0);
   }
 
   getCol(x) {
@@ -108,6 +128,7 @@ class Map {
     ctx.lineWidth = 1;
     ctx.strokeStyle = "black";
   }
+
 
   render(ctx, xView, yView) {
     //context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height);
@@ -146,12 +167,8 @@ class Map {
 
   drawGrid(ctx, xView, yView) {
     // dimensions of cropped image
-    let cameraWidth = ctx.canvas.width + 300,
-      cameraHeight = ctx.canvas.height + 300;
-
-    //I should have about 6 x 10 tiles for a full screen
-    //  console.log("Row estimate " + cameraHeight / 128);
-    //  console.log("Col estimate " + cameraWidth / 128);
+    let cameraWidth = ctx.canvas.width,
+      cameraHeight = ctx.canvas.height;
 
     let startCol = Math.floor(xView / this.tsize);
     let endCol = startCol + (cameraWidth / this.tsize);
@@ -161,14 +178,15 @@ class Map {
     let endRow = startRow + (cameraHeight / this.tsize);
     let offsetX = -xView + startCol * this.tsize;
     let offsetY = -yView + startRow * this.tsize;
-    for (let c = startCol; c <= endCol; c++) {
+
       for (let r = startRow; r <= endRow; r++) {
-        var tile = this.getTile(c, r);
+        for (let c = startCol; c <= endCol; c++) {
+        var tile = this.getTile(r, c);
         var x = (c - startCol) * this.tsize + offsetX;
         var y = (r - startRow) * this.tsize + offsetY;
         ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
-        if (tile == 1) { // 0 => empty tile
-          this.tile.drawAtCorner(ctx, x, y);
+        if (tile != 0) { // 0 => empty tile
+          this.tiles[tile-1].drawAtCorner(ctx, x, y);
         }
 
       }

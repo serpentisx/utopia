@@ -46,8 +46,8 @@ class Knight extends Entity {
 
   handleCollisions(du) {
 
-    let halfWidth = this.sprite.width / 2;
-    let halfHeight = this.sprite.height / 2;
+    const halfWidth = this.sprite.width / 2;
+    const halfHeight = this.sprite.height / 2;
 
     this.applyGravity(du);
 
@@ -86,7 +86,7 @@ class Knight extends Entity {
   }
 
   detectCollisionsWithPlatform() {
-    let w = this.sprite.width / 2;
+    const w = this.sprite.width / 2;
     let tiles = this.map.getRectTiles(this.x, this.y);
     let collisions = [];
 
@@ -101,16 +101,16 @@ class Knight extends Entity {
 
   // Two rectangles collision check
   collidesWithPlatform(p) {
-    let x = this.x - this.sprite.width / 2;
-    let y = this.y - this.sprite.height / 2;
-    let w = this.sprite.width;
-    let h = this.sprite.height;
-    let dx = (x + w / 2) - (p.x + p.w / 2);
-    let dy = (y + h / 2) - (p.y + p.h / 2);
-    let width = (w + p.w) / 2;
-    let height = (h + p.h) / 2;
-    let crossWidth = width * dy;
-    let crossHeight = height * dx;
+    const x = this.x - this.sprite.width / 2;
+    const y = this.y - this.sprite.height / 2;
+    const w = this.sprite.width;
+    const h = this.sprite.height;
+    const dx = (x + w / 2) - (p.x + p.w / 2);
+    const dy = (y + h / 2) - (p.y + p.h / 2);
+    const width = (w + p.w) / 2;
+    const height = (h + p.h) / 2;
+    const crossWidth = width * dy;
+    const crossHeight = height * dx;
     let collision = null;
     //
     if (Math.abs(dx) <= width && Math.abs(dy) <= height) {
@@ -124,8 +124,8 @@ class Knight extends Entity {
   }
 
   handleBoundary() {
-    let halfWidth = this.sprite.width / 2;
-    let halfHeight = this.sprite.height / 2;
+    const halfWidth = this.sprite.width / 2;
+    const halfHeight = this.sprite.height / 2;
 
     if (this.y - halfHeight < 0) this.y = halfHeight;
     if (this.y + halfHeight > this.map.height) this.y = this.map.height - halfHeight;
