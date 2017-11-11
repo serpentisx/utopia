@@ -60,19 +60,7 @@ class Map {
     //Create 2D array that fills out image/map size - we will split the array to
     //represent background and foreground (this is if we want the player to
     // walk behind objects)
-    this.layer = new Array(this.rows + 2);
-
-    for (let i = 0; i < this.layer.length; i++) {
-      this.layer[i] = new Array(this.cols + 2);
-      this.layer[i].fill(0);
-    }
-
-
-    //Place the ground
-    for (var i = 0; i < this.cols; i++) {
-      this.layer[this.rows-1][i] = 1;
-    }
-
+    this.layer = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,2,2,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],[4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0],[1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0],[1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,1,1,1,1,1,0,0],[1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0],[0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0],[1,2,0,0,0,0,0,0,2,2,1,1,1,1,1,1,1,1,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,0,0,5,5,5,5,5,5,5,5,5,0,0],[0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,3,3,3,3,3,5,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,2,2,1,1,1,5,5,0,0,0,5,5,5,5,5,5,5,2,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,1,1,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,2,2,0,0,0,1,1,1,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,2,2,0,0,0,0,0,0,0,1,1,1,5,5,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,2,2,0,1,1,1,5,5,0,0,0,0,2,0,0,0,0,0,2,2,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,1,1,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,5,5,5,5,5,5,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
 
     window.addEventListener('mousedown', this.addOrRemoveTile.bind(this));
 }
@@ -152,6 +140,10 @@ class Map {
   render(ctx, xView, yView) {
     //context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height);
 
+    //Get the array from map building
+    console.log(JSON.stringify(this.layer));
+
+
     let sx, sy, dx, dy,
       sWidth, sHeight, dWidth, dHeight;
 
@@ -182,13 +174,14 @@ class Map {
 
     this.sprite.drawAt(ctx, this.xView, this.yView, sWidth, sHeight, dx, dy, dWidth, dHeight);
     this.rocks.drawAtCorner(ctx, 0, 0);
-    this.hills2.drawAtCorner(ctx, -this.xView, -this.yView+ (this.sprite.height-this.hills.image.height*0.923));
-    this.hills.drawAtCorner(ctx, -this.xView+this.hills.image.width, -this.yView+ (this.sprite.height-this.hills.image.height/1.5));
-    this.hills.drawAtCorner(ctx, -this.xView+this.hills.image.width*2, -this.yView+ (this.sprite.height-this.hills.image.height/1.5));
     if(this.clouds.x > this.xView) {
-      this.clouds.x = -this.xView;
+      this.clouds.x = -1000;
     }
-    this.clouds.drawAtCorner(ctx, this.clouds.x++, this.clouds.y);
+    this.clouds.drawAtCorner(ctx, this.clouds.x+=0.5, this.clouds.y);
+    this.hills.drawAtCorner(ctx, -this.xView, -this.yView);
+    this.hills.drawAtCorner(ctx, -this.xView+this.hills.image.width, -this.yView);
+    this.hills.drawAtCorner(ctx, -this.xView+this.hills.image.width*2, -this.yView);
+
   //  this.hills.drawAtCorner(ctx, this.xView, -this.yView+ (this.sprite.height-this.hills.image.height/2));
 
     this.drawGrid(ctx, this.xView, this.yView);

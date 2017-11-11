@@ -17,7 +17,7 @@ class HollowKnightGame extends Scene {
   }
 
   init() {
-    this.knight = this.entityManager.createKnight({x: 3000, y: 100});
+    this.knight = this.entityManager.createKnight({x: 29, y:700});
     this.coinManager = new CoinManager(this.knight);
 
     // Set the camera up to follow the knight
