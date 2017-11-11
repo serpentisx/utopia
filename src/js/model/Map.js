@@ -13,46 +13,25 @@ class Map {
     //tile size
     this.tsize = 128;
 
-    this.cols = Math.floor(this.width / this.tsize); //Divide by map tile size
-    this.rows = Math.floor(this.height / this.tsize); //Divide by map tile size
+    this.cols = Math.ceil(this.width / this.tsize); //Divide by map tile size
+    this.rows = Math.ceil(this.height / this.tsize); //Divide by map tile size
 
     //Create 2D array that fills out image/map size - we will split the array to
     //represent background and foreground (this is if we want the player to
     // walk behind objects)
-    this.layer = new Array(this.cols + 1);
+    this.layer = new Array(this.rows);
     for (let i = 0; i < this.layer.length; i++) {
-      this.layer[i] = new Array(this.rows + 1);
+      this.layer[i] = new Array(this.cols);
     }
 
     //Place the ground
-    for (var i = 0; i < this.layer.length; i++) {
-      this.layer[this.rows][i] = 1;
-
+    for (var i = 0; i < this.cols; i++) {
+      this.layer[this.rows-1][i] = 1;
     }
 
-    //Place random bricks
+}
 
-    this.layer[2][7] = 1;
-    this.layer[9][6] = 1;
-    this.layer[5][6] = 1;
-    this.layer[4][7] = 1;
-    this.layer[3][6] = 1;
-    this.layer[4][6] = 1;
-    this.layer[7][22] = 1;
-    this.layer[7][23] = 1;
-    this.layer[6][24] = 1;
-    this.layer[4][25] = 1;
-    this.layer[5][25] = 1;
-    this.layer[7][28] = 1;
-    this.layer[6][27] = 1;
-    this.layer[6][26] = 1;
-
-    this.layer[7][43] = 1;
-    this.layer[7][34] = 1;
-    this.layer[8][33] = 1;
-  }
-
-  getTile(col, row) {
+  getTile(row, col) {
     return this.layer[row][col];
   }
 
@@ -80,7 +59,7 @@ class Map {
   isSolidTileAtXY(x, y) {
     let col = Math.floor(x / this.tsize);
     let row = Math.floor(y / this.tsize);
-    let tile = this.getTile(col, row);
+    let tile = this.getTile(row, col);
 
     return (tile === 1);
   }
@@ -146,8 +125,8 @@ class Map {
 
   drawGrid(ctx, xView, yView) {
     // dimensions of cropped image
-    let cameraWidth = ctx.canvas.width + 300,
-      cameraHeight = ctx.canvas.height + 300;
+    let cameraWidth = ctx.canvas.width+100,
+      cameraHeight = ctx.canvas.height+100;
 
     //I should have about 6 x 10 tiles for a full screen
     //  console.log("Row estimate " + cameraHeight / 128);
@@ -161,9 +140,10 @@ class Map {
     let endRow = startRow + (cameraHeight / this.tsize);
     let offsetX = -xView + startCol * this.tsize;
     let offsetY = -yView + startRow * this.tsize;
-    for (let c = startCol; c <= endCol; c++) {
+
       for (let r = startRow; r <= endRow; r++) {
-        var tile = this.getTile(c, r);
+        for (let c = startCol; c <= endCol; c++) {
+        var tile = this.getTile(r, c);
         var x = (c - startCol) * this.tsize + offsetX;
         var y = (r - startRow) * this.tsize + offsetY;
         ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
