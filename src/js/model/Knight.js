@@ -16,6 +16,7 @@ class Knight extends Entity {
     this.GO_RIGHT = KEY_D;
     this.JUMP = KEY_W;
 
+    this.dirX = 0;
     this.isJumping = false;
     this.isIdle = true;
   }
@@ -43,10 +44,6 @@ class Knight extends Entity {
       this.x = collisions["right"].x - halfWidth - offSet;
     }
 
-    if ((collisions["right"] || collisions["left"]) && collisions["top"]) {
-      return;
-    }
-
     if (collisions["top"]) {
       this.velY = 0.01;
       this.y = halfHeight + collisions["top"].y + collisions["top"].h;
@@ -54,10 +51,10 @@ class Knight extends Entity {
 
     if (collisions["bottom"] && this.velY > 0) {
       // hard coded
-      if ((collisions["right"] || collisions["left"]) &&
+     /* if ((collisions["right"] || collisions["left"]) &&
         Math.abs(this.velY) > du * this.gravity &&
         (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 143 ||
-          Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;
+          Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;*/
 
       this.velY = 0;
       this.y = collisions["bottom"].y - halfHeight + 1;

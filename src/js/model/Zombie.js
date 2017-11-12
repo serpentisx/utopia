@@ -71,6 +71,7 @@ class Zombie extends Entity {
     this.applyGravity(du);
     this.autoMovement(du);
     this.handleCollisionsWithPlatform(du);
+    this.handleBoundary();
   }
 
   render(ctx, xView, yView) {
