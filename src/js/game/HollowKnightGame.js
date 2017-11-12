@@ -25,7 +25,7 @@ class HollowKnightGame extends Scene {
     this.coinManager = new CoinManager(this.knight);
 
     // Should not be initialized here - THIS IS FOR TESTING PURPOSE
-    this.zombie = new Zombie(1200, 500);
+    this.zombie = new Zombie(1200, 500, this.knight);
 
     this.isStarted = true;
   }

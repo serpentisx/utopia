@@ -1,6 +1,6 @@
 class Zombie extends Entity {
 
-  constructor(x, y) {
+  constructor(x, y, knight) {
     super();
 
     this.sprite = new ZombieSprite();
@@ -9,8 +9,11 @@ class Zombie extends Entity {
     this.isAttacking = false;
     this.isDead = false;
 
+    this.knight = knight;
+
     this.x = x;
     this.y = y;
+    this.speed = 4;
 
     this.spanRange = 800;
     this.dirX = 0;
@@ -44,8 +47,29 @@ class Zombie extends Entity {
     }
   }
 
+  autoMovement(du) {
+    const diffX = this.knight.x - this.x,
+          diffY = this.knight.y - this.y;
+
+    //Move x direction
+    if( diffX > 0 ) {
+      this.x += this.speed * du;
+    }else {
+      this.x -= this.speed * du;
+    }
+
+    //Move y direction
+    if( diffY > 0 ) {
+      this.y += this.speed * du;
+    }else {
+      this.y -= this.speed * du;
+    }
+
+  }
+
   update(du) {
     this.applyGravity(du);
+    this.autoMovement(du);
     this.handleCollisionsWithPlatform(du);
   }
 

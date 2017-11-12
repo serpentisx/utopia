@@ -16,7 +16,7 @@ class KnightSprite {
   }
 
   loadSprites() {
-    let requiredImages = {
+    const requiredImages = {
       idle0: 'assets/character/idle/1.png',
       idle1: 'assets/character/idle/2.png',
       idle2: 'assets/character/idle/3.png',

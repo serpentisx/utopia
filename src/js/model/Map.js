@@ -170,7 +170,7 @@ class Map {
     //context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height);
 
     //Get the array from map building
-    console.log(JSON.stringify(this.layer[this.developer]));
+    //console.log(JSON.stringify(this.layer[this.developer]));
 
 
     let sx, sy, dx, dy,
