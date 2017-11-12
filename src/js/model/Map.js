@@ -211,6 +211,9 @@ class Map {
     this.hills.drawAtCorner(ctx, -this.xView+this.hills.image.width, -this.yView);
     this.hills.drawAtCorner(ctx, -this.xView+this.hills.image.width*2, -this.yView);
     this.cave.drawAtCorner(ctx, -this.xView, -this.yView+this.sprite.image.height-this.cave.image.height);
+    this.cave.drawAtCorner(ctx, -this.xView+this.cave.image.width, -this.yView+this.sprite.image.height-this.cave.image.height);
+    this.cave.drawAtCorner(ctx, -this.xView, -this.yView+this.sprite.image.height-this.cave.image.height*2);
+    this.cave.drawAtCorner(ctx, -this.xView+this.cave.image.width, -this.yView+this.sprite.image.height-this.cave.image.height*2);
 
   //  this.hills.drawAtCorner(ctx, this.xView, -this.yView+ (this.sprite.height-this.hills.image.height/2));
 
