@@ -17,25 +17,6 @@ class KnightSprite {
   }
 
   loadSprites() {
-    const requiredImages = {
-      idle0: 'assets/character/idle/1.png',
-      idle1: 'assets/character/idle/2.png',
-      idle2: 'assets/character/idle/3.png',
-      idle3: 'assets/character/idle/4.png',
-      idle4: 'assets/character/idle/5.png',
-      idle5: 'assets/character/idle/6.png',
-      walk0: 'assets/character/walk/1.png',
-      walk1: 'assets/character/walk/2.png',
-      walk2: 'assets/character/walk/3.png',
-      walk3: 'assets/character/walk/4.png',
-      walk4: 'assets/character/walk/5.png',
-      walk5: 'assets/character/walk/6.png',
-      jump0: 'assets/character/jump/1.png',
-      jump1: 'assets/character/jump/2.png',
-      jump2: 'assets/character/jump/3.png',
-      jump3: 'assets/character/jump/4.png',
-      jump4: 'assets/character/jump/4.png'
-    }
 
     const idleImages = {
       idleRight0: 'assets/model/character/idle/right/1.png',
