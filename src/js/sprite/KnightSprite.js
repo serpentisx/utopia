@@ -29,11 +29,13 @@ class KnightSprite {
       walk3: 'assets/character/walk/4.png',
       walk4: 'assets/character/walk/5.png',
       walk5: 'assets/character/walk/6.png',
-      jump0: 'assets/model/ork/JUMP_000.png',
-      jump1: 'assets/model/ork/JUMP_001.png',
-      jump2: 'assets/model/ork/JUMP_002.png',
-      jump3: 'assets/model/ork/JUMP_003.png',
-      jump4: 'assets/model/ork/JUMP_004.png',
+      jump0: 'assets/character/jump/1.png',
+      jump1: 'assets/character/jump/2.png',
+      jump2: 'assets/character/jump/3.png',
+      jump3: 'assets/character/jump/4.png',
+      jump4: 'assets/character/jump/4.png',
+
+
     };
     imagesPreload(requiredImages, this.sprites, function empty() {});
   }
