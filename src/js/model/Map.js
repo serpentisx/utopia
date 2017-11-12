@@ -111,7 +111,7 @@ class Map {
     //Get the array from map building
     console.log(JSON.stringify(this.layer[this.developer]));
   }
-  
+
   getTile(layer, row, col) {
     return this.layer[layer][row][col];
   }
