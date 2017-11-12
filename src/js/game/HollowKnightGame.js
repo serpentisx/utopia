@@ -1,6 +1,3 @@
-// The game itself. Every game objects and managers (entity, spatial, ... )
-// should be handled here
-
 class HollowKnightGame extends Scene {
 
   constructor() {
@@ -9,6 +6,7 @@ class HollowKnightGame extends Scene {
     this.entityManager = new EntityManager();
     this.coinManager;
 
+    this.map;
     this.sprites = {};
     this.camera = new Camera(0, 0, canvas.width, canvas.height);
 
@@ -17,15 +15,18 @@ class HollowKnightGame extends Scene {
   }
 
   init() {
-    this.knight = this.entityManager.createKnight({x: 29, y:700});
-    this.coinManager = new CoinManager(this.knight);
+    this.map = new Map(this.sprites.background);
+    this.knight = this.entityManager.createKnight({x: 29, y: 700});
 
     // Set the camera up to follow the knight
     this.camera.follow(this.knight, canvas.width / 2, canvas.height / 2);
-    this.map = new Map(this.sprites.background);
-
-    this.knight.setMap(this.map);
     this.camera.setWorldDimensions(this.sprites.background.width, this.sprites.background.height);
+
+    this.coinManager = new CoinManager(this.knight);
+
+    // Should not be initialized here - THIS IS FOR TESTING PURPOSE
+    this.zombie = new Zombie(1200, 500);
+
     this.isStarted = true;
   }
 
@@ -40,6 +41,7 @@ class HollowKnightGame extends Scene {
   update(du) {
     if (this.isStarted) {
       if (!this.isPaused) {
+        this.zombie.update(du);
         this.entityManager.update(du, this.camera.worldRect.width, this.camera.worldRect.height, this.map);
         this.coinManager.update(du);
         this.camera.update();
@@ -51,6 +53,7 @@ class HollowKnightGame extends Scene {
     if (this.isStarted) {
       if (!this.isPaused) {
         this.map.render(ctx, this.camera.xView, this.camera.yView);
+        this.zombie.render(ctx, this.camera.xView, this.camera.yView);
         this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
         this.coinManager.render(ctx, this.camera.xView, this.camera.yView);
       }

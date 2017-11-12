@@ -26,4 +26,4 @@ const KEY_6 = '6'.charCodeAt(0)
 const NOMINAL_UPDATE_INTERVAL = 16
 
 //Game variables
-const gravity = 10;
+const g_gravity = 0.32;

@@ -39,6 +39,10 @@ class SceneManager {
     return scene;
   }
 
+  getSceneByID(id) {
+    return this.scenes[id];
+  }
+
   update(du) {
 
     // Check whether scene should change, if so load next scene?

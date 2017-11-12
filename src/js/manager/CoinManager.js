@@ -26,8 +26,8 @@ class CoinManager {
     let knight = {
       x: this.knight.x,
       y: this.knight.y,
-      width: this.knight.sprite.width,
-      height: this.knight.sprite.height
+      w: this.knight.sprite.width,
+      h: this.knight.sprite.height
     };
     return Utils.collidesWithRectangle(knight, coin);
   }

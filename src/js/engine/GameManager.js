@@ -12,20 +12,20 @@ class GameManager {
     return instance;
   }
 
-  constructor(game) {
+  constructor(sceneManager) {
     if (instance) {
       return instance;
     }
     this.keys = {};
     this.stopKey = false;
 
-    this.renderManager = new RenderManager(game.render.bind(game));
-    this.updateManager = new UpdateManager(game.update.bind(game));
+    this.renderManager = new RenderManager(sceneManager.render.bind(sceneManager));
+    this.updateManager = new UpdateManager(sceneManager.update.bind(sceneManager));
 
     this.isGameOver = false;
     this.frameTime_ms = null;
     this.frameTimeDelta_ms = null;
-    this.game = game;
+    this.sceneManager = sceneManager;
 
     instance = this;
   }
