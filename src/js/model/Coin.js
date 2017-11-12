@@ -5,8 +5,6 @@ class Coin {
 
     this.x = x;
     this.y = y;
-    this.width;
-    this.height;
 
     this.numSprite = 10;
     this.index = 0;
@@ -33,8 +31,8 @@ class Coin {
 
   render(ctx, xView, yView) {
     let index = Math.floor(this.index += this.updateRate) % this.numSprite;
-    this.width = this.sprites[`coin${index}`].width;
-    this.height = this.sprites[`coin${index}`].height;
+    this.w = this.sprites[`coin${index}`].width;
+    this.h = this.sprites[`coin${index}`].height;
     this.sprites[`coin${index}`].drawAtCenter(ctx, this.x - xView, this.y - yView);
   }
 }

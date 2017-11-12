@@ -11,7 +11,6 @@ class Knight extends Entity {
     this.rotation = 0;
     this.velX = 8;
     this.velY = 0;
-    this.gravity = 0.32;
 
     this.GO_LEFT = KEY_A;
     this.GO_RIGHT = KEY_D;
@@ -21,27 +20,8 @@ class Knight extends Entity {
     this.isIdle = true;
   }
 
-  setMap(map) {
-    this.map = map;
-  }
-
-  applyGravity(du) {
-    let finalVelY = this.velY + this.gravity * du,
-      avgVelY = (this.velY + finalVelY) / 2,
-      dPosY = avgVelY * du;
-
-    this.y += dPosY;
-    this.velY = finalVelY;
-  }
-
   getRadius() {
     return (this.sprite.width / 2) * 0.9;
-  }
-
-  drawCollisions(collisions) {
-    for (let i in collisions) {
-      this.map.drawTile(collisions[i].x, collisions[i].y);
-    }
   }
 
   handleCollisions(du) {
@@ -83,54 +63,6 @@ class Knight extends Entity {
       this.y = collisions["bottom"].y - halfHeight + 1;
     }
 
-  }
-
-  detectCollisionsWithPlatform() {
-    const w = this.sprite.width / 2;
-    let tiles = this.map.getRectTiles(this.x, this.y);
-    let collisions = [];
-
-    tiles.forEach(tile => {
-      let collision = this.collidesWithPlatform(tile);
-      if (collision && this.map.isSolidTileAtXY(tile.x, tile.y)) {
-        collisions[collision] = tile;
-      }
-    });
-    return collisions;
-  }
-
-  // Two rectangles collision check
-  collidesWithPlatform(p) {
-    const x = this.x - this.sprite.width / 2;
-    const y = this.y - this.sprite.height / 2;
-    const w = this.sprite.width;
-    const h = this.sprite.height;
-    const dx = (x + w / 2) - (p.x + p.w / 2);
-    const dy = (y + h / 2) - (p.y + p.h / 2);
-    const width = (w + p.w) / 2;
-    const height = (h + p.h) / 2;
-    const crossWidth = width * dy;
-    const crossHeight = height * dx;
-    let collision = null;
-    //
-    if (Math.abs(dx) <= width && Math.abs(dy) <= height) {
-      if (crossWidth > crossHeight) {
-        collision = (crossWidth > (-crossHeight)) ? 'top' : 'right';
-      } else {
-        collision = (crossWidth > -(crossHeight)) ? 'left' : 'bottom';
-      }
-    }
-    return collision;
-  }
-
-  handleBoundary() {
-    const halfWidth = this.sprite.width / 2;
-    const halfHeight = this.sprite.height / 2;
-
-    if (this.y - halfHeight < 0) this.y = halfHeight;
-    if (this.y + halfHeight > this.map.height) this.y = this.map.height - halfHeight;
-    if (this.x - halfWidth < 0) this.x = halfWidth;
-    if (this.x + halfWidth > this.map.width) this.x = this.map.width - halfWidth;
   }
 
   update(du) {
