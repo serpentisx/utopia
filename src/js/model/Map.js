@@ -173,13 +173,9 @@ class Map {
   render(ctx, xView, yView) {
     //context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height);
 
-<<<<<<< HEAD
     //Get the array from map building
     //console.log(JSON.stringify(this.layer[this.developer]));
 
-
-=======
->>>>>>> 042deee31e28502211afd5df3a53f204cc162a20
     let sx, sy, dx, dy,
       sWidth, sHeight, dWidth, dHeight;
 

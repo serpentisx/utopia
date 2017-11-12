@@ -17,7 +17,6 @@ class KnightSprite {
   }
 
   loadSprites() {
-<<<<<<< HEAD
     const requiredImages = {
       idle0: 'assets/character/idle/1.png',
       idle1: 'assets/character/idle/2.png',
@@ -35,8 +34,9 @@ class KnightSprite {
       jump1: 'assets/character/jump/2.png',
       jump2: 'assets/character/jump/3.png',
       jump3: 'assets/character/jump/4.png',
-      jump4: 'assets/character/jump/4.png',
-=======
+      jump4: 'assets/character/jump/4.png'
+    }
+
     const idleImages = {
       idleRight0: 'assets/model/character/idle/right/1.png',
       idleRight1: 'assets/model/character/idle/right/2.png',
@@ -44,7 +44,6 @@ class KnightSprite {
       idleRight3: 'assets/model/character/idle/right/4.png',
       idleRight4: 'assets/model/character/idle/right/5.png',
       idleRight5: 'assets/model/character/idle/right/6.png',
->>>>>>> 042deee31e28502211afd5df3a53f204cc162a20
 
       idleLeft0: 'assets/model/character/idle/left/1_.png',
       idleLeft1: 'assets/model/character/idle/left/2_.png',
@@ -53,13 +52,13 @@ class KnightSprite {
       idleLeft4: 'assets/model/character/idle/left/5_.png',
       idleLeft5: 'assets/model/character/idle/left/6_.png'
     };
-    
+
     const walkImages = {
-      walkRight0: 'assets/model/character/walk/right/1.png', 
-      walkRight1: 'assets/model/character/walk/right/2.png', 
-      walkRight2: 'assets/model/character/walk/right/3.png', 
-      walkRight3: 'assets/model/character/walk/right/4.png', 
-      walkRight4: 'assets/model/character/walk/right/5.png', 
+      walkRight0: 'assets/model/character/walk/right/1.png',
+      walkRight1: 'assets/model/character/walk/right/2.png',
+      walkRight2: 'assets/model/character/walk/right/3.png',
+      walkRight3: 'assets/model/character/walk/right/4.png',
+      walkRight4: 'assets/model/character/walk/right/5.png',
       walkRight5: 'assets/model/character/walk/right/6.png',
 
       walkLeft0: 'assets/model/character/walk/left/1_.png',
@@ -128,6 +127,6 @@ class KnightSprite {
     else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
     else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
 
-    else this.renderAnimation(ctx, x, y, 'idle', 'right');;
+    else this.renderAnimation(ctx, x, y, 'idle', 'right');
   }
 }
