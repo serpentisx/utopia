@@ -17,11 +17,11 @@ class KnightSprite {
 
   loadSprites() {
     let requiredImages = {
-      idle0: 'assets/model/ork/IDLE_000.png',
-      idle1: 'assets/model/ork/IDLE_001.png',
-      idle2: 'assets/model/ork/IDLE_002.png',
-      idle3: 'assets/model/ork/IDLE_003.png',
-      idle4: 'assets/model/ork/IDLE_004.png',
+      idle0: 'assets/character/idle/1.png',
+      idle1: 'assets/character/idle/2.png',
+      idle2: 'assets/character/idle/3.png',
+      idle3: 'assets/character/idle/2.png',
+      idle4: 'assets/character/idle/3.png',
       walk0: 'assets/model/ork/WALK_000.png',
       walk1: 'assets/model/ork/WALK_001.png',
       walk2: 'assets/model/ork/WALK_002.png',
