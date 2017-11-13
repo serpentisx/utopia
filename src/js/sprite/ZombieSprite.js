@@ -176,7 +176,13 @@ class ZombieSprite {
   }
 
   render(ctx, x, y, dir, attacking, isIdle, isDead) {
-    this.renderAnimation(ctx, x, y, 'run', 'left');
+
+    if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
+    else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
+    else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
+    else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
+
+    else this.renderAnimation(ctx, x, y, 'idle', 'right');
   }
 
 

@@ -13,7 +13,6 @@ class Zombie extends Entity {
 
     this.x = x;
     this.y = y;
-    this.speed = 4;
 
     this.spanRange = 800;
     this.dirX = 0;
@@ -47,27 +46,37 @@ class Zombie extends Entity {
     }
   }
 
+  searchForKnight() {
+    //TODO check if the knight is in the range
+  }
+
   autoMovement(du) {
+    this.searchForKnight();
+
     const diffX = this.knight.x - this.x,
           diffY = this.knight.y - this.y;
 
     //Move x direction
     if( diffX > 0 ) {
-      this.x += this.speed * du;
-    }else {
-      this.x -= this.speed * du;
+      this.isIdle = false;
+      this.dirX = 1;
+      this.x += this.walkSpeed * du;
+    }else{
+      this.isIdle = false;
+      this.dirX = -1;
+      this.x -= this.walkSpeed * du;
     }
-
-    //Move y direction
-    if( diffY > 0 ) {
-      this.y += this.speed * du;
-    }else {
-      this.y -= this.speed * du;
-    }
+    //Move y direction but zombie doesn't need to
+    // if( diffY > 0 ) {
+    //   this.y += this.speed * du;
+    // }else {
+    //   this.y -= this.speed * du;
+    // }
 
   }
 
   update(du) {
+    this.isIdle = true;
     this.applyGravity(du);
     this.autoMovement(du);
     this.handleCollisionsWithPlatform(du);
