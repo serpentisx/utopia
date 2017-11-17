@@ -52,20 +52,29 @@ class Zombie extends Entity {
 
   autoMovement(du) {
     this.searchForKnight();
+    const diffX = this.knight.x - this.x;
 
-    const diffX = this.knight.x - this.x,
-          diffY = this.knight.y - this.y;
+    console.log("du", du);
+    console.log("diff", diffX);
+    console.log("abs", Math.abs(du+diffX));
 
-    //Move x direction
-    if( diffX > 0 ) {
-      this.isIdle = false;
-      this.dirX = 1;
-      this.x += this.walkSpeed * du;
-    }else{
-      this.isIdle = false;
-      this.dirX = -1;
-      this.x -= this.walkSpeed * du;
+    this.isIdle = true;
+
+    if( Math.abs(du-diffX) > this.walkSpeed ) {
+      //this.x = this.knight.x;
+      //Move x direction
+      if( diffX > 0) {
+        this.isIdle = false;
+        this.dirX = 1;
+        this.x += this.walkSpeed*du;
+      }else {
+        this.isIdle = false;
+        this.dirX = -1;
+        this.x -= this.walkSpeed*du;
+      }
+
     }
+
     //Move y direction but zombie doesn't need to
     // if( diffY > 0 ) {
     //   this.y += this.speed * du;
@@ -76,7 +85,6 @@ class Zombie extends Entity {
   }
 
   update(du) {
-    this.isIdle = true;
     this.applyGravity(du);
     this.autoMovement(du);
     this.handleCollisionsWithPlatform(du);

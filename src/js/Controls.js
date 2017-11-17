@@ -12,7 +12,7 @@ class Controls {
     //canvas.addEventListener("mousedown", this.handleMouseDown.bind(this));
     //canvas.addEventListener("mouseup", this.handleMouseUp.bind(this));
 
-    // this.initializeFullscreenListener()
+    //this.initializeFullscreenListener()
     this.quitGame()
   }
 
@@ -23,7 +23,10 @@ class Controls {
         break;
       case "r":
         this.gm.renderManager.doRender = !this.gm.renderManager.doRender
-        break;
+        break
+      case "q":
+        this.gm.stopKey = true
+        break
       default:
         break
     }
