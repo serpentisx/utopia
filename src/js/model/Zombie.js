@@ -13,13 +13,18 @@ class Zombie extends Entity {
 
     this.x = x;
     this.y = y;
-
     this.spanRange = 800;
     this.dirX = 0;
 
     this.runSpeed = 10;
     this.walkSpeed = 5;
     this.velY = 0;
+
+    this.attackRange = {
+      x: 700,
+      y: this.walkSpeed
+    };
+
   }
 
   handleCollisionsWithPlatform(du) {
@@ -46,22 +51,12 @@ class Zombie extends Entity {
     }
   }
 
-  searchForKnight() {
-    //TODO check if the knight is in the range
-  }
 
   autoMovement(du) {
-    this.searchForKnight();
     const diffX = this.knight.x - this.x;
-
-    console.log("du", du);
-    console.log("diff", diffX);
-    console.log("abs", Math.abs(du+diffX));
-
     this.isIdle = true;
 
     if( Math.abs(du-diffX) > this.walkSpeed ) {
-      //this.x = this.knight.x;
       //Move x direction
       if( diffX > 0) {
         this.isIdle = false;
@@ -72,7 +67,6 @@ class Zombie extends Entity {
         this.dirX = -1;
         this.x -= this.walkSpeed*du;
       }
-
     }
 
     //Move y direction but zombie doesn't need to
@@ -85,8 +79,19 @@ class Zombie extends Entity {
   }
 
   update(du) {
+    const diffXabs = Math.abs(this.knight.x - this.x),
+          diffYabs = Math.abs(this.knight.y - this.y);
+    console.log(diffYabs);
+
     this.applyGravity(du);
-    this.autoMovement(du);
+
+    if(this.attackRange.x > diffXabs) {
+      console.log("attack!!!!!");
+      this.autoMovement(du);
+    }else {
+      console.log("not attack");
+    }
+
     this.handleCollisionsWithPlatform(du);
     this.handleBoundary();
   }
