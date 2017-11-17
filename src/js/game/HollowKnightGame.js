@@ -32,7 +32,6 @@ class HollowKnightGame extends Scene {
 
   loadSprites() {
     let requiredImages = {
-      knight: 'assets/knight.png',
       background: 'assets/platformer_background_3/Layers/layer07_Sky.png'
     };
     imagesPreload(requiredImages, this.sprites, this.init.bind(this));
