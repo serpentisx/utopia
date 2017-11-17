@@ -22,7 +22,7 @@ class Zombie extends Entity {
 
     this.attackRange = {
       x: 700,
-      y: this.walkSpeed
+      y: this.y
     };
 
   }
@@ -54,7 +54,6 @@ class Zombie extends Entity {
 
   autoMovement(du) {
     const diffX = this.knight.x - this.x;
-    this.isIdle = true;
 
     if( Math.abs(du-diffX) > this.walkSpeed ) {
       //Move x direction
@@ -68,24 +67,16 @@ class Zombie extends Entity {
         this.x -= this.walkSpeed*du;
       }
     }
-
-    //Move y direction but zombie doesn't need to
-    // if( diffY > 0 ) {
-    //   this.y += this.speed * du;
-    // }else {
-    //   this.y -= this.speed * du;
-    // }
-
   }
 
   update(du) {
+    this.isIdle = true;
     const diffXabs = Math.abs(this.knight.x - this.x),
           diffYabs = Math.abs(this.knight.y - this.y);
-    console.log(diffYabs);
 
     this.applyGravity(du);
 
-    if(this.attackRange.x > diffXabs) {
+    if(this.attackRange.x > diffXabs && this.attackRange.y > diffYabs) {
       console.log("attack!!!!!");
       this.autoMovement(du);
     }else {
