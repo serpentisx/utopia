@@ -26,6 +26,7 @@ class HollowKnightGame extends Scene {
 
     // Should not be initialized here - THIS IS FOR TESTING PURPOSE
     this.zombie = new Zombie(1200, 500, this.knight);
+    this.orc = new Orc(100, 500, this.knight);
 
     this.isStarted = true;
   }
@@ -41,6 +42,7 @@ class HollowKnightGame extends Scene {
     if (this.isStarted) {
       if (!this.isPaused) {
         this.zombie.update(du);
+        this.orc.update(du);
         this.entityManager.update(du, this.camera.worldRect.width, this.camera.worldRect.height, this.map);
         this.coinManager.update(du);
         this.camera.update();
@@ -53,6 +55,7 @@ class HollowKnightGame extends Scene {
       if (!this.isPaused) {
         this.map.render(ctx, this.camera.xView, this.camera.yView);
         this.zombie.render(ctx, this.camera.xView, this.camera.yView);
+        this.orc.render(ctx, this.camera.xView, this.camera.yView);
         this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
         this.coinManager.render(ctx, this.camera.xView, this.camera.yView);
         this.map.renderForeground(ctx, this.camera.xView, this.camera.yView);

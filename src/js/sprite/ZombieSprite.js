@@ -22,8 +22,8 @@ class ZombieSprite {
     this.runRate = 0.07;
     this.idleRate = 0.08;
 
-    this.width = 140;
-    this.height = 108;
+    this.width = 120;
+    this.height = 100;
 
     this.loadSprites();
   }
