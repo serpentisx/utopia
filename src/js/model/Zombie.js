@@ -77,10 +77,7 @@ class Zombie extends Entity {
     this.applyGravity(du);
 
     if(this.attackRange.x > diffXabs && this.attackRange.y > diffYabs) {
-      console.log("attack!!!!!");
       this.autoMovement(du);
-    }else {
-      console.log("not attack");
     }
 
     this.handleCollisionsWithPlatform(du);

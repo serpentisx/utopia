@@ -5,15 +5,22 @@ class Orc extends Entity{
 
 
     this.isIdle = true;
-    this.isAttacking = false;
-    this.isDead = false;
+    this.isJumping = false;
 
-    this.walkSpeed = 7;
+    this.walkSpeed = 4;
     this.velY = 0;
 
     this.x = x;
     this.y = y;
+    this.velX = 8;
+    this.velY = 0;
+    this.dirX = 0;
     this.knight = knight;
+
+    this.attackRange = {
+      x: 500,
+      y: this.y
+    };
   }
 
   handleCollisionsWithPlatform(du) {
@@ -40,26 +47,54 @@ class Orc extends Entity{
     }
   }
 
+  autoMovement(du) {
+    const diffX = this.knight.x - this.x,
+          diffY = this.knight.y - this.y;
+
+    if( Math.abs(du-diffX) > this.walkSpeed) {
+      //Move x direction
+      if( diffX > 0) {
+        this.isIdle = false;
+        this.dirX = 1;
+        this.x += this.walkSpeed*du;
+      }else {
+        this.isIdle = false;
+        this.dirX = -1;
+        this.x -= this.walkSpeed*du;
+      }
+
+      console.log(this.knight.isJumping);
+      if(this.knight.isJumping) {
+        this.isJumping = true;
+        this.velY = -15;
+        this.y = this.knight.y - this.walkSpeed;
+      }
+
+    }
+
+  }
+
   update(du) {
-    //this.isIdle = true;
+    this.isIdle = true;
     const diffXabs = Math.abs(this.knight.x - this.x),
           diffYabs = Math.abs(this.knight.y - this.y);
 
     this.applyGravity(du);
 
-    // if(this.attackRange.x > diffXabs && this.attackRange.y > diffYabs) {
-    //   console.log("attack!!!!!");
-    //   this.autoMovement(du);
-    // }else {
-    //   console.log("not attack");
-    // }
+    if(this.attackRange.x > diffXabs) {
+      this.autoMovement(du);
+    }
 
     this.handleCollisionsWithPlatform(du);
     this.handleBoundary();
+
+    if (this.velY === 0) {
+      this.isJumping = false; // might want to change this later
+    }
   }
 
   render(ctx, xView, yView) {
-    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isAttacking, this.isIdle, this.isDead);
+    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isIdle, this.isJumping);
   }
 
 }

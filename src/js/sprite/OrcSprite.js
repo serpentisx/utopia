@@ -105,7 +105,7 @@ class OrcSprite {
     sprites[`${type}${direction}${index}`].drawAtCenter(ctx, x, y);
   }
 
-  render(ctx, x, y, dir, attacking, isIdle, isjump) {
+  render(ctx, x, y, dir, isIdle, isjump) {
     // if (isJump && dir > 0) this.renderAnimation(ctx, x, y, 'jump', 'right');
     // else if (isJump && dir < 0) this.renderAnimation(ctx, x, y, 'jump', 'left');
     if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
