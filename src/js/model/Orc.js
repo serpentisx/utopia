@@ -50,6 +50,12 @@ class Orc extends Entity{
   autoMovement(du) {
     const diffX = this.knight.x - this.x,
           diffY = this.knight.y - this.y;
+		
+	if(this.knight.isJumping && this.velY == g_gravity * du) {
+        this.isJumping = true;
+        this.velY = -13;
+        //this.y = this.knight.y - this.walkSpeed;
+    }
 
     if( Math.abs(du-diffX) > this.walkSpeed) {
       //Move x direction
@@ -62,14 +68,6 @@ class Orc extends Entity{
         this.dirX = -1;
         this.x -= this.walkSpeed*du;
       }
-
-      console.log(this.knight.isJumping);
-      if(this.knight.isJumping) {
-        this.isJumping = true;
-        this.velY = -15;
-        this.y = this.knight.y - this.walkSpeed;
-      }
-
     }
 
   }
