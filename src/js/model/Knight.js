@@ -19,10 +19,16 @@ class Knight extends Entity {
     this.dirX = 0;
     this.isJumping = false;
     this.isIdle = true;
+
+    this.health = 5;
   }
 
   getRadius() {
     return (this.sprite.width / 2) * 0.9;
+  }
+
+  getHealth() {
+    return this.health;
   }
 
   handleCollisions(du) {
@@ -36,9 +42,9 @@ class Knight extends Entity {
     this.collisions = collisions;
 
     let offSet = 3;
-    if(collisions["lava"]) {
-      console.log("LAVA");
-    }  
+    if(collisions["lava"] && !collisions["bottom"]) {
+      this.health--;
+    }
       if (collisions["left"]) {
         this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
       }

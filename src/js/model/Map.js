@@ -143,7 +143,7 @@ class Map {
     let row = Math.floor(y / this.tsize);
     let tile = this.getTile(1, row, col);
 
-    if(tile==3) return 'lava';
+    if(tile==3 || tile==8) return 'lava';
     else if (tile != 0) return 'solid';
   }
 
