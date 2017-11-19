@@ -19,7 +19,7 @@ class Knight extends Entity {
     this.isJumping = false;
     this.isIdle = true;
 
-    this.health = new Heart(5);
+    this.health = new Heart(100);
     this.isInLava = false;
   }
 
@@ -38,11 +38,25 @@ class Knight extends Entity {
     this.collisions = collisions;
 
     let offSet = 3;
+    this.isInLava = false;
+
+    if(collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
+      return;
+    }
 
     if(collisions["lava"] && !collisions["bottom"]) {
       this.isInLava = true;
-    } else this.isInLava = false;
+      this.velY = 0;
 
+      if (collisions["col"].solid.right) {
+        this.x = collisions["right"].x - halfWidth - offSet;
+      }
+      else if (collisions["col"].solid.left) {
+        this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
+      }
+
+      return;
+    }
 
     if (collisions["left"]) {
       this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;

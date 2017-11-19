@@ -9,19 +9,32 @@ class Entity {
   detectCollisionsWithPlatform() {
     let tiles = this.map.getRectTiles(this.x, this.y);
     let collisions = [];
+    let col = {
+      solid: {
+        right: null,
+        left: null,
+        bottom: null,
+        top: null
+      },
+
+      lava: {
+        right: null,
+        left: null,
+        bottom: null,
+        top: null
+      }
+    };
 
     tiles.forEach(tile => {
       let collision = Utils.collidesWithRectangle(this.getEntityRect(), tile);
       let type = this.map.getPlatformType(tile.x, tile.y);
       if (collision && type) {
-        if(type == "lava") {
-          collisions[type] = tile;
-        } else if(type == "solid") {
+          collisions[type] = type;
           collisions[collision] = tile;
-        }
-
+          col[type][collision] = tile;
       }
     });
+    collisions["col"] = col;
     return collisions;
   }
 
