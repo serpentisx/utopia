@@ -80,7 +80,6 @@ class Orc extends Entity{
     this.applyGravity(du);
 
     if(this.attackRange.x > diffXabs && this.attackRange.y > diffYabs) {
-      console.log("orc atk");
       this.autoMovement(du);
     }
 

@@ -1,16 +1,14 @@
 class Heart {
 
-  constructor() {
-    let ba = new Image();
-    ba.src = 'assets/itch/pngs/face_on_heart.png';
+  constructor(lifePoints) {
+    let heart = new Image();
+    heart.src = 'assets/itch/pngs/face_on_heart.png';
 
-    this.sprite = new Sprite(ba);
+    this.sprite = new Sprite(heart);
+    this.lifePoints = lifePoints;
 
-
-  //  this.loadSprites();
-    console.log("Done loading");
-    console.log(this.sprite.width);
-
+    this.startPosX = canvas.width-100;
+    this.posY = 50;
   }
 
   loadSprites() {
@@ -21,11 +19,9 @@ class Heart {
     imagesPreload(requiredImages, this.sprites, function empty() {});
   }
 
-  render(ctx, xView, yView, noOfHearts) {
-
-    for(var i = 0; i < noOfHearts; i++) {
-        this.sprite.drawAtCenter(ctx, canvas.width-100-(i*50), 50);
+  render(ctx) {
+    for(var i = 0; i < this.lifePoints; i++) {
+        this.sprite.drawAtCenter(ctx, this.startPosX - (i*50), this.posY);
     }
-
   }
 }

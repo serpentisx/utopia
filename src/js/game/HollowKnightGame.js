@@ -24,9 +24,6 @@ class HollowKnightGame extends Scene {
 
     this.coinManager = new CoinManager(this.knight);
 
-    this.heart = new Heart(canvas.width,50);
-
-
     // Should not be initialized here - THIS IS FOR TESTING PURPOSE
     this.zombie = new Zombie(1200, 500, this.knight);
     this.orc = new Orc(100, 500, this.knight);
@@ -62,7 +59,6 @@ class HollowKnightGame extends Scene {
         this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
         this.map.renderForeground(ctx, this.camera.xView, this.camera.yView);
         this.coinManager.render(ctx, this.camera.xView, this.camera.yView);
-        this.heart.render(ctx, this.camera.xview, this.camera.yView, this.knight.getHealth());
       }
     }
   }

@@ -20,7 +20,7 @@ class Knight extends Entity {
     this.isJumping = false;
     this.isIdle = true;
 
-    this.health = 5;
+    this.health = new Heart(5);
   }
 
   getRadius() {
@@ -43,30 +43,31 @@ class Knight extends Entity {
 
     let offSet = 3;
     if(collisions["lava"] && !collisions["bottom"]) {
-      this.health--;
+      this.health.lifePoints--;
     }
-      if (collisions["left"]) {
-        this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
-      }
-      if (collisions["right"]) {
-        this.x = collisions["right"].x - halfWidth - offSet;
-      }
 
-      if (collisions["top"]) {
-        this.velY = 0.01;
-        this.y = halfHeight + collisions["top"].y + collisions["top"].h;
-      }
+    if (collisions["left"]) {
+      this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
+    }
+    if (collisions["right"]) {
+      this.x = collisions["right"].x - halfWidth - offSet;
+    }
 
-      if (collisions["bottom"] && this.velY > 0) {
-        // hard coded
-       /* if ((collisions["right"] || collisions["left"]) &&
-          Math.abs(this.velY) > du * this.gravity &&
-          (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 143 ||
-            Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;*/
+    if (collisions["top"]) {
+      this.velY = 0.01;
+      this.y = halfHeight + collisions["top"].y + collisions["top"].h;
+    }
 
-        this.velY = 0;
-        this.y = collisions["bottom"].y - halfHeight + 1;
-      }
+    if (collisions["bottom"] && this.velY > 0) {
+      // hard coded
+     /* if ((collisions["right"] || collisions["left"]) &&
+        Math.abs(this.velY) > du * this.gravity &&
+        (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 143 ||
+          Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;*/
+
+      this.velY = 0;
+      this.y = collisions["bottom"].y - halfHeight + 1;
+    }
 
   }
 
@@ -101,5 +102,6 @@ class Knight extends Entity {
   render(ctx, xView, yView) {
     this.drawCollisions(this.collisions);
     this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle);
+    this.health.render(ctx);
   }
 }
