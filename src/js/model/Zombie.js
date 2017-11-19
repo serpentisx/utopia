@@ -1,15 +1,14 @@
 class Zombie extends Entity {
 
-  constructor(x, y, knight) {
+  constructor(x, y) {
     super();
 
     this.sprite = new ZombieSprite();
-
+    this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
+    
     this.isIdle = true;
     this.isAttacking = false;
     this.isDead = false;
-
-    this.knight = knight;
 
     this.x = x;
     this.y = y;

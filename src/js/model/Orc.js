@@ -1,7 +1,9 @@
 class Orc extends Entity{
-  constructor(x, y , knight) {
+  constructor(x, y) {
     super();
+
     this.sprite = new OrcSprite();
+    this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
 
 
     this.isIdle = true;
@@ -15,7 +17,6 @@ class Orc extends Entity{
     this.velX = 8;
     this.velY = 0;
     this.dirX = 0;
-    this.knight = knight;
 
     this.attackRange = {
       x: 500,

@@ -1,34 +1,27 @@
-class EntityManager extends SpatialManager {
+class EntityManager {
 
   constructor() {
-    super();
-    this.KILL_ME_NOW = -1;
+    this.enemies = [];
+    this.knight;
   }
 
-  createKnight(prop) {
-    return this.registerEntity(new Knight(prop));
+  createKnight(x, y) {
+    this.knight = new Knight(x, y);
+    return this.knight;
   }
 
-  registerEntity(entity) {
-    entity.spatialID = this.getNewSpatialID();
-    this.entities.push(entity);
-    return entity;
+  createEnemies() {
+    this.enemies.push(new Zombie(1200, 500));
+    this.enemies.push(new Orc(100, 500));
   }
 
   update(du) {
-    for (let i = 0; i < this.entities.length; i++) {
-      let entity = this.entities[i];
-      this.unregister(entity);
-      if (entity.isDeadNow) {
-        this.entities[i].splice(i--, 1);
-        return;
-      }
-      entity.update(du);
-      this.register(entity);
-    }
+    this.knight.update(du);
+    this.enemies.forEach(enemy => enemy.update(du));
   }
 
   render(ctx, xView, yView) {
-    this.entities.forEach(entity => entity.render(ctx, xView, yView));
+    this.knight.render(ctx, xView, yView);
+    this.enemies.forEach(enemy => enemy.render(ctx, xView, yView));
   }
 }

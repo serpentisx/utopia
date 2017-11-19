@@ -1,11 +1,10 @@
 class Knight extends Entity {
 
-  constructor(obj) {
+  constructor(x, y) {
     super();
 
-    for (let prop in obj) {
-      this[prop] = obj[prop];
-    }
+    this.x = x;
+    this.y = y;
 
     this.sprite = new KnightSprite();
     this.rotation = 0;
