@@ -36,29 +36,31 @@ class Knight extends Entity {
     this.collisions = collisions;
 
     let offSet = 3;
+    if(collisions["lava"]) {
+      console.log("LAVA");
+    }  
+      if (collisions["left"]) {
+        this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
+      }
+      if (collisions["right"]) {
+        this.x = collisions["right"].x - halfWidth - offSet;
+      }
 
-    if (collisions["left"]) {
-      this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
-    }
-    if (collisions["right"]) {
-      this.x = collisions["right"].x - halfWidth - offSet;
-    }
+      if (collisions["top"]) {
+        this.velY = 0.01;
+        this.y = halfHeight + collisions["top"].y + collisions["top"].h;
+      }
 
-    if (collisions["top"]) {
-      this.velY = 0.01;
-      this.y = halfHeight + collisions["top"].y + collisions["top"].h;
-    }
+      if (collisions["bottom"] && this.velY > 0) {
+        // hard coded
+       /* if ((collisions["right"] || collisions["left"]) &&
+          Math.abs(this.velY) > du * this.gravity &&
+          (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 143 ||
+            Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;*/
 
-    if (collisions["bottom"] && this.velY > 0) {
-      // hard coded
-     /* if ((collisions["right"] || collisions["left"]) &&
-        Math.abs(this.velY) > du * this.gravity &&
-        (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 143 ||
-          Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;*/
-
-      this.velY = 0;
-      this.y = collisions["bottom"].y - halfHeight + 1;
-    }
+        this.velY = 0;
+        this.y = collisions["bottom"].y - halfHeight + 1;
+      }
 
   }
 

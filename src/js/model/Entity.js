@@ -12,8 +12,14 @@ class Entity {
 
     tiles.forEach(tile => {
       let collision = Utils.collidesWithRectangle(this.getEntityRect(), tile);
-      if (collision && this.map.isSolidTileAtXY(tile.x, tile.y)) {
-        collisions[collision] = tile;
+      let type = this.map.getPlatformType(tile.x, tile.y);
+      if (collision && type) {
+        if(type == "lava") {
+          collisions[type] = tile;
+        } else if(type == "solid") {
+          collisions[collision] = tile;
+        }
+
       }
     });
     return collisions;
