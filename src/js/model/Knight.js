@@ -20,14 +20,11 @@ class Knight extends Entity {
     this.isIdle = true;
 
     this.health = new Heart(5);
+    this.isInLava = false;
   }
 
   getRadius() {
     return (this.sprite.width / 2) * 0.9;
-  }
-
-  getHealth() {
-    return this.health;
   }
 
   handleCollisions(du) {
@@ -41,9 +38,11 @@ class Knight extends Entity {
     this.collisions = collisions;
 
     let offSet = 3;
+
     if(collisions["lava"] && !collisions["bottom"]) {
-      this.health.lifePoints--;
-    }
+      this.isInLava = true;
+    } else this.isInLava = false;
+
 
     if (collisions["left"]) {
       this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
@@ -73,12 +72,11 @@ class Knight extends Entity {
   update(du) {
     this.isIdle = true;
 
-    if (keys[this.GO_LEFT])  {
+    if (keys[this.GO_LEFT]) {
       this.isIdle = false;
       this.dirX = -1;
       this.x -= this.velX * du;
-    }
-    else if (keys[this.GO_RIGHT]) {
+    } else if (keys[this.GO_RIGHT]) {
       this.isIdle = false;
       this.dirX = 1;
       this.x += this.velX * du;
@@ -96,6 +94,21 @@ class Knight extends Entity {
     if (this.velY === 0) {
       this.isJumping = false; // might want to change this later
     }
+
+    if(this.isInLava) {
+      this.health.depleteLifePoints();
+    }
+
+    if(this.health.lifePoints < 0) {
+      // Play some death scene
+      this.setCoords(29, 600);
+      this.health.lifePoints = 5;
+    }
+  }
+
+  setCoords(x, y) {
+    this.x = x;
+    this.y = y;
   }
 
   render(ctx, xView, yView) {

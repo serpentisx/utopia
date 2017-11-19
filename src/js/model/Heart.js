@@ -19,6 +19,11 @@ class Heart {
     imagesPreload(requiredImages, this.sprites, function empty() {});
   }
 
+  depleteLifePoints() {
+    this.lifePoints -= 0.03;
+
+  }
+
   render(ctx) {
     for(var i = 0; i < this.lifePoints; i++) {
         this.sprite.drawAtCenter(ctx, this.startPosX - (i*50), this.posY);
