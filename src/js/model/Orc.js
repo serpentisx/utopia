@@ -8,6 +8,7 @@ class Orc extends Entity{
 
     this.isIdle = true;
     this.isJumping = false;
+    this.isAttacking = false;
 
     this.walkSpeed = 4;
     this.velY = 0;
@@ -52,10 +53,9 @@ class Orc extends Entity{
     const diffX = this.knight.x - this.x,
           diffY = this.knight.y - this.y;
 
-	if(this.knight.isJumping && this.velY == g_gravity * du) {
+	  if(this.knight.isJumping && this.velY == g_gravity * du) {
         this.isJumping = true;
-        this.velY = -13;
-        //this.y = this.knight.y - this.walkSpeed;
+        this.velY = -15;
     }
 
     if( Math.abs(du-diffX) > this.walkSpeed) {
@@ -70,11 +70,17 @@ class Orc extends Entity{
         this.x -= this.walkSpeed*du;
       }
     }
+    if(Math.abs(du-diffX) < this.attackRange) {
+      this.isIdle = false;
+      this.isAttacking = true;
+      //TODO knight loses live
+    }
 
   }
 
   update(du) {
     this.isIdle = true;
+    this.isAttacking = false;
     const diffXabs = Math.abs(this.knight.x - this.x),
           diffYabs = Math.abs(this.knight.y - this.y);
 
