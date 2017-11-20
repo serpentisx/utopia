@@ -1,6 +1,6 @@
 class KnightSprite {
 
-  constructor(knight) {
+  constructor() {
     this.idleSprites = {};
     this.jumpSprites = {};
     this.walkSprites = {};
@@ -87,6 +87,10 @@ class KnightSprite {
       attackRight17: 'assets/model/character/attack/right/6.png',
       attackRight18: 'assets/model/character/attack/right/5.png',
       attackRight19: 'assets/model/character/attack/right/4.png',
+      attackRight20: 'assets/model/character/attack/right/3.png',
+      attackRight21: 'assets/model/character/attack/right/2.png',
+      attackRight22: 'assets/model/character/attack/right/1.png',
+
 
 
 
@@ -102,14 +106,17 @@ class KnightSprite {
       attackLeft9: 'assets/model/character/attack/left/10.png',
       attackLeft10: 'assets/model/character/attack/left/11.png',
       attackLeft11: 'assets/model/character/attack/left/12.png',
-      attackLeft12: 'assets/model/character/attack/left/12.png',
-      attackLeft13: 'assets/model/character/attack/left/12.png',
-      attackLeft14: 'assets/model/character/attack/left/12.png',
-      attackLeft15: 'assets/model/character/attack/left/12.png',
-      attackLeft16: 'assets/model/character/attack/left/12.png',
-      attackLeft17: 'assets/model/character/attack/left/12.png',
-      attackLeft18: 'assets/model/character/attack/left/12.png',
-      attackLeft19: 'assets/model/character/attack/left/12.png'
+      attackLeft12: 'assets/model/character/attack/left/11.png',
+      attackLeft13: 'assets/model/character/attack/left/10.png',
+      attackLeft14: 'assets/model/character/attack/left/9.png',
+      attackLeft15: 'assets/model/character/attack/left/8.png',
+      attackLeft16: 'assets/model/character/attack/left/7.png',
+      attackLeft17: 'assets/model/character/attack/left/6.png',
+      attackLeft18: 'assets/model/character/attack/left/5.png',
+      attackLeft19: 'assets/model/character/attack/left/4.png',
+      attackLeft20: 'assets/model/character/attack/left/3.png',
+      attackLeft21: 'assets/model/character/attack/left/2.png',
+      attackLeft22: 'assets/model/character/attack/left/1.png'
 
     };
 
@@ -134,9 +141,7 @@ class KnightSprite {
         return Math.floor(this.jumpIndex += this.jumpRate) % (Object.keys(this.jumpSprites).length / 2);
         break;
       case 'attack':
-
-        if((this.attackIndex % 20) == 0) {
-          console.log(this.attackIndex);
+        if((this.attackIndex % 23) == 0) {
           this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
           this.knight.isAttacking = false;
         }
