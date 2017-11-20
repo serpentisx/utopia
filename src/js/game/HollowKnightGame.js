@@ -53,6 +53,7 @@ class HollowKnightGame extends Scene {
         this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
         this.map.renderForeground(ctx, this.camera.xView, this.camera.yView);
         this.coinManager.render(ctx, this.camera.xView, this.camera.yView);
+        this.knight.renderHealth(ctx);
       }
     }
   }
