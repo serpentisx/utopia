@@ -97,7 +97,7 @@ class Zombie extends Entity {
    */
    checkDeath() {
      if(this.live <= 0) {
-       //console.log("orc is dead");
+       //console.log("zombie is dead");
        this.kill();
      }
    }
@@ -124,7 +124,9 @@ class Zombie extends Entity {
   }
 
   render(ctx, xView, yView) {
-    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isAttacking, this.isIdle, this.isDead);
+    if(!this.isDeadNow) {
+      this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isAttacking, this.isIdle, this.isDead);
+    }
   }
 
 

@@ -128,7 +128,9 @@ class Orc extends Entity{
   }
 
   render(ctx, xView, yView) {
-    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isIdle, this.isJumping);
+    if(!this.isDeadNow) {
+      this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isAttacking, this.isIdle, this.isDead);
+    }
   }
 
 }
