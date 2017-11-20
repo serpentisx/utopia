@@ -122,9 +122,12 @@ class Knight extends Entity {
     this.y = y;
   }
 
+  renderHealth(ctx) {
+    this.health.render(ctx);
+  }
+
   render(ctx, xView, yView) {
     this.drawCollisions(this.collisions);
     this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle, this.isAttacking);
-    this.health.render(ctx);
   }
 }

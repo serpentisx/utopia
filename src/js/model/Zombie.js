@@ -51,7 +51,6 @@ class Zombie extends Entity {
     }
   }
 
-
   autoMovement(du) {
     const diffX = this.knight.x - this.x;
     //Follow
