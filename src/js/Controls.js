@@ -18,6 +18,8 @@ class Controls {
   }
 
   checkKey(e) {
+    let didPlayerPressSpace = false;
+
     switch (KEYS[e.keyCode]) {
       case "c":
         this.gm.renderManager.doClear = !this.gm.renderManager.doClear
@@ -31,11 +33,13 @@ class Controls {
       case "space":
         const knight  = this.gm.sceneManager.currentScene.knight;
         knight.isAttacking = true;
-        console.log("space");
+        didPlayerPressSpace = true;
         break
       default:
         break
     }
+
+    if(!didPlayerPressSpace) knight.isAttacking = false;
   }
 
   handleKeydown(e) {
