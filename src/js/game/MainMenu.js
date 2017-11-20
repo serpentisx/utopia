@@ -43,7 +43,7 @@ class MainMenu extends Scene {
   }
 
   init() {
-//    this.music.play();
+   this.music.play();
     this.isLoaded = true;
 
   }

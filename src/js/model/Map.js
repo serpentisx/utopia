@@ -72,6 +72,11 @@ class Map {
     for(var i = 0; i < this.imgArray.length; i ++ ) {
       this.tiles[i] = new Sprite(this.imgArray[i]);
     }
+    this.isBeingPlayed = false;
+    this.lavaSound = new Audio();
+    this.lavaSound.src = 'assets/lava4.mp4';
+    this.lavaSound.loop = true;
+
 
     this.layers =
       //Background
@@ -87,6 +92,7 @@ class Map {
         ]
       ];
 
+      this.nearLava = false;
 
     window.addEventListener('mousedown', this.addOrRemoveTile.bind(this));
   }
@@ -110,7 +116,7 @@ class Map {
     else this.layers[this.developer][r][c] = 0;
 
     //Get the array from map building
-    console.log(JSON.stringify(this.layers[this.developer]));
+    //console.log(JSON.stringify(this.layers[this.developer]));
   }
 
   getTile(layers, row, col) {
@@ -229,15 +235,18 @@ class Map {
     this.drawGrid(ctx, 1, this.xView, this.yView);
   }
 
+
   drawGrid(ctx, layers, xView, yView) {
     // dimensions of cropped image
+
+    let isPlayerNearLava = false;
+
     let cameraWidth = ctx.canvas.width + 200,
       cameraHeight = ctx.canvas.height + 200;
 
     let startCol = Math.floor(xView / this.tsize);
     let endCol = startCol + (cameraWidth / this.tsize);
 
-    //	console.log(endCol);
     let startRow = Math.floor(yView / this.tsize);
     let endRow = startRow + (cameraHeight / this.tsize);
     let offsetX = -xView + startCol * this.tsize;
@@ -251,9 +260,18 @@ class Map {
         ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
         if (tile != 0) { // 0 => empty tile
           this.tiles[tile-1].drawAtCorner(ctx, x, y);
+          if((tile == 3 || tile == 8) && layers==1) isPlayerNearLava = true;
         }
 
       }
+    }
+
+    if(isPlayerNearLava && !this.isBeingPlayed && layers==1) {
+      this.lavaSound.play();
+    }
+    else if(layers==1) {
+      this.isBeingPlayed = false;
+      this.lavaSound.pause();
     }
   }
 }
