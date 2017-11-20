@@ -265,7 +265,6 @@ class Map {
 
       }
     }
-
     if(isPlayerNearLava && !this.isBeingPlayed && layers==1) {
       this.lavaSound.play();
     }
