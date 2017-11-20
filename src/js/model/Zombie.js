@@ -118,7 +118,7 @@ class Zombie extends Entity {
     this.handleBoundary
     //Check lives
     if(this.collidesWithKnight() != null && this.knight.isAttacking) {
-        this.live--;
+        this.lives--;
     }
     this.checkDeath();
   }
