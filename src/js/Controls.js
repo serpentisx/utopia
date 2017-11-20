@@ -7,6 +7,7 @@ let keys = {}
 class Controls {
   constructor() {
     this.gm = GameManager.getInstance();
+    this.scene = this.gm.sceneManager;
     window.addEventListener("keydown", this.handleKeydown.bind(this));
     window.addEventListener("keyup", this.handleKeyup.bind(this));
     //canvas.addEventListener("mousedown", this.handleMouseDown.bind(this));
@@ -32,9 +33,18 @@ class Controls {
     }
   }
 
+  knightAttack(e) {
+    if(KEYS[e.keyCode] == "space") {
+      const knight  = this.gm.sceneManager.currentScene.knight;
+      knight.isAttacking = true;
+      console.log(knight.isAttacking);
+    }
+  }
+
   handleKeydown(e) {
     //Check which key to use
     this.gameEngineKey(e)
+    this.knightAttack(e)
 
     // Remember that this key is down.
     if (e.keyCode in KEYS) {

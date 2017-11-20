@@ -5,7 +5,7 @@ class Zombie extends Entity {
 
     this.sprite = new ZombieSprite();
     this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
-    
+
     this.isIdle = true;
     this.isAttacking = false;
     this.isDead = false;
@@ -19,7 +19,7 @@ class Zombie extends Entity {
     this.walkSpeed = 5;
     this.velY = 0;
 
-    this.attackRange = {
+    this.awakeRange = {
       x: 700,
       y: this.y
     };
@@ -75,7 +75,7 @@ class Zombie extends Entity {
 
     this.applyGravity(du);
 
-    if(this.attackRange.x > diffXabs && this.attackRange.y > diffYabs) {
+    if(this.awakeRange.x > diffXabs && this.awakeRange.y > diffYabs) {
       this.autoMovement(du);
     }
 

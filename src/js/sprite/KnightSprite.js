@@ -100,7 +100,7 @@ class KnightSprite {
     sprite.drawAtCenter(ctx, x, y);
   }
 
-  render(ctx, x, y, dir, jumping, isIdle) {
+  render(ctx, x, y, dir, jumping, isIdle, isAttacking) {
     if (jumping && dir > 0) this.renderAnimation(ctx, x, y, 'jump', 'right');
     else if (jumping && dir < 0) this.renderAnimation(ctx, x, y, 'jump', 'left');
     else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');

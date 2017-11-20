@@ -18,7 +18,7 @@ class Orc extends Entity{
     this.velY = 0;
     this.dirX = 0;
 
-    this.attackRange = {
+    this.awakeRange = {
       x: 500,
       y: this.y
     };
@@ -80,7 +80,7 @@ class Orc extends Entity{
 
     this.applyGravity(du);
 
-    if(this.attackRange.x > diffXabs && this.attackRange.y > diffYabs) {
+    if(this.awakeRange.x > diffXabs && this.awakeRange.y > diffYabs) {
       this.autoMovement(du);
     }
 

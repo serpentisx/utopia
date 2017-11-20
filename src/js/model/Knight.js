@@ -18,6 +18,7 @@ class Knight extends Entity {
     this.dirX = 0;
     this.isJumping = false;
     this.isIdle = true;
+    this.isAttacking = false;
 
     this.health = new Heart(100);
     this.isInLava = false;
@@ -71,12 +72,6 @@ class Knight extends Entity {
     }
 
     if (collisions["bottom"] && this.velY > 0) {
-      // hard coded
-     /* if ((collisions["right"] || collisions["left"]) &&
-        Math.abs(this.velY) > du * this.gravity &&
-        (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 143 ||
-          Math.abs(collisions["bottom"].x - this.x + halfWidth) == 131)) return;*/
-
       this.velY = 0;
       this.y = collisions["bottom"].y - halfHeight + 1;
     }
@@ -118,6 +113,7 @@ class Knight extends Entity {
       this.setCoords(29, 600);
       this.health.lifePoints = 5;
     }
+
   }
 
   setCoords(x, y) {
@@ -127,7 +123,7 @@ class Knight extends Entity {
 
   render(ctx, xView, yView) {
     this.drawCollisions(this.collisions);
-    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle);
+    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle, this.isAttacking);
     this.health.render(ctx);
   }
 }
