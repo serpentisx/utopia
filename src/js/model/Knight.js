@@ -26,6 +26,10 @@ class Knight extends Entity {
     this.burningSound = new Audio();
     this.burningSound.src = 'sounds/burn.mp3';
     this.burningSound.loop = true;
+
+    this.jumpSound = new Audio();
+    this.jumpSound.src = 'sounds/jump.wav';
+    this.jumpSound.volume = 0.2;
   }
 
   getRadius() {
@@ -55,7 +59,7 @@ class Knight extends Entity {
     }
 
     if(collisions["lava"] && !collisions["bottom"]) {
-      
+
       if(!this.isInLava) {
         this.isInLava = true;
         this.burningSound.play();
@@ -118,6 +122,7 @@ class Knight extends Entity {
     }
 
     if (keys[this.JUMP] && !this.isJumping) {
+      this.jumpSound.play();
       this.isIdle = false;
       this.velY = -15;
       this.isJumping = true;
