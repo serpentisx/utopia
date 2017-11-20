@@ -6,6 +6,7 @@ class Zombie extends Entity {
     this.sprite = new ZombieSprite();
     this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
 
+    this.lives = 3;
     this.isIdle = true;
     this.isAttacking = false;
     this.isDead = false;
@@ -50,6 +51,24 @@ class Zombie extends Entity {
     }
   }
 
+  collidesWithKnight() {
+    let knight = {
+      x: this.knight.x,
+      y: this.knight.y,
+      w: this.knight.sprite.width,
+      h: this.knight.sprite.height
+    };
+    let zombie = {
+      x: this.x,
+      y: this.y,
+      w: this.sprite.width,
+      h: this.sprite.height
+    }
+    return Utils.collidesWithRectangle(knight, zombie);
+  }
+  /**
+   * Make the Zombie follows and attack the knight automatically
+   */
   autoMovement(du) {
     const diffX = this.knight.x - this.x;
     //Follow
@@ -65,11 +84,23 @@ class Zombie extends Entity {
         this.x -= this.walkSpeed*du;
       }
     }
-    if(Math.abs(du-diffX) < this.attackRange) {
-      this.isIdle = false;
-      this.isAttacking = true;
+
+    if(this.collidesWithKnight() != null) {
+        this.isIdle = false;
+        this.isAttacking = true;
     }
+
   }
+
+  /**
+   * Check if the zombie is dead
+   */
+   checkDeath() {
+     if(this.live <= 0) {
+       //console.log("orc is dead");
+       this.kill();
+     }
+   }
 
   update(du) {
     this.isIdle = true;
@@ -82,8 +113,14 @@ class Zombie extends Entity {
     if(this.awakeRange.x > diffXabs && this.awakeRange.y > diffYabs) {
       this.autoMovement(du);
     }
+
     this.handleCollisionsWithPlatform(du);
-    this.handleBoundary();
+    this.handleBoundary
+    //Check lives
+    if(this.collidesWithKnight() != null && this.knight.isAttacking) {
+        this.live--;
+    }
+    this.checkDeath();
   }
 
   render(ctx, xView, yView) {

@@ -4,7 +4,7 @@ class Orc extends Entity{
 
     this.sprite = new OrcSprite();
     this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
-
+    this.live = 1;
 
     this.isIdle = true;
     this.isJumping = false;
@@ -49,10 +49,28 @@ class Orc extends Entity{
     }
   }
 
+  collidesWithKnight() {
+    let knight = {
+      x: this.knight.x,
+      y: this.knight.y,
+      w: this.knight.sprite.width,
+      h: this.knight.sprite.height
+    };
+    let orc = {
+      x: this.x,
+      y: this.y,
+      w: this.sprite.width,
+      h: this.sprite.height
+    }
+    return Utils.collidesWithRectangle(knight, orc);
+  }
+  /**
+   * Make the Orc follows and attack the knight automatically
+   */
   autoMovement(du) {
     const diffX = this.knight.x - this.x,
           diffY = this.knight.y - this.y;
-
+    //FOLLOW
 	  if(this.knight.isJumping && this.velY == g_gravity * du) {
         this.isJumping = true;
         this.velY = -15;
@@ -70,12 +88,18 @@ class Orc extends Entity{
         this.x -= this.walkSpeed*du;
       }
     }
-    if(Math.abs(du-diffX) < this.attackRange) {
-      this.isIdle = false;
-      this.isAttacking = true;
-      //TODO knight loses live
-    }
 
+    //ATTACK!
+    if(this.collidesWithKnight() != null) {
+        this.isIdle = false;
+        this.isAttacking = true;
+    }
+  }
+  checkDeath() {
+    if(this.live <= 0) {
+      //console.log("orc is dead");
+      this.kill();
+    }
   }
 
   update(du) {
@@ -96,6 +120,11 @@ class Orc extends Entity{
     if (this.velY === 0) {
       this.isJumping = false; // might want to change this later
     }
+    //Check lives
+    if(this.collidesWithKnight() != null && this.knight.isAttacking) {
+        this.live--;
+    }
+    this.checkDeath();
   }
 
   render(ctx, xView, yView) {

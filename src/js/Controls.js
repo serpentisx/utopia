@@ -37,7 +37,6 @@ class Controls {
     if(KEYS[e.keyCode] == "space") {
       const knight  = this.gm.sceneManager.currentScene.knight;
       knight.isAttacking = true;
-      console.log(knight.isAttacking);
     }
   }
 

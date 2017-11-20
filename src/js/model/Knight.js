@@ -79,9 +79,19 @@ class Knight extends Entity {
 
   }
 
-  update(du) {
-    this.isIdle = true;
+  checkForLava() {
+    if(this.isInLava) {
+      this.health.depleteLifePoints();
+    }
 
+    if(this.health.lifePoints < 0) {
+      // Play some death scene
+      this.setCoords(29, 600);
+      this.health.lifePoints = 5;
+    }
+  }
+
+  checkForControls(du) {
     if (keys[this.GO_LEFT]) {
       this.isIdle = false;
       this.dirX = -1;
@@ -98,22 +108,20 @@ class Knight extends Entity {
       this.isJumping = true;
     }
 
+    if(this.isAttacking) {
+
+    }
+  }
+
+  update(du) {
+    this.isIdle = true;
+    this.checkForControls(du);
     this.handleCollisions(du);
     this.handleBoundary();
-
     if (this.velY === 0) {
       this.isJumping = false; // might want to change this later
     }
-
-    if(this.isInLava) {
-      this.health.depleteLifePoints();
-    }
-
-    if(this.health.lifePoints < 0) {
-      // Play some death scene
-      this.setCoords(29, 600);
-      this.health.lifePoints = 5;
-    }
+    this.checkForLava();
 
   }
 
