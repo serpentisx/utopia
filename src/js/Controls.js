@@ -19,6 +19,7 @@ class Controls {
 
   checkKey(e) {
     let didPlayerPressSpace = false;
+    let knight  = this.gm.sceneManager.currentScene.knight;
 
     switch (KEYS[e.keyCode]) {
       case "c":
@@ -31,7 +32,6 @@ class Controls {
         this.gm.stopKey = true
         break
       case "space":
-        const knight  = this.gm.sceneManager.currentScene.knight;
         knight.isAttacking = true;
         didPlayerPressSpace = true;
         break
