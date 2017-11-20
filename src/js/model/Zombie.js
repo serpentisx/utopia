@@ -18,10 +18,11 @@ class Zombie extends Entity {
     this.runSpeed = 10;
     this.walkSpeed = 5;
     this.velY = 0;
+    this.attackRange = 7;
 
     this.awakeRange = {
       x: 700,
-      y: this.y
+      y: this.y / this.attackRange
     };
 
   }
@@ -53,7 +54,7 @@ class Zombie extends Entity {
 
   autoMovement(du) {
     const diffX = this.knight.x - this.x;
-
+    //Follow
     if( Math.abs(du-diffX) > this.walkSpeed ) {
       //Move x direction
       if( diffX > 0) {
@@ -66,10 +67,15 @@ class Zombie extends Entity {
         this.x -= this.walkSpeed*du;
       }
     }
+    if(Math.abs(du-diffX) < this.attackRange) {
+      this.isIdle = false;
+      this.isAttacking = true;
+    }
   }
 
   update(du) {
     this.isIdle = true;
+    this.isAttacking = false;
     const diffXabs = Math.abs(this.knight.x - this.x),
           diffYabs = Math.abs(this.knight.y - this.y);
 
@@ -78,7 +84,6 @@ class Zombie extends Entity {
     if(this.awakeRange.x > diffXabs && this.awakeRange.y > diffYabs) {
       this.autoMovement(du);
     }
-
     this.handleCollisionsWithPlatform(du);
     this.handleBoundary();
   }
