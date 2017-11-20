@@ -20,7 +20,7 @@ class Knight extends Entity {
     this.isIdle = true;
     this.isAttacking = false;
 
-    this.health = new Heart(100);
+    this.health = new Heart(5);
     this.isInLava = false;
   }
 
@@ -46,6 +46,7 @@ class Knight extends Entity {
     }
 
     if(collisions["lava"] && !collisions["bottom"]) {
+      console.log("HERE")
       this.isInLava = true;
       this.velY = 0;
 
