@@ -17,7 +17,7 @@ class Controls {
     this.quitGame()
   }
 
-  gameEngineKey(e) {
+  checkKey(e) {
     switch (KEYS[e.keyCode]) {
       case "c":
         this.gm.renderManager.doClear = !this.gm.renderManager.doClear
@@ -28,22 +28,19 @@ class Controls {
       case "q":
         this.gm.stopKey = true
         break
+      case "space":
+        const knight  = this.gm.sceneManager.currentScene.knight;
+        knight.isAttacking = true;
+        console.log("space");
+        break
       default:
         break
     }
   }
 
-  knightAttack(e) {
-    if(KEYS[e.keyCode] == "space") {
-      const knight  = this.gm.sceneManager.currentScene.knight;
-      knight.isAttacking = true;
-    }
-  }
-
   handleKeydown(e) {
     //Check which key to use
-    this.gameEngineKey(e)
-    this.knightAttack(e)
+    this.checkKey(e)
 
     // Remember that this key is down.
     if (e.keyCode in KEYS) {

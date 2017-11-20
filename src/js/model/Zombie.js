@@ -96,7 +96,7 @@ class Zombie extends Entity {
    * Check if the zombie is dead
    */
    checkDeath() {
-     if(this.live <= 0) {
+     if(this.lives <= 0) {
        //console.log("zombie is dead");
        this.kill();
      }
