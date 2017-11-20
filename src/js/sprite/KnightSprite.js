@@ -4,14 +4,17 @@ class KnightSprite {
     this.idleSprites = {};
     this.jumpSprites = {};
     this.walkSprites = {};
+    this.attackSprites = {};
 
     this.walkIndex = 0;
     this.idleIndex = 0;
     this.jumpIndex = 0;
+    this.attackIndex = 0;
 
     this.walkRate = 0.2;
     this.idleRate = 0.2;
     this.jumpRate = 0.2;
+    this.attackRate = 0.2;
 
     this.loadSprites();
   }
@@ -61,9 +64,43 @@ class KnightSprite {
       jumpLeft2: 'assets/model/character/jump/left/3_.png',
       jumpLeft3: 'assets/model/character/jump/left/4_.png'
     };
+
+    const attackImages = {
+      attackRight0: 'assets/model/character/attack/right/1.png',
+      attackRight1: 'assets/model/character/attack/right/2.png',
+      attackRight2: 'assets/model/character/attack/right/3.png',
+      attackRight3: 'assets/model/character/attack/right/4.png',
+      attackRight4: 'assets/model/character/attack/right/5.png',
+      attackRight5: 'assets/model/character/attack/right/6.png',
+      attackRight6: 'assets/model/character/attack/right/7.png',
+      attackRight7: 'assets/model/character/attack/right/8.png',
+      attackRight8: 'assets/model/character/attack/right/9.png',
+      attackRight9: 'assets/model/character/attack/right/10.png',
+      attackRight10: 'assets/model/character/attack/right/11.png',
+      attackRight11: 'assets/model/character/attack/right/12.png',
+
+
+      attackLeft0: 'assets/model/character/attack/left/1.png',
+      attackLeft1: 'assets/model/character/attack/left/2.png',
+      attackLeft2: 'assets/model/character/attack/left/3.png',
+      attackLeft3: 'assets/model/character/attack/left/4.png',
+      attackLeft4: 'assets/model/character/attack/left/5.png',
+      attackLeft5: 'assets/model/character/attack/left/6.png',
+      attackLeft6: 'assets/model/character/attack/left/7.png',
+      attackLeft7: 'assets/model/character/attack/left/8.png',
+      attackLeft8: 'assets/model/character/attack/left/9.png',
+      attackLeft9: 'assets/model/character/attack/left/10.png',
+      attackLeft10: 'assets/model/character/attack/left/11.png',
+      attackLeft11: 'assets/model/character/attack/left/12.png'
+
+
+    };
+
     imagesPreload(idleImages, this.idleSprites, function empty() {});
     imagesPreload(walkImages, this.walkSprites, function empty() {});
     imagesPreload(jumpImages, this.jumpSprites, function empty() {});
+    imagesPreload(attackImages, this.attackSprites, function empty() {});
+
   }
 
   calculateNextIndex(type) {
@@ -71,6 +108,7 @@ class KnightSprite {
       case 'idle' : return Math.floor(this.idleIndex += this.idleRate) % (Object.keys(this.idleSprites).length / 2); break;
       case 'walk' : return Math.floor(this.walkIndex += this.walkRate) % (Object.keys(this.walkSprites).length / 2); break;
       case 'jump' : return Math.floor(this.jumpIndex += this.jumpRate) % (Object.keys(this.jumpSprites).length / 2); break;
+      case 'attack' : return Math.floor(this.attackIndex += this.attackRate) % (Object.keys(this.attackSprites).length / 2); break;
 
       default: return 0; break;
     }
@@ -81,6 +119,7 @@ class KnightSprite {
       case 'idle' : return this.idleSprites; break;
       case 'walk' : return this.walkSprites; break;
       case 'jump' : return this.jumpSprites; break;
+      case 'attack' : return this.attackSprites; break;
 
       default: return this.idleSprites; break;
     }
@@ -93,7 +132,6 @@ class KnightSprite {
     const index = this.calculateNextIndex(type);
     const sheet = this.getAnimationSprite(type);
     const sprite = sheet[`${type}${direction}${index}`];
-
     this.width = sprite.width;
     this.height = sprite.height;
 
@@ -105,6 +143,8 @@ class KnightSprite {
     else if (jumping && dir < 0) this.renderAnimation(ctx, x, y, 'jump', 'left');
     else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
     else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
+    else if (isAttacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
+    else if (isAttacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
     else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
     else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
 

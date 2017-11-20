@@ -115,7 +115,7 @@ class Knight extends Entity {
     }
 
     if(this.isAttacking) {
-      console.log("hi");
+      console.log("ATTACKING")
     }
   }
 
