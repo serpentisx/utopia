@@ -7,20 +7,15 @@ let keys = {}
 class Controls {
   constructor() {
     this.gm = GameManager.getInstance();
-    this.scene = this.gm.sceneManager;
     window.addEventListener("keydown", this.handleKeydown.bind(this));
     window.addEventListener("keyup", this.handleKeyup.bind(this));
-    //canvas.addEventListener("mousedown", this.handleMouseDown.bind(this));
-    //canvas.addEventListener("mouseup", this.handleMouseUp.bind(this));
 
     //this.initializeFullscreenListener()
     this.quitGame()
   }
 
   checkKey(e) {
-    let didPlayerPressSpace = false;
     let knight  = this.gm.sceneManager.currentScene.knight;
-
     switch (KEYS[e.keyCode]) {
       case "c":
         this.gm.renderManager.doClear = !this.gm.renderManager.doClear
@@ -32,20 +27,16 @@ class Controls {
         this.gm.stopKey = true
         break
       case "space":
-        knight.isAttacking = true;
-        didPlayerPressSpace = true;
+        knight.isAttacking = true
         break
       default:
         break
     }
-
-    if(!didPlayerPressSpace) knight.isAttacking = false;
   }
 
   handleKeydown(e) {
     //Check which key to use
     this.checkKey(e)
-
     // Remember that this key is down.
     if (e.keyCode in KEYS) {
       const keyName = KEYS[e.keyCode]
@@ -93,6 +84,8 @@ class Controls {
 			this.gm.stopKey = true
 		});
 	}
+
+
 
   toggleFullscreen() {
     ctx.canvas.width = window.innerWidth

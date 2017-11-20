@@ -97,7 +97,6 @@ class Orc extends Entity{
   }
   checkDeath() {
     if(this.live <= 0) {
-      //console.log("orc is dead");
       this.kill();
     }
   }
@@ -121,7 +120,7 @@ class Orc extends Entity{
       this.isJumping = false; // might want to change this later
     }
     //Check lives
-    if(this.collidesWithKnight() != null && this.knight.isAttacking) {
+    if(this.collidesWithKnight() != null && this.knight.attack()) {
         this.live--;
     }
     this.checkDeath();

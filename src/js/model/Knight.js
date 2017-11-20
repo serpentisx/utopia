@@ -28,6 +28,12 @@ class Knight extends Entity {
     return (this.sprite.width / 2) * 0.9;
   }
 
+  attack () {
+    let answer = this.isAttacking;
+    this.isAttacking = false;
+    return answer;
+  }
+
   handleCollisions(du) {
 
     const halfWidth = this.sprite.width / 2;
@@ -109,7 +115,7 @@ class Knight extends Entity {
     }
 
     if(this.isAttacking) {
-
+      console.log("hi");
     }
   }
 

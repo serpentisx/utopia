@@ -10,7 +10,7 @@ const KEYS = {
   67: "c",
   82: "r",
   81: "q",
-  32: "space"
+  32: 'space'
 }
 const KEY_A = 'A'.charCodeAt(0)
 const KEY_D = 'D'.charCodeAt(0)
