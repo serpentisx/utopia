@@ -110,10 +110,6 @@ class KnightSprite {
       attackLeft18: 'assets/model/character/attack/left/12.png',
       attackLeft19: 'assets/model/character/attack/left/12.png'
 
-
-
-
-
     };
 
     imagesPreload(idleImages, this.idleSprites, function empty() {});

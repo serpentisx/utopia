@@ -245,7 +245,6 @@ class Map {
 
 
   drawGrid(ctx, layers, xView, yView) {
-    // dimensions of cropped image
 
     let isPlayerNearLava = false;
 

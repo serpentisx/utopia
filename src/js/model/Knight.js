@@ -22,6 +22,10 @@ class Knight extends Entity {
 
     this.health = new Heart(5);
     this.isInLava = false;
+
+    this.burningSound = new Audio();
+    this.burningSound.src = 'sounds/burn.mp3';
+    this.burningSound.loop = true;
   }
 
   getRadius() {
@@ -45,14 +49,17 @@ class Knight extends Entity {
     this.collisions = collisions;
 
     let offSet = 3;
-    this.isInLava = false;
 
     if(collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
       return;
     }
 
     if(collisions["lava"] && !collisions["bottom"]) {
-      this.isInLava = true;
+      
+      if(!this.isInLava) {
+        this.isInLava = true;
+        this.burningSound.play();
+      }
       this.velY = 0;
 
       if (collisions["col"].solid.right) {
@@ -63,6 +70,9 @@ class Knight extends Entity {
       }
 
       return;
+    } else {
+      this.isInLava = false;
+      this.burningSound.pause();
     }
 
     if (collisions["left"]) {
