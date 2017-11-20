@@ -6,7 +6,7 @@ class Knight extends Entity {
     this.x = x;
     this.y = y;
 
-    this.sprite = new KnightSprite();
+    this.sprite = new KnightSprite(this);
     this.rotation = 0;
     this.velX = 8;
     this.velY = 0;
@@ -129,7 +129,7 @@ class Knight extends Entity {
     }
 
     if(this.isAttacking) {
-      console.log("ATTACKING")
+
     }
   }
 

@@ -264,7 +264,7 @@ class Map {
         var tile = this.getTile(layers, r, c);
         var x = (c - startCol) * this.tsize + offsetX;
         var y = (r - startRow) * this.tsize + offsetY;
-        ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
+    ///    ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
         if (tile != 0) { // 0 => empty tile
           this.tiles[tile-1].drawAtCorner(ctx, x, y);
           if((tile == 3 || tile == 8) && layers==1) isPlayerNearLava = true;

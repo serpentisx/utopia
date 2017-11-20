@@ -1,6 +1,6 @@
 class KnightSprite {
 
-  constructor() {
+  constructor(knight) {
     this.idleSprites = {};
     this.jumpSprites = {};
     this.walkSprites = {};
@@ -14,9 +14,10 @@ class KnightSprite {
     this.walkRate = 0.2;
     this.idleRate = 0.2;
     this.jumpRate = 0.2;
-    this.attackRate = 0.8;
+    this.attackRate = 1;
 
     this.loadSprites();
+
   }
 
   loadSprites() {
@@ -78,14 +79,14 @@ class KnightSprite {
       attackRight9: 'assets/model/character/attack/right/10.png',
       attackRight10: 'assets/model/character/attack/right/11.png',
       attackRight11: 'assets/model/character/attack/right/12.png',
-      attackRight12: 'assets/model/character/attack/right/12.png',
-      attackRight13: 'assets/model/character/attack/right/12.png',
-      attackRight14: 'assets/model/character/attack/right/12.png',
-      attackRight15: 'assets/model/character/attack/right/12.png',
-      attackRight16: 'assets/model/character/attack/right/12.png',
-      attackRight17: 'assets/model/character/attack/right/12.png',
-      attackRight18: 'assets/model/character/attack/right/12.png',
-      attackRight19: 'assets/model/character/attack/right/12.png',
+      attackRight12: 'assets/model/character/attack/right/11.png',
+      attackRight13: 'assets/model/character/attack/right/10.png',
+      attackRight14: 'assets/model/character/attack/right/9.png',
+      attackRight15: 'assets/model/character/attack/right/8.png',
+      attackRight16: 'assets/model/character/attack/right/7.png',
+      attackRight17: 'assets/model/character/attack/right/6.png',
+      attackRight18: 'assets/model/character/attack/right/5.png',
+      attackRight19: 'assets/model/character/attack/right/4.png',
 
 
 
@@ -117,6 +118,8 @@ class KnightSprite {
     imagesPreload(jumpImages, this.jumpSprites, function empty() {});
     imagesPreload(attackImages, this.attackSprites, function empty() {});
 
+
+
   }
 
   calculateNextIndex(type) {
@@ -131,6 +134,12 @@ class KnightSprite {
         return Math.floor(this.jumpIndex += this.jumpRate) % (Object.keys(this.jumpSprites).length / 2);
         break;
       case 'attack':
+
+        if((this.attackIndex % 20) == 0) {
+          console.log(this.attackIndex);
+          this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
+          this.knight.isAttacking = false;
+        }
         return Math.floor(this.attackIndex += this.attackRate) % (Object.keys(this.attackSprites).length / 2);
         break;
 
