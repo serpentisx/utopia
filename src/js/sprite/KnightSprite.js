@@ -14,7 +14,7 @@ class KnightSprite {
     this.walkRate = 0.2;
     this.idleRate = 0.2;
     this.jumpRate = 0.2;
-    this.attackRate = 0.2;
+    this.attackRate = 0.8;
 
     this.loadSprites();
   }
@@ -78,6 +78,15 @@ class KnightSprite {
       attackRight9: 'assets/model/character/attack/right/10.png',
       attackRight10: 'assets/model/character/attack/right/11.png',
       attackRight11: 'assets/model/character/attack/right/12.png',
+      attackRight12: 'assets/model/character/attack/right/12.png',
+      attackRight13: 'assets/model/character/attack/right/12.png',
+      attackRight14: 'assets/model/character/attack/right/12.png',
+      attackRight15: 'assets/model/character/attack/right/12.png',
+      attackRight16: 'assets/model/character/attack/right/12.png',
+      attackRight17: 'assets/model/character/attack/right/12.png',
+      attackRight18: 'assets/model/character/attack/right/12.png',
+      attackRight19: 'assets/model/character/attack/right/12.png',
+
 
 
       attackLeft0: 'assets/model/character/attack/left/1.png',
@@ -91,7 +100,18 @@ class KnightSprite {
       attackLeft8: 'assets/model/character/attack/left/9.png',
       attackLeft9: 'assets/model/character/attack/left/10.png',
       attackLeft10: 'assets/model/character/attack/left/11.png',
-      attackLeft11: 'assets/model/character/attack/left/12.png'
+      attackLeft11: 'assets/model/character/attack/left/12.png',
+      attackLeft12: 'assets/model/character/attack/left/12.png',
+      attackLeft13: 'assets/model/character/attack/left/12.png',
+      attackLeft14: 'assets/model/character/attack/left/12.png',
+      attackLeft15: 'assets/model/character/attack/left/12.png',
+      attackLeft16: 'assets/model/character/attack/left/12.png',
+      attackLeft17: 'assets/model/character/attack/left/12.png',
+      attackLeft18: 'assets/model/character/attack/left/12.png',
+      attackLeft19: 'assets/model/character/attack/left/12.png'
+
+
+
 
 
     };
@@ -105,29 +125,49 @@ class KnightSprite {
 
   calculateNextIndex(type) {
     switch (type) {
-      case 'idle' : return Math.floor(this.idleIndex += this.idleRate) % (Object.keys(this.idleSprites).length / 2); break;
-      case 'walk' : return Math.floor(this.walkIndex += this.walkRate) % (Object.keys(this.walkSprites).length / 2); break;
-      case 'jump' : return Math.floor(this.jumpIndex += this.jumpRate) % (Object.keys(this.jumpSprites).length / 2); break;
-      case 'attack' : return Math.floor(this.attackIndex += this.attackRate) % (Object.keys(this.attackSprites).length / 2); break;
+      case 'idle':
+        return Math.floor(this.idleIndex += this.idleRate) % (Object.keys(this.idleSprites).length / 2);
+        break;
+      case 'walk':
+        return Math.floor(this.walkIndex += this.walkRate) % (Object.keys(this.walkSprites).length / 2);
+        break;
+      case 'jump':
+        return Math.floor(this.jumpIndex += this.jumpRate) % (Object.keys(this.jumpSprites).length / 2);
+        break;
+      case 'attack':
+        return Math.floor(this.attackIndex += this.attackRate) % (Object.keys(this.attackSprites).length / 2);
+        break;
 
-      default: return 0; break;
+      default:
+        return 0;
+        break;
     }
   }
 
   getAnimationSprite(type) {
     switch (type) {
-      case 'idle' : return this.idleSprites; break;
-      case 'walk' : return this.walkSprites; break;
-      case 'jump' : return this.jumpSprites; break;
-      case 'attack' : return this.attackSprites; break;
+      case 'idle':
+        return this.idleSprites;
+        break;
+      case 'walk':
+        return this.walkSprites;
+        break;
+      case 'jump':
+        return this.jumpSprites;
+        break;
+      case 'attack':
+        return this.attackSprites;
+        break;
 
-      default: return this.idleSprites; break;
+      default:
+        return this.idleSprites;
+        break;
     }
   }
 
   renderAnimation(ctx, x, y, type, direction) {
     type = type.toLowerCase();
-    direction =  direction.charAt(0).toUpperCase() + direction.slice(1);
+    direction = direction.charAt(0).toUpperCase() + direction.slice(1);
 
     const index = this.calculateNextIndex(type);
     const sheet = this.getAnimationSprite(type);
@@ -139,14 +179,15 @@ class KnightSprite {
   }
 
   render(ctx, x, y, dir, jumping, isIdle, isAttacking) {
-    if (jumping && dir > 0) this.renderAnimation(ctx, x, y, 'jump', 'right');
+    if (isAttacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
+    else if (isAttacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
+    else if (jumping && dir > 0) this.renderAnimation(ctx, x, y, 'jump', 'right');
     else if (jumping && dir < 0) this.renderAnimation(ctx, x, y, 'jump', 'left');
     else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
     else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
-    else if (isAttacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
-    else if (isAttacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
+
     else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
-    else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
+    else if (dir < 0) this.renderAnimation(ctx, x, y, 'walk', 'left');
 
     else this.renderAnimation(ctx, x, y, 'idle', 'right');
   }
