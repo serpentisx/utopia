@@ -16,7 +16,7 @@ class Zombie extends Entity {
     this.spanRange = 800;
     this.dirX = 0;
 
-    this.walkSpeed = 7;
+    this.walkSpeed = 5;
     this.velY = 0;
     this.attackRange = 7;
 

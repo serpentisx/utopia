@@ -52,7 +52,6 @@ class Knight extends Entity {
     }
 
     if(collisions["lava"] && !collisions["bottom"]) {
-      console.log("HERE")
       this.isInLava = true;
       this.velY = 0;
 

@@ -74,7 +74,7 @@ class Map {
     }
     this.isBeingPlayed = false;
     this.lavaSound = new Audio();
-    this.lavaSound.src = 'assets/lava4.mp4';
+    this.lavaSound.src = 'sounds/lava.mp4';
     this.lavaSound.loop = true;
 
 
@@ -131,12 +131,20 @@ class Map {
     var tiles = [];
     for (var i = row; i <= row + 4; i++) {
       for( var k = col; k <= col + 4; k++) {
-        if (this.layers[1][i][k] !== undefined) {
+        if (this.layers[1][i][k]) {
+          let width;
+          let height;
+          switch (this.layers[1][i][k]) {
+            case 2 : {width = 128; height = 97;} break;
+            case 9 : {width = 128; height = 81;} break;
+
+            default : {width = this.tsize; height = this.tsize;} break;
+          }
           tiles.push({
             y: i * this.tsize,
             x: k * this.tsize,
-            w: this.tsize,
-            h: this.tsize
+            w: width,
+            h: height
           });
         }
       }
