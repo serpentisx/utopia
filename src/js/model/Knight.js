@@ -36,7 +36,7 @@ class Knight extends Entity {
     return (this.sprite.width / 2) * 0.9;
   }
 
-  attack () {
+  attack() {
     let answer = this.isAttacking;
     this.isAttacking = false;
     return answer;
@@ -126,10 +126,6 @@ class Knight extends Entity {
       this.isIdle = false;
       this.velY = -15;
       this.isJumping = true;
-    }
-
-    if(this.isAttacking) {
-
     }
   }
 

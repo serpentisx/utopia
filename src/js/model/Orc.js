@@ -91,8 +91,8 @@ class Orc extends Entity{
 
     //ATTACK!
     if(this.collidesWithKnight() != null) {
-        this.isIdle = false;
-        this.isAttacking = true;
+      this.isIdle = false;
+      this.isAttacking = true;
     }
   }
   checkDeath() {
@@ -114,14 +114,14 @@ class Orc extends Entity{
     }
 
     this.handleCollisionsWithPlatform(du);
+    //Check lives
+    if(this.collidesWithKnight() != null && this.knight.isAttacking) {
+        this.live--;
+    }
     this.handleBoundary();
 
     if (this.velY === 0) {
       this.isJumping = false; // might want to change this later
-    }
-    //Check lives
-    if(this.collidesWithKnight() != null && this.knight.attack()) {
-        this.live--;
     }
     this.checkDeath();
   }

@@ -15,7 +15,7 @@ class Controls {
   }
 
   checkKey(e) {
-    let knight  = this.gm.sceneManager.currentScene.knight;
+    let knight  = this.gm.sceneManager.getSceneByID('game').knight;
     switch (KEYS[e.keyCode]) {
       case "c":
         this.gm.renderManager.doClear = !this.gm.renderManager.doClear
@@ -27,7 +27,7 @@ class Controls {
         this.gm.stopKey = true
         break
       case "space":
-        knight.isAttacking = true
+        knight.isAttacking = true;
         break
       default:
         break

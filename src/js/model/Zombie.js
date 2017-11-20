@@ -115,11 +115,11 @@ class Zombie extends Entity {
     }
 
     this.handleCollisionsWithPlatform(du);
-    this.handleBoundary();
     //Check lives
-    if(this.collidesWithKnight() != null && this.knight.attack()) {
+    if(this.collidesWithKnight() != null && this.knight.isAttacking) {
         this.lives--;
     }
+    this.handleBoundary();
     this.checkDeath();
   }
 

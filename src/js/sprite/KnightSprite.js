@@ -134,11 +134,9 @@ class KnightSprite {
         return Math.floor(this.jumpIndex += this.jumpRate) % (Object.keys(this.jumpSprites).length / 2);
         break;
       case 'attack':
-
         if((this.attackIndex % 20) == 0) {
-          console.log(this.attackIndex);
           this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
-          this.knight.isAttacking = false;
+          this.knight.attack();
         }
         return Math.floor(this.attackIndex += this.attackRate) % (Object.keys(this.attackSprites).length / 2);
         break;
@@ -163,7 +161,6 @@ class KnightSprite {
       case 'attack':
         return this.attackSprites;
         break;
-
       default:
         return this.idleSprites;
         break;
@@ -184,6 +181,7 @@ class KnightSprite {
   }
 
   render(ctx, x, y, dir, jumping, isIdle, isAttacking) {
+    console.log(isAttacking);
     if (isAttacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
     else if (isAttacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
     else if (jumping && dir > 0) this.renderAnimation(ctx, x, y, 'jump', 'right');
