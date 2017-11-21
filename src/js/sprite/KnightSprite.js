@@ -145,7 +145,6 @@ class KnightSprite {
       case 'attack':
         if((this.attackIndex % 23) == 0) {
           this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
-
           this.knight.isAttacking = false;
         }
         return Math.floor(this.attackIndex += this.attackRate) % (Object.keys(this.attackSprites).length / 2);

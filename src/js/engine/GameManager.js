@@ -8,10 +8,6 @@ let instance = null;
 
 class GameManager {
 
-  static getInstance() {
-    return instance;
-  }
-
   constructor(sceneManager) {
     if (instance) {
       return instance;
@@ -26,15 +22,14 @@ class GameManager {
     this.frameTime_ms = null;
     this.frameTimeDelta_ms = null;
     this.sceneManager = sceneManager;
+    this.mainIterFrame = this.mainIterFrame.bind(this);
 
     instance = this;
+    return instance;
   }
 
-  iter(frameTime) {
-    this.updateClocks(frameTime);
-    this.iterCore(this.frameTimeDelta_ms);
-
-    if (!this.isGameOver) this.requestNextIteration();
+  static getInstance() {
+    return instance;
   }
 
   updateClocks(frameTime) {
@@ -60,14 +55,13 @@ class GameManager {
   }
 
   mainIterFrame(frameTime) {
-    this.iter(frameTime);
+    this.updateClocks(frameTime);
+    this.iterCore(this.frameTimeDelta_ms);
+
+    if (!this.isGameOver) this.requestNextIteration();
   }
 
   requestNextIteration() {
-    window.requestAnimationFrame(this.mainIterFrame.bind(this));
-  }
-
-  start() {
-    this.requestNextIteration();
+    window.requestAnimationFrame(this.mainIterFrame)
   }
 }

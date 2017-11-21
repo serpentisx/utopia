@@ -16,6 +16,11 @@ class Knight extends Entity {
     this.JUMP = KEY_W;
 
     this.dirX = 0;
+
+    this.tokenManager = new TokenManager(this);
+
+    this.hasWon = false;
+
     this.isJumping = false;
     this.isIdle = true;
     this.isAttacking = false;
@@ -32,6 +37,10 @@ class Knight extends Entity {
     this.jumpSound = new Audio();
     this.jumpSound.src = 'sounds/jump.wav';
     this.jumpSound.volume = 0.2;
+
+    this.winSound = new Audio();
+    this.winSound.src = 'sounds/win.mp3';
+    this.winSound.volume = 0.5;
   }
 
   getRadius() {
@@ -126,15 +135,30 @@ class Knight extends Entity {
     }
   }
 
-  update(du) {
-    this.isIdle = true;
-    this.checkForControls(du);
-    this.handleCollisions(du);
-    this.handleBoundary();
-    if (this.velY === 0) {
-      this.isJumping = false; // might want to change this later
+  checkForGameOver() {
+    if(this.tokenManager.hasCollectedAll() && this.x > 4700 && this.y < canvas.height) {
+      this.winSound.play();
+      this.hasWon = true;
     }
-    this.checkForLava();
+  }
+
+  update(du) {
+    if(!this.hasWon) {
+      this.isIdle = true;
+      this.checkForControls(du);
+      this.handleCollisions(du);
+      this.handleBoundary();
+      if (this.velY === 0) {
+        this.isJumping = false;
+      }
+      this.checkForLava();
+      this.tokenManager.update();
+      this.checkForGameOver();
+    }
+    else this.x += this.velX*du;
+
+
+
   }
 
   setCoords(x, y) {
@@ -148,6 +172,8 @@ class Knight extends Entity {
 
   render(ctx, xView, yView) {
     //this.drawCollisions(this.collisions);
+    this.tokenManager.render(ctx, xView, yView);
     this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle, this.isAttacking);
+
   }
 }

@@ -17,7 +17,6 @@ class EntityManager {
     this.enemies.push(new Zombie(632,1874));
     this.enemies.push(new Zombie(3983, 1869));
     this.enemies.push(new Zombie(4515, 1211));
-    this.enemies.push(new Zombie(4827, 482));
 
     //Make orcs
     this.enemies.push(new Orc(1680, 1725));
