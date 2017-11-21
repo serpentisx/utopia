@@ -142,13 +142,13 @@ class Map {
       castle: 'assets/platformer_background_1/Layers/layer02_cake.png',
       tile_0: 'assets/ground/ground06.png',
       tile_1: 'assets/ground/ground02.png',
-      tile_2: 'assets/_lava/lava01.png',
-      tile_3: 'assets/_leafy_ground/leafy_ground01.png',
-      tile_4: 'assets/_rocky/rocky03.png',
-      tile_5: 'assets/_hollow/hollow_middle_blank.png',
-      tile_6: 'assets/_hollow/hollow15.png',
-      tile_7: 'assets/_lava/lava2.png',
-      tile_8: 'assets/_rocky/rocky04.png',
+      tile_2: 'assets/lava/lava01.png',
+      tile_3: 'assets/leafy_ground/leafy_ground01.png',
+      tile_4: 'assets/rocky/rocky03.png',
+      tile_5: 'assets/hollow/hollow_middle_blank.png',
+      tile_6: 'assets/hollow/hollow15.png',
+      tile_7: 'assets/lava/lava2.png',
+      tile_8: 'assets/rocky/rocky04.png',
       tile_9: 'assets/model/map/stonetexture.jpg'
     };
     imagesPreload(requiredImages, this.sprites,  this.init.bind(this));
