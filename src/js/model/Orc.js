@@ -4,7 +4,7 @@ class Orc extends Entity{
 
     this.sprite = new OrcSprite();
     this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
-    this.live = 1;
+    this.lives = 1;
 
     this.isIdle = true;
     this.isJumping = false;
@@ -98,7 +98,7 @@ class Orc extends Entity{
     }
   }
   checkDeath() {
-    if(this.live <= 0) {
+    if(this.lives <= 0) {
       this.kill();
     }
   }
