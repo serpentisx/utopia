@@ -1,9 +1,9 @@
-/**
- * The main method that loads everything
- * once the document is ready.
- */
 
-window.onload = function () {
+ /**
+  * The main method that loads everthing
+  * once the document is ready.
+  */
+ (() => {
 	//Set canvas size
   ctx.canvas.width  = window.innerWidth
   ctx.canvas.height = window.innerHeight
@@ -20,7 +20,5 @@ window.onload = function () {
   const gameManager = new GameManager(sceneManager);
 	const controls = new Controls();
 
-  //Reset canvas width and height
-  //initializeWindowListener();
-	gameManager.start();
-}
+	gameManager.requestNextIteration();
+})();

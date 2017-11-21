@@ -123,16 +123,16 @@ class Map {
     this.developer = 0;
 
     //Developer Tool
-    window.addEventListener('mousedown', this.addOrRemoveTile.bind(this));
+    //window.addEventListener('mousedown', this.addOrRemoveTile.bind(this));
 
   }
 
   loadSprites(mapImage) {
     let requiredImages = {
-      rocks: 'assets/platformer_background_3/layers/layer06_Rocks.png',
+      rocks: 'assets/platformer_background_3/Layers/layer06_Rocks.png',
       caves: 'assets/model/map/cave_background.png',
-      hills: 'assets/platformer_background_3/layers/layer04_Hills_2.png',
-      clouds: 'assets/platformer_background_3/layers/layer05_Clouds.png',
+      hills: 'assets/platformer_background_3/Layers/layer04_Hills_2.png',
+      clouds: 'assets/platformer_background_3/Layers/layer05_Clouds.png',
       castle: 'assets/platformer_background_1/Layers/layer02_cake.png',
       tile_0: 'assets/_ground/ground06.png',
       tile_1: 'assets/_ground/ground02.png',
@@ -148,27 +148,27 @@ class Map {
     imagesPreload(requiredImages, this.sprites,  function empty() {});
   }
 
-  addOrRemoveTile(e) {
-    let x = e.clientX - ctx.canvas.offsetLeft + this.xView;
-    let y = e.clientY - ctx.canvas.offsetTop + this.yView;
-    let r = this.getRow(y);
-    let c = this.getCol(x);
-
-    if (keys[KEY_1]) this.layers[this.developer][r][c] = 1;
-    else if (keys[KEY_2]) this.layers[this.developer][r][c] = 2;
-    else if (keys[KEY_3]) this.layers[this.developer][r][c] = 3;
-    else if (keys[KEY_4]) this.layers[this.developer][r][c] = 4;
-    else if (keys[KEY_5]) this.layers[this.developer][r][c] = 5;
-    else if (keys[KEY_6]) this.layers[this.developer][r][c] = 6;
-    else if (keys[KEY_7]) this.layers[this.developer][r][c] = 7;
-    else if (keys[KEY_8]) this.layers[this.developer][r][c] = 8;
-    else if (keys[KEY_9]) this.layers[this.developer][r][c] = 9;
-    else if (keys[KEY_0]) this.layers[this.developer][r][c] = 10;
-    else this.layers[this.developer][r][c] = 0;
-
-    //Get the array from map building
-    //console.log(JSON.stringify(this.layers[this.developer]));
-  }
+  // addOrRemoveTile(e) {
+  //   let x = e.clientX - ctx.canvas.offsetLeft + this.xView;
+  //   let y = e.clientY - ctx.canvas.offsetTop + this.yView;
+  //   let r = this.getRow(y);
+  //   let c = this.getCol(x);
+  //
+  //   if (keys[KEY_1]) this.layers[this.developer][r][c] = 1;
+  //   else if (keys[KEY_2]) this.layers[this.developer][r][c] = 2;
+  //   else if (keys[KEY_3]) this.layers[this.developer][r][c] = 3;
+  //   else if (keys[KEY_4]) this.layers[this.developer][r][c] = 4;
+  //   else if (keys[KEY_5]) this.layers[this.developer][r][c] = 5;
+  //   else if (keys[KEY_6]) this.layers[this.developer][r][c] = 6;
+  //   else if (keys[KEY_7]) this.layers[this.developer][r][c] = 7;
+  //   else if (keys[KEY_8]) this.layers[this.developer][r][c] = 8;
+  //   else if (keys[KEY_9]) this.layers[this.developer][r][c] = 9;
+  //   else if (keys[KEY_0]) this.layers[this.developer][r][c] = 10;
+  //   else this.layers[this.developer][r][c] = 0;
+  //
+  //   //Get the array from map building
+  //   //console.log(JSON.stringify(this.layers[this.developer]));
+  // }
 
   getTile(layers, row, col) {
     return this.layers[layers][row][col];
