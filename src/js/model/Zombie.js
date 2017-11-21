@@ -52,27 +52,29 @@ class Zombie extends Entity {
   }
 
   collidesWithKnight() {
-    let knight = {
-      x: this.knight.x,
-      y: this.knight.y,
-      w: this.knight.sprite.width,
-      h: this.knight.sprite.height
-    };
-    let zombie = {
-      x: this.x,
-      y: this.y,
+    return Utils.collidesWithRectangleTopLeft(this.getAttackOffsetRect(), this.knight.getEntityRectTopLeft());
+  }
+
+  getAttackOffsetRect() {
+    let offset = 18;
+    return {
+      x: this.x - offset * this.dirX - this.sprite.width / 2,
+      y: this.y - this.sprite.height / 2,
       w: this.sprite.width,
       h: this.sprite.height
     }
-    return Utils.collidesWithRectangle(knight, zombie);
   }
+
   /**
    * Make the Zombie follows and attack the knight automatically
    */
   autoMovement(du) {
     const diffX = this.knight.x - this.x;
+
+    let collidesWithKnight = this.collidesWithKnight();
+
     //Follow
-    if( Math.abs(du-diffX) > this.walkSpeed ) {
+    if( Math.abs(diffX) > this.walkSpeed * du && !collidesWithKnight) {
       //Move x direction
       if( diffX > 0) {
         this.isIdle = false;
@@ -85,10 +87,9 @@ class Zombie extends Entity {
       }
     }
 
-    if(this.collidesWithKnight() != null && !this.knight.isAttacking) {
+    if(collidesWithKnight && !this.knight.isAttacking) {
         this.isIdle = false;
         this.knight.health.removeLifePoint();
-      
     }
 
   }
@@ -118,13 +119,12 @@ class Zombie extends Entity {
 
       this.handleCollisionsWithPlatform(du);
       //Check lives
-      if(this.collidesWithKnight() != null && this.knight.isAttacking) {
+      if(this.collidesWithKnight() && this.knight.isAttacking) {
         this.lives--;
         if(this.knight.x < this.x) {
-          this.x += 200;
+          this.x += 50;
         } else {
-          this.x -= 200;
-
+          this.x -= 50;
         }
       }
       this.handleBoundary();

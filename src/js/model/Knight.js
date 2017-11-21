@@ -100,7 +100,7 @@ class Knight extends Entity {
 
     if(this.health.lifePoints < 0) {
       // Play some death scene
-      this.setCoords(29, 600);
+      this.setCoords(30, 600);
       this.health.lifePoints = 5;
     }
   }
