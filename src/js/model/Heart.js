@@ -21,7 +21,10 @@ class Heart {
 
   depleteLifePoints() {
     this.lifePoints -= 0.03;
+  }
 
+  removeLifePoint() {
+    this.lifePoints -= 1;
   }
 
   render(ctx) {

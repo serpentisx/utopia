@@ -31,7 +31,8 @@ class TokenManager {
     this.tokens.push(new Token(this.sprites.clover, 73, 2369));
     this.tokens.push(new Token(this.sprites.feather, 644, 1601));
     this.tokens.push(new Token(this.sprites.ring, 2064, 2241));
-
+    this.tokens.push(new Token(this.sprites.book, 5434, 1729));
+    this.tokens.push(new Token(this.sprites.bomb, 5162, 1217));
   }
 
   collidesWithKnight(token) {
