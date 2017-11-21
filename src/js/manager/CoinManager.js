@@ -47,7 +47,7 @@ class CoinManager {
     for (let i = 0; i < this.coins.length; i++) {
       if (this.collidesWithKnight(this.coins[i])) {
         this.coins.splice(i--, 1);
-        this.coinSound.currentTime = 0
+        this.coinSound.currentTime = 0;
         this.coinSound.play();
         this.score++;
       }

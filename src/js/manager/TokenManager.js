@@ -17,7 +17,8 @@ class TokenManager {
       bronze_coin: 'assets/model/tokens/PNG/64px/bronze_coin.png',
       clover: 'assets/model/tokens/PNG/64px/clover.png',
       feather: 'assets/model/tokens/PNG/64px/feather.png',
-      ring: 'assets/model/tokens/PNG/64px/ring.png'
+      ring: 'assets/model/tokens/PNG/64px/ring.png',
+      live: 'assets/itch/pngs/face_on_heart.png'
     };
     imagesPreload(requiredImages, this.sprites, this.generateTokens.bind(this));
   }
@@ -31,6 +32,8 @@ class TokenManager {
     this.tokens.push(new Token(this.sprites.ring, 2064, 2241));
     this.tokens.push(new Token(this.sprites.book, 5434, 1729));
     this.tokens.push(new Token(this.sprites.bomb, 5162, 1217));
+    this.tokens.push(new Token(this.sprites.live, 2376, 462, 'live'));
+    this.tokens.push(new Token(this.sprites.live, 2870, 2762, 'live'));
   }
 
   collidesWithKnight(token) {
@@ -46,6 +49,9 @@ class TokenManager {
   update(du) {
     for (let i = 0; i < this.tokens.length; i++) {
       if (this.collidesWithKnight(this.tokens[i])) {
+        if (this.tokens[i].type === 'live') {
+          this.knight.health.lifePoints += 1;
+        }
         this.tokens.splice(i--, 1);
       }
     }
