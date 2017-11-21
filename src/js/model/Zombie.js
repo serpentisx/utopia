@@ -52,27 +52,29 @@ class Zombie extends Entity {
   }
 
   collidesWithKnight() {
-    let knight = {
-      x: this.knight.x,
-      y: this.knight.y,
-      w: this.knight.sprite.width,
-      h: this.knight.sprite.height
-    };
-    let zombie = {
-      x: this.x,
-      y: this.y,
+    return Utils.collidesWithRectangleTopLeft(this.getAttackOffsetRect(), this.knight.getEntityRectTopLeft());
+  }
+
+  getAttackOffsetRect() {
+    let offset = 18;
+    return {
+      x: this.x - offset * this.dirX - this.sprite.width / 2,
+      y: this.y - this.sprite.height / 2,
       w: this.sprite.width,
       h: this.sprite.height
     }
-    return Utils.collidesWithRectangle(knight, zombie);
   }
+
   /**
    * Make the Zombie follows and attack the knight automatically
    */
   autoMovement(du) {
     const diffX = this.knight.x - this.x;
+
+    let collidesWithKnight = this.collidesWithKnight();
+
     //Follow
-    if( Math.abs(du-diffX) > this.walkSpeed ) {
+    if( Math.abs(diffX) > this.walkSpeed * du && !collidesWithKnight) {
       //Move x direction
       if( diffX > 0) {
         this.isIdle = false;
@@ -85,7 +87,7 @@ class Zombie extends Entity {
       }
     }
 
-    if(this.collidesWithKnight() != null) {
+    if(collidesWithKnight) {
         this.isIdle = false;
         this.isAttacking = true;
     }

@@ -81,6 +81,15 @@ class Entity {
     };
   }
 
+  getEntityRectTopLeft() {
+    return {
+      x: this.x - this.sprite.width / 2,
+      y: this.y - this.sprite.height / 2,
+      w: this.sprite.width,
+      h: this.sprite.height
+    };
+  }
+
   getRadius() {
     return this.radius ? this.radius : 0;
   }
