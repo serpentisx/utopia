@@ -6,8 +6,6 @@ class TokenManager {
     this.sprites = {};
 
     this.loadSprites();
-
-
   }
 
   loadSprites() {
@@ -54,5 +52,6 @@ class TokenManager {
   }
 
   render(ctx, xView, yView) {
-    this.tokens.forEach(token => token.render(ctx, xView, yView));  }
+    this.tokens.forEach(token => token.render(ctx, xView, yView));
+  }
 }
