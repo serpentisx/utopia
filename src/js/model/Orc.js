@@ -92,7 +92,7 @@ class Orc extends Entity{
       }
     }
 
-    //ATTACK!
+    //Orc attacks knight
     if(collidesWithKnight && !this.knight.isAttacking) {
       this.isIdle = false;
       this.knight.health.depleteLifePoints();
@@ -118,16 +118,22 @@ class Orc extends Entity{
       }
 
       this.handleCollisionsWithPlatform(du);
-      //Check lives
-      if(this.collidesWithKnight() != null && this.knight.isAttacking) {
-        this.live--;
-        if(this.knight.x < this.x) {
-          this.x += 200;
-        } else {
-          this.x -= 200;
 
-        }
+
+      let collision = this.collidesWithKnight();
+      //Knight attacks orc
+      if(collision && this.knight.isAttacking) {
+        if( this.knight.facingDirection == collision) {
+            this.lives--;
+            if(this.knight.x < this.x) {
+              this.x += 200;
+            } else {
+              this.x -= 200;
+            }
+          } else this.knight.health.depleteLifePoints();
       }
+
+
       this.handleBoundary();
 
       if (this.velY === 0) {

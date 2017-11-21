@@ -118,15 +118,21 @@ class Zombie extends Entity {
       }
 
       this.handleCollisionsWithPlatform(du);
-      //Check lives
-      if(this.collidesWithKnight() && this.knight.isAttacking) {
-        this.lives--;
-        if(this.knight.x < this.x) {
-          this.x += 50;
-        } else {
-          this.x -= 50;
-        }
+
+      let collision = this.collidesWithKnight();
+
+      //Knight attacks zombie
+      if(collision && this.knight.isAttacking) {
+        if( this.knight.facingDirection == collision) {
+            this.lives--;
+            if(this.knight.x < this.x) {
+              this.x += 200;
+            } else {
+              this.x -= 200;
+            }
+          } else this.knight.health.depleteLifePoints();
       }
+
       this.handleBoundary();
       this.checkDeath();
     }
