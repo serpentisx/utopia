@@ -2,13 +2,14 @@ class Orc extends Entity{
   constructor(x, y) {
     super();
 
-    this.sprite = new OrcSprite();
+    this.sprite = new OrcSprite(this);
     this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
-    this.live = 1;
+    this.lives = 5;
 
     this.isIdle = true;
     this.isJumping = false;
     this.isAttacking = false;
+    this.isDead = false;
 
     this.walkSpeed = 4;
     this.velY = 0;
@@ -66,6 +67,7 @@ class Orc extends Entity{
    * Make the Orc follows and attack the knight automatically
    */
   autoMovement(du) {
+    if (this.isDead) return;
     const diffX = this.knight.x - this.x,
           diffY = this.knight.y - this.y;
 
@@ -98,8 +100,8 @@ class Orc extends Entity{
     }
   }
   checkDeath() {
-    if(this.live <= 0) {
-      this.kill();
+    if(this.lives <= 0) {
+      this.isDead = true;
     }
   }
 
