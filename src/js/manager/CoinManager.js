@@ -19,6 +19,19 @@ class CoinManager {
   generateCoins() {
     this.coins.push(new Coin(2388, 200));
     this.coins.push(new Coin(1345, 193));
+    this.coins.push(new Coin(1856, 1473));
+    this.coins.push(new Coin(645, 2241))
+    this.coins.push(new Coin(5545, 2369));
+    this.coins.push(new Coin(3660, 1857));
+    this.coins.push(new Coin(3788, 1857));
+    this.coins.push(new Coin(3906, 1857));
+    this.coins.push(new Coin(4034, 1857));
+    this.coins.push(new Coin(4162, 1857));
+    this.coins.push(new Coin(4290, 1857));
+
+
+
+
   }
 
   collidesWithKnight(coin) {
