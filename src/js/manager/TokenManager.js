@@ -26,20 +26,22 @@ class TokenManager {
 
   generateTokens() {
     this.tokens.push(new Token(this.sprites.backpack, 2428, 2625));
-    this.tokens.push(new Token(this.sprites.bronze_coin, 165, 3009));
+  /*  this.tokens.push(new Token(this.sprites.bronze_coin, 165, 3009));
     this.tokens.push(new Token(this.sprites.clover, 73, 2369));
     this.tokens.push(new Token(this.sprites.feather, 644, 1601));
     this.tokens.push(new Token(this.sprites.ring, 2064, 2241));
     this.tokens.push(new Token(this.sprites.book, 5434, 1729));
     this.tokens.push(new Token(this.sprites.bomb, 5162, 1217));
     this.tokens.push(new Token(this.sprites.live, 2376, 462, 'live'));
-    this.tokens.push(new Token(this.sprites.live, 2870, 2762, 'live'));
+    this.tokens.push(new Token(this.sprites.live, 2870, 2762, 'live')); */
   }
 
   hasCollectedAll() {
-    if(this.tokens[i].length == 0) {
+    if(this.tokens.length == 0) {
       return true;
     }
+
+    return false;
   }
 
   collidesWithKnight(token) {

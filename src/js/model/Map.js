@@ -4,6 +4,8 @@ class Map {
     this.background = mapImage;
     this.sprites = {};
 
+    this.hasLoaded = false;
+
     this.loadSprites(mapImage);
 
     this.width = this.background.width;
@@ -127,6 +129,10 @@ class Map {
 
   }
 
+  init() {
+    this.hasLoaded = true;
+  }
+
   loadSprites(mapImage) {
     let requiredImages = {
       rocks: 'assets/platformer_background_3/Layers/layer06_Rocks.png',
@@ -145,7 +151,7 @@ class Map {
       tile_8: 'assets/_rocky/rocky04.png',
       tile_9: 'assets/model/map/stonetexture.jpg'
     };
-    imagesPreload(requiredImages, this.sprites,  function empty() {});
+    imagesPreload(requiredImages, this.sprites,  this.init.bind(this));
   }
 
   // addOrRemoveTile(e) {
@@ -257,60 +263,62 @@ class Map {
 
     //Get the array from map building
     //console.log(JSON.stringify(this.layers[this.developer]));
+    if(this.hasLoaded) {
+      let sx, sy, dx, dy,
+        sWidth, sHeight, dWidth, dHeight;
 
-    let sx, sy, dx, dy,
-      sWidth, sHeight, dWidth, dHeight;
+      // Offset point to crop image
+      this.xView = xView;
+      this.yView = yView;
 
-    // Offset point to crop image
-    this.xView = xView;
-    this.yView = yView;
+      // dimensions of cropped image
+      sWidth = ctx.canvas.width;
+      sHeight = ctx.canvas.height;
 
-    // dimensions of cropped image
-    sWidth = ctx.canvas.width;
-    sHeight = ctx.canvas.height;
+      //Check if cropped image is smaller than canvas
+      if (this.background.width - this.xView < sWidth) {
+        sWidth = this.background.width - this.xView;
+      }
 
-    //Check if cropped image is smaller than canvas
-    if (this.background.width - this.xView < sWidth) {
-      sWidth = this.background.width - this.xView;
+      if (this.background.height - this.yView < sHeight) {
+        sHeight = this.background.height - this.yView;
+      }
+
+      // location on canvas to draw the cropped image
+      dx = 0;
+      dy = 0;
+
+      // match destination with source to not scale the image
+      dWidth = sWidth;
+      dHeight = sHeight;
+
+      //Map background
+      this.background.drawAt(ctx, this.xView, this.yView, sWidth, sHeight, dx, dy, dWidth, dHeight);
+
+      this.sprites.rocks.drawAtCorner(ctx, 0, 0);
+      if (this.clouds.x > this.xView) {
+        this.clouds.x = -1000;
+      }
+      if (yView < ctx.canvas.height) {
+        this.sprites.clouds.drawAtCorner(ctx, this.clouds.x += 0.5, this.clouds.y);
+        this.sprites.hills.drawAtCorner(ctx, -this.xView, -this.yView);
+        this.sprites.hills.drawAtCorner(ctx, -this.xView + this.sprites.hills.width, -this.yView);
+        this.sprites.hills.drawAtCorner(ctx, -this.xView + this.sprites.hills.width * 2, -this.yView);
+        this.sprites.castle.drawAtCorner(ctx, -this.xView+this.width-this.sprites.castle.width+200, -this.yView-150);
+
+      }
+      this.sprites.caves.drawAtCorner(ctx, -this.xView, -this.yView + this.background.height - this.sprites.caves.height);
+      this.sprites.caves.drawAtCorner(ctx, -this.xView + this.sprites.caves.width, -this.yView + this.background.height - this.sprites.caves.height);
+      this.sprites.caves.drawAtCorner(ctx, -this.xView, -this.yView + this.background.height - this.sprites.caves.height * 2);
+      this.sprites.caves.drawAtCorner(ctx, -this.xView + this.sprites.caves.width, -this.yView + this.background.height - this.sprites.caves.height * 2);
+
+      //Render Background
+      this.drawGrid(ctx, 0, this.xView, this.yView);
+
+      //Render Logic Grid
+      this.drawGrid(ctx, 1, this.xView, this.yView);
     }
 
-    if (this.background.height - this.yView < sHeight) {
-      sHeight = this.background.height - this.yView;
-    }
-
-    // location on canvas to draw the cropped image
-    dx = 0;
-    dy = 0;
-
-    // match destination with source to not scale the image
-    dWidth = sWidth;
-    dHeight = sHeight;
-
-    //Map background
-    this.background.drawAt(ctx, this.xView, this.yView, sWidth, sHeight, dx, dy, dWidth, dHeight);
-
-    this.sprites.rocks.drawAtCorner(ctx, 0, 0);
-    if (this.clouds.x > this.xView) {
-      this.clouds.x = -1000;
-    }
-    if (yView < ctx.canvas.height) {
-      this.sprites.clouds.drawAtCorner(ctx, this.clouds.x += 0.5, this.clouds.y);
-      this.sprites.hills.drawAtCorner(ctx, -this.xView, -this.yView);
-      this.sprites.hills.drawAtCorner(ctx, -this.xView + this.sprites.hills.width, -this.yView);
-      this.sprites.hills.drawAtCorner(ctx, -this.xView + this.sprites.hills.width * 2, -this.yView);
-      this.sprites.castle.drawAtCorner(ctx, -this.xView+this.width-this.sprites.castle.width+200, -this.yView-150);
-
-    }
-    this.sprites.caves.drawAtCorner(ctx, -this.xView, -this.yView + this.background.height - this.sprites.caves.height);
-    this.sprites.caves.drawAtCorner(ctx, -this.xView + this.sprites.caves.width, -this.yView + this.background.height - this.sprites.caves.height);
-    this.sprites.caves.drawAtCorner(ctx, -this.xView, -this.yView + this.background.height - this.sprites.caves.height * 2);
-    this.sprites.caves.drawAtCorner(ctx, -this.xView + this.sprites.caves.width, -this.yView + this.background.height - this.sprites.caves.height * 2);
-
-    //Render Background
-    this.drawGrid(ctx, 0, this.xView, this.yView);
-
-    //Render Logic Grid
-    this.drawGrid(ctx, 1, this.xView, this.yView);
   }
 
 
