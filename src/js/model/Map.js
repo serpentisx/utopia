@@ -93,8 +93,8 @@ class Map {
       ];
 
       this.nearLava = false;
-
-    window.addEventListener('mousedown', this.addOrRemoveTile.bind(this));
+      //Developer Tool
+  //  window.addEventListener('mousedown', this.addOrRemoveTile.bind(this));
   }
 
   addOrRemoveTile(e) {
@@ -240,10 +240,11 @@ class Map {
       this.cave.drawAtCorner(ctx, -this.xView+this.cave.image.width, -this.yView+this.sprite.image.height-this.cave.image.height);
       this.cave.drawAtCorner(ctx, -this.xView, -this.yView+this.sprite.image.height-this.cave.image.height*2);
       this.cave.drawAtCorner(ctx, -this.xView+this.cave.image.width, -this.yView+this.sprite.image.height-this.cave.image.height*2);
-    
-  //  this.hills.drawAtCorner(ctx, this.xView, -this.yView+ (this.sprite.height-this.hills.image.height/2));
+
+    //Render Background
     this.drawGrid(ctx, 0, this.xView, this.yView);
 
+    //Render Logic Grid
     this.drawGrid(ctx, 1, this.xView, this.yView);
   }
 
@@ -268,7 +269,8 @@ class Map {
         var tile = this.getTile(layers, r, c);
         var x = (c - startCol) * this.tsize + offsetX;
         var y = (r - startRow) * this.tsize + offsetY;
-    //    ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
+        //Draw Grid
+        //ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
         if (tile != 0) { // 0 => empty tile
           this.tiles[tile-1].drawAtCorner(ctx, x, y);
           if((tile == 3 || tile == 8) && layers==1) isPlayerNearLava = true;

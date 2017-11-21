@@ -68,6 +68,9 @@ class Orc extends Entity{
    * Make the Orc follows and attack the knight automatically
    */
   autoMovement(du) {
+
+    let collidesWithKnight = this.collidesWithKnight();
+
     const diffX = this.knight.x - this.x,
           diffY = this.knight.y - this.y;
     //FOLLOW
@@ -90,14 +93,9 @@ class Orc extends Entity{
     }
 
     //ATTACK!
-    if(this.collidesWithKnight() != null && !this.knight.isAttacking) {
+    if(collidesWithKnight && !this.knight.isAttacking) {
       this.isIdle = false;
-      this.knight.health.removeLifePoint();
-      if(this.knight.x < this.x) {
-        this.knight.x -= 128;
-      } else {
-        this.knight.x += 128;
-      }
+      this.knight.health.depleteLifePoints();
     }
   }
   checkDeath() {

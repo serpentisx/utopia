@@ -86,10 +86,9 @@ class Zombie extends Entity {
         this.x -= this.walkSpeed*du;
       }
     }
-
-    if(collidesWithKnight) {
+    // If knight is hit
+    if(collidesWithKnight && !this.knight.isAttacking) {
         this.isIdle = false;
-        this.isAttacking = true;
         this.knight.health.depleteLifePoints();
     }
 
