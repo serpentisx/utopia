@@ -22,7 +22,7 @@ class Wizard extends Entity {
     this.attackRange = 1;
 
     this.awakeRange = {
-      x: canvas.width,
+      x: 1200,
       y: 800
     };
 
@@ -136,7 +136,7 @@ class Wizard extends Entity {
   attackWithProjectile() {
     let velX = 2 + Math.random() * 2;
     let velY = 8 + Math.random() * 8;
-    this.projectiles.push(new Projectile(this.x + this.dirX * this.sprite.width/2, this.y, -velX, -velY));
+    this.projectiles.push(new Projectile(this.x + this.dirX * this.sprite.width/2, this.y, velX, -velY));
   }
 
   updateBullets(du) {
