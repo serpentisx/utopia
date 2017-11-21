@@ -27,8 +27,6 @@ class ZombieSprite {
 
     this.zombie = zombie;
 
-    console.log(this.zombie)
-
     this.loadSprites();
   }
 

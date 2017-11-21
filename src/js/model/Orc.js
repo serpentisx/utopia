@@ -10,7 +10,7 @@ class Orc extends Entity{
     this.isJumping = false;
     this.isAttacking = false;
 
-    this.walkSpeed = 4;
+    this.walkSpeed = 7;
     this.velY = 0;
 
     this.x = x;
@@ -50,19 +50,17 @@ class Orc extends Entity{
   }
 
   collidesWithKnight() {
-    let knight = {
-      x: this.knight.x,
-      y: this.knight.y,
-      w: this.knight.sprite.width,
-      h: this.knight.sprite.height
-    };
-    let orc = {
-      x: this.x,
-      y: this.y,
+    return Utils.collidesWithRectangleTopLeft(this.getAttackOffsetRect(), this.knight.getEntityRectTopLeft());
+  }
+
+  getAttackOffsetRect() {
+    let offset = 18;
+    return {
+      x: this.x - offset * this.dirX - this.sprite.width / 2,
+      y: this.y - this.sprite.height / 2,
       w: this.sprite.width,
       h: this.sprite.height
     }
-    return Utils.collidesWithRectangle(knight, orc);
   }
   /**
    * Make the Orc follows and attack the knight automatically
@@ -70,13 +68,16 @@ class Orc extends Entity{
   autoMovement(du) {
     const diffX = this.knight.x - this.x,
           diffY = this.knight.y - this.y;
+
+    let collidesWithKnight = this.collidesWithKnight();
+
     //FOLLOW
 	  if(this.knight.isJumping && this.velY == g_gravity * du) {
         this.isJumping = true;
         this.velY = -15;
     }
 
-    if( Math.abs(du-diffX) > this.walkSpeed) {
+    if(Math.abs(diffX) > this.walkSpeed * du && !collidesWithKnight) {
       //Move x direction
       if( diffX > 0) {
         this.isIdle = false;
@@ -90,14 +91,10 @@ class Orc extends Entity{
     }
 
     //ATTACK!
-    if(this.collidesWithKnight() != null && !this.knight.isAttacking) {
+    if(collidesWithKnight) {
       this.isIdle = false;
-      this.knight.removeLifePoint();
-      if(this.knight.x < this.x) {
-        this.knight.x -= 128;
-      } else {
-        this.knight.x += 128;
-      } 
+      this.isAttacking = true;
+      this.knight.health.depleteLifePoints();
     }
   }
   checkDeath() {
@@ -124,9 +121,9 @@ class Orc extends Entity{
       if(this.collidesWithKnight() != null && this.knight.isAttacking) {
         this.live--;
         if(this.knight.x < this.x) {
-          this.x += 200;
+          this.x += 50;
         } else {
-          this.x -= 200;
+          this.x -= 50;
 
         }
       }

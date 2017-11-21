@@ -6,7 +6,7 @@ class Zombie extends Entity {
     this.sprite = new ZombieSprite(this);
     this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
 
-    this.lives = 5;
+    this.lives = 7;
     this.isIdle = true;
     this.isAttacking = false;
     this.isDead = false;
@@ -75,7 +75,7 @@ class Zombie extends Entity {
     let collidesWithKnight = this.collidesWithKnight();
 
     //Follow
-    if( Math.abs(diffX) > this.walkSpeed * du && !collidesWithKnight) {
+    if(Math.abs(diffX) > this.walkSpeed * du && !collidesWithKnight) {
       //Move x direction
       if( diffX > 0) {
         this.isIdle = false;
