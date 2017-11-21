@@ -60,6 +60,9 @@ class Controls {
     $("#instructions").on("click", () => {
       location.href = "instruction.html";
     });
+    $("#credits").on("click", () => {
+      location.href = "credits.html";
+    });
   }
 
   toggleFullscreen() {
