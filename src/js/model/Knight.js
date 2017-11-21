@@ -136,7 +136,7 @@ class Knight extends Entity {
   }
 
   checkForGameOver() {
-    if(this.tokenManager.hasCollectedAll() && this.x > 5000 && this.y < canvas.height) {
+    if(this.tokenManager.hasCollectedAll() && this.x > 4700 && this.y < canvas.height) {
       this.winSound.play();
       this.hasWon = true;
     }
