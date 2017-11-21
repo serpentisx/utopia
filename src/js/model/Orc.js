@@ -92,12 +92,12 @@ class Orc extends Entity{
     //ATTACK!
     if(this.collidesWithKnight() != null && !this.knight.isAttacking) {
       this.isIdle = false;
-      this.knight.removeLifePoint();
+      this.knight.health.removeLifePoint();
       if(this.knight.x < this.x) {
         this.knight.x -= 128;
       } else {
         this.knight.x += 128;
-      } 
+      }
     }
   }
   checkDeath() {

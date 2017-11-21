@@ -20,6 +20,8 @@ class Knight extends Entity {
     this.isIdle = true;
     this.isAttacking = false;
 
+    this.facingDirection = 'right';
+
     this.health = new Heart(5);
     this.isInLava = false;
 
