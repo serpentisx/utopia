@@ -6,7 +6,6 @@ class TokenManager {
     this.sprites = {};
 
     this.loadSprites();
-    console.log(this.sprites.backpack)
   }
 
   loadSprites() {
@@ -35,6 +34,12 @@ class TokenManager {
     this.tokens.push(new Token(this.sprites.bomb, 5162, 1217));
     this.tokens.push(new Token(this.sprites.live, 2376, 462, 'live'));
     this.tokens.push(new Token(this.sprites.live, 2870, 2762, 'live'));
+  }
+
+  hasCollectedAll() {
+    if(this.tokens[i].length == 0) {
+      return true;
+    }
   }
 
   collidesWithKnight(token) {
