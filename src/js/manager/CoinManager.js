@@ -8,6 +8,9 @@ class CoinManager {
     this.counterCoin = this.generateCounterCoin();
 
     this.score = 0;
+
+    this.coinSound = new Audio();
+    this.coinSound.src = 'sounds/coin.wav'
   }
 
   generateCounterCoin() {
@@ -48,6 +51,7 @@ class CoinManager {
     for (let i = 0; i < this.coins.length; i++) {
       if (this.collidesWithKnight(this.coins[i])) {
         this.coins.splice(i--, 1);
+        this.coinSound.play();
         this.score++;
       }
     }
