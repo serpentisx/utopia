@@ -179,10 +179,16 @@ class ZombieSprite {
     if (this.hurtIndex > 1 && Math.floor(this.hurtIndex) % ((Object.keys(this.hurtSprites).length / 2) * 2) === 0) {
       this.zombie.isHurt = false;
     }
+
+    if (this.deadIndex > 1 && Math.floor(this.deadIndex) % ((Object.keys(this.deadSprites).length / 2)) === 0) {
+      this.zombie.kill();
+    }
   }
 
   render(ctx, x, y, dir, attacking, isIdle, isHurt, isDead) {
-    if (isHurt && dir > 0) this.renderAnimation(ctx, x, y, 'hurt', 'right');
+    if (isDead && dir > 0) this.renderAnimation(ctx, x, y, 'dead', 'right');
+    else if (isDead && dir < 0) this.renderAnimation(ctx, x, y, 'dead', 'left');
+    else if (isHurt && dir > 0) this.renderAnimation(ctx, x, y, 'hurt', 'right');
     else if (isHurt && dir < 0) this.renderAnimation(ctx, x, y, 'hurt', 'left');
     else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
     else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');

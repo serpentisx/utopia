@@ -70,6 +70,8 @@ class Zombie extends Entity {
    * Make the Zombie follows and attack the knight automatically
    */
   autoMovement(du) {
+    if (this.isDead) return;
+    
     const diffX = this.knight.x - this.x;
 
     let collidesWithKnight = this.collidesWithKnight();
@@ -101,8 +103,7 @@ class Zombie extends Entity {
    */
    checkDeath() {
      if(this.lives <= 0) {
-       //console.log("zombie is dead");
-       this.kill();
+       this.isDead = true;
      }
    }
 
