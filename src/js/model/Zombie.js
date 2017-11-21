@@ -88,8 +88,9 @@ class Zombie extends Entity {
       }
     }
     // If knight is hit
-    if(collidesWithKnight && !this.knight.isAttacking) {
+    if(collidesWithKnight) {
         this.isIdle = false;
+        this.isAttacking = true;
         this.knight.health.depleteLifePoints();
     }
 
@@ -119,16 +120,22 @@ class Zombie extends Entity {
       }
 
       this.handleCollisionsWithPlatform(du);
-      //Check lives
-      if(this.collidesWithKnight() && this.knight.isAttacking) {
-        this.lives--;
-        this.isHurt = true;
-        if(this.knight.x < this.x) {
-          this.x += 50;
-        } else {
-          this.x -= 50;
+
+      let collision = this.collidesWithKnight();
+
+      //Knight attacks zombie
+      if (collision && this.knight.isAttacking) {
+        if (this.knight.facingDirection == collision) {
+          this.lives--;
+          this.isHurt = true;
+          if (this.knight.x < this.x) {
+            this.x += 100;
+          } else {
+            this.x -= 100;
+          }
         }
       }
+
       this.handleBoundary();
       this.checkDeath();
     }

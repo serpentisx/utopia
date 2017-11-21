@@ -16,14 +16,14 @@ class ZombieSprite {
     this.idleIndex = 0;
 
     this.attackRate = 0.08;
-    this.hurtRate = 0.05;
+    this.hurtRate = 0.08;
     this.deadRate = 0.08;
     this.walkRate = 0.08;
     this.runRate = 0.07;
     this.idleRate = 0.08;
 
-    this.width = 120;
-    this.height = 100;
+    this.width = 126;
+    this.height = 97;
 
     this.zombie = zombie;
 
@@ -176,7 +176,7 @@ class ZombieSprite {
 
     sprites[`${type}${direction}${index}`].drawAtCenter(ctx, x, y);
 
-    if (this.hurtIndex > 1 && Math.floor(this.hurtIndex) % ((Object.keys(this.hurtSprites).length / 2) * 3) === 0) {
+    if (this.hurtIndex > 1 && Math.floor(this.hurtIndex) % ((Object.keys(this.hurtSprites).length / 2) * 2) === 0) {
       this.zombie.isHurt = false;
     }
   }

@@ -10,7 +10,7 @@ class Orc extends Entity{
     this.isJumping = false;
     this.isAttacking = false;
 
-    this.walkSpeed = 7;
+    this.walkSpeed = 4;
     this.velY = 0;
 
     this.x = x;
@@ -117,16 +117,22 @@ class Orc extends Entity{
       }
 
       this.handleCollisionsWithPlatform(du);
-      //Check lives
-      if(this.collidesWithKnight() != null && this.knight.isAttacking) {
-        this.live--;
-        if(this.knight.x < this.x) {
-          this.x += 50;
-        } else {
-          this.x -= 50;
 
+
+      let collision = this.collidesWithKnight();
+      //Knight attacks orc
+      if (collision && this.knight.isAttacking) {
+        if (this.knight.facingDirection == collision) {
+          this.lives--;
+          if (this.knight.x < this.x) {
+            this.x += 100;
+          } else {
+            this.x -= 100;
+          }
         }
       }
+
+
       this.handleBoundary();
 
       if (this.velY === 0) {
