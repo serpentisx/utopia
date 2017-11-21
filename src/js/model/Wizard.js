@@ -86,6 +86,7 @@ class Wizard extends Entity {
    checkDeath() {
      if(this.lives <= 0) {
        this.isDead = true;
+       this.knight.bossIsDead = true;
      }
    }
 

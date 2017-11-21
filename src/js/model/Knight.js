@@ -41,6 +41,8 @@ class Knight extends Entity {
     this.winSound = new Audio();
     this.winSound.src = 'sounds/win.mp3';
     this.winSound.volume = 0.5;
+
+    this.bossIsDead = false;
   }
 
   getRadius() {
@@ -136,7 +138,7 @@ class Knight extends Entity {
   }
 
   checkForGameOver() {
-    if(this.tokenManager.hasCollectedAll() && this.x > 4700 && this.y < canvas.height) {
+    if(this.tokenManager.hasCollectedAll() && this.x > 4700 && this.y < canvas.height && this.bossIsDead) {
       this.winSound.play();
       this.hasWon = true;
     }
