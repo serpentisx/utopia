@@ -17,9 +17,8 @@ class CoinManager {
   }
 
   generateCoins() {
-    for (let i = 0; i < 20; i++) {
-      this.coins.push(new Coin(3000 + i*100, 1000));
-    }
+    this.coins.push(new Coin(2388, 200));
+    this.coins.push(new Coin(1345, 193));
   }
 
   collidesWithKnight(coin) {
