@@ -121,7 +121,6 @@ class Zombie extends Entity {
         this.knight.attack();
         this.lives--;
       }
-      console.log("zombie", this.lives);
       this.handleBoundary();
       this.checkDeath();
     }

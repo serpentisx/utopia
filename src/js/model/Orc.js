@@ -21,7 +21,7 @@ class Orc extends Entity{
 
     this.awakeRange = {
       x: 500,
-      y: this.y
+      y: this.y/ 7
     };
   }
 
@@ -120,7 +120,6 @@ class Orc extends Entity{
         this.knight.attack();
         this.live--;
       }
-      console.log("orc", this.live);
       this.handleBoundary();
 
       if (this.velY === 0) {

@@ -11,8 +11,18 @@ class EntityManager {
   }
 
   createEnemies() {
+    //Make zombies
     this.enemies.push(new Zombie(1200, 500));
-    this.enemies.push(new Orc(100, 500));
+    this.enemies.push(new Zombie(1827,493));
+    this.enemies.push(new Zombie(632,1874));
+    this.enemies.push(new Zombie(3983, 1869));
+    this.enemies.push(new Zombie(4515, 1211));
+    this.enemies.push(new Zombie(4827, 482));
+    //Make orcs
+    this.enemies.push(new Orc(1680, 1725));
+    this.enemies.push(new Orc(632, 2261));
+    this.enemies.push(new Orc(5275, 1757));
+    this.enemies.push(new Orc(2339, 1752.5));
   }
 
   update(du) {

@@ -138,7 +138,6 @@ class Knight extends Entity {
       this.isJumping = false; // might want to change this later
     }
     this.checkForLava();
-    console.log(this.x + " +  " + this.y)
   }
 
   setCoords(x, y) {
