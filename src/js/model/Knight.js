@@ -20,6 +20,8 @@ class Knight extends Entity {
     this.isIdle = true;
     this.isAttacking = false;
 
+    this.facingDirection = 'right';
+
     this.health = new Heart(5);
     this.isInLava = false;
 
@@ -145,7 +147,7 @@ class Knight extends Entity {
   }
 
   render(ctx, xView, yView) {
-    this.drawCollisions(this.collisions);
+    //this.drawCollisions(this.collisions);
     this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle, this.isAttacking);
   }
 }

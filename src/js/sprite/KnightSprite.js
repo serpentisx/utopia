@@ -16,6 +16,8 @@ class KnightSprite {
     this.jumpRate = 0.2;
     this.attackRate = 1;
 
+
+
     this.loadSprites();
 
   }
@@ -143,6 +145,7 @@ class KnightSprite {
       case 'attack':
         if((this.attackIndex % 23) == 0) {
           this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
+
           this.knight.isAttacking = false;
         }
         return Math.floor(this.attackIndex += this.attackRate) % (Object.keys(this.attackSprites).length / 2);
@@ -200,5 +203,13 @@ class KnightSprite {
     else if (dir < 0) this.renderAnimation(ctx, x, y, 'walk', 'left');
 
     else this.renderAnimation(ctx, x, y, 'idle', 'right');
+
+    if(dir < 0) {
+      this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
+      this.knight.facingDirection = 'left';
+    } else {
+      this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
+      this.knight.facingDirection = 'right';
+    }
   }
 }
