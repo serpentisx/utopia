@@ -68,6 +68,7 @@ class Orc extends Entity{
    */
   autoMovement(du) {
     if (this.isDead) return;
+
     const diffX = this.knight.x - this.x,
           diffY = this.knight.y - this.y;
 
