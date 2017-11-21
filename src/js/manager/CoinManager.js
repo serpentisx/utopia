@@ -31,10 +31,6 @@ class CoinManager {
     this.coins.push(new Coin(4034, 1857));
     this.coins.push(new Coin(4162, 1857));
     this.coins.push(new Coin(4290, 1857));
-
-
-
-
   }
 
   collidesWithKnight(coin) {
@@ -51,6 +47,7 @@ class CoinManager {
     for (let i = 0; i < this.coins.length; i++) {
       if (this.collidesWithKnight(this.coins[i])) {
         this.coins.splice(i--, 1);
+        this.coinSound.currentTime = 0
         this.coinSound.play();
         this.score++;
       }
