@@ -9,9 +9,8 @@ class Controls {
     this.gm = GameManager.getInstance();
     window.addEventListener("keydown", this.handleKeydown.bind(this));
     window.addEventListener("keyup", this.handleKeyup.bind(this));
-
-    //this.initializeFullscreenListener()
-    this.quitGame()
+    this.initializeFullscreenListener();
+    this.initializeInstructionListener();
   }
 
   checkKey(e) {
@@ -22,9 +21,6 @@ class Controls {
         break;
       case "r":
         this.gm.renderManager.doRender = !this.gm.renderManager.doRender
-        break
-      case "q":
-        this.gm.stopKey = true
         break
       case "space":
         knight.isAttacking = true;
@@ -54,38 +50,17 @@ class Controls {
     keys[e.keyCode] = false;
   }
 
-  handleMouseDown(e) {
-    if (KEYS[e.which] == "leftClick") {
-      console.log(e.offsetX, e.offsetY);
-    }
-    // Remember that the mouse is pressed down.
-    if (e.which in KEYS) {
-      const keyName = KEYS[e.which];
-      keys[keyName] = true;
-    }
-  }
-
-  handleMouseUp(e) {
-    // Remember that the mouse is released.
-    if (e.which in KEYS) {
-      const keyName = KEYS[e.which];
-      keys[keyName] = false;
-    }
-  }
-
   initializeFullscreenListener() {
 		$("#play").on("click", () => {
 			this.toggleFullscreen();
     });
 	}
 
-	quitGame() {
-		$("#quit").on("click", () => {
-			this.gm.stopKey = true
-		});
-	}
-
-
+  initializeInstructionListener() {
+    $("#instructions").on("click", () => {
+      location.href = "instruction.html";
+    });
+  }
 
   toggleFullscreen() {
     ctx.canvas.width = window.innerWidth
