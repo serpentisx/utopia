@@ -102,28 +102,32 @@ class Orc extends Entity{
   }
 
   update(du) {
-    this.isIdle = true;
-    this.isAttacking = false;
-    const diffXabs = Math.abs(this.knight.x - this.x),
-          diffYabs = Math.abs(this.knight.y - this.y);
+    if(!this.isDeadNow) {
+      this.isIdle = true;
+      this.isAttacking = false;
+      const diffXabs = Math.abs(this.knight.x - this.x),
+            diffYabs = Math.abs(this.knight.y - this.y);
 
-    this.applyGravity(du);
+      this.applyGravity(du);
 
-    if(this.awakeRange.x > diffXabs && this.awakeRange.y > diffYabs) {
-      this.autoMovement(du);
-    }
+      if(this.awakeRange.x > diffXabs && this.awakeRange.y > diffYabs) {
+        this.autoMovement(du);
+      }
 
-    this.handleCollisionsWithPlatform(du);
-    //Check lives
-    if(this.collidesWithKnight() != null && this.knight.isAttacking) {
+      this.handleCollisionsWithPlatform(du);
+      //Check lives
+      if(this.collidesWithKnight() != null && this.knight.isAttacking) {
+        this.knight.attack();
         this.live--;
-    }
-    this.handleBoundary();
+      }
+      console.log("orc", this.live);
+      this.handleBoundary();
 
-    if (this.velY === 0) {
-      this.isJumping = false; // might want to change this later
+      if (this.velY === 0) {
+        this.isJumping = false; // might want to change this later
+      }
+      this.checkDeath();
     }
-    this.checkDeath();
   }
 
   render(ctx, xView, yView) {
