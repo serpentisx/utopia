@@ -105,7 +105,7 @@ class Wizard extends Entity {
       this.isIdle = false;
       this.isAttacking = true;
       this.isProjectTileAttack = true;
-      this.attackProjectileRate = (1000 + Math.random() * 2000) / NOMINAL_UPDATE_INTERVAL;
+      this.attackProjectileRate = (3000 + Math.random() * 4000) / NOMINAL_UPDATE_INTERVAL;
     }
 
     this.attackProjectileRate -= du;

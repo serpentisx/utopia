@@ -22,7 +22,7 @@ class ZombieSprite {
     this.runRate = 0.07;
     this.idleRate = 0.08;
 
-    this.width = 126;
+    this.width = 110;
     this.height = 97;
 
     this.zombie = zombie;
