@@ -38,6 +38,24 @@ class Entity {
     return collisions;
   }
 
+  isCollisionWithPlatform() {
+    let tiles = this.map.getRectTiles(this.x, this.y);
+    let collisions = [];
+
+    tiles.forEach(tile => {
+      let collision = Utils.collidesWithRectangleTopLeft(this.getEntityRectTopLeft(), tile);
+      let type = this.map.getPlatformType(tile.x, tile.y);
+      if (collision && type) {
+        collisions[type] = type;
+        collisions[collision] = tile;
+      }
+    });
+    if(collisions["solid"]) {
+      return true;
+    }
+    return false;
+  }
+
   handleBoundary() {
     const halfWidth = this.sprite.width / 2;
     const halfHeight = this.sprite.height / 2;

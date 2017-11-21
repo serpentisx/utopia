@@ -24,6 +24,16 @@ class EntityManager {
     this.enemies.push(new Orc(632, 2261));
     this.enemies.push(new Orc(5275, 1757));
     this.enemies.push(new Orc(2339, 1752.5));
+
+    this.enemies.push(new Wizard(5139, 384));
+  }
+
+  createOrc(x, y) {
+    this.enemies.push(new Orc(x, y));
+  }
+
+  createZombie(x, y) {
+    this.enemies.push(new Zombie(x, y));
   }
 
   update(du) {

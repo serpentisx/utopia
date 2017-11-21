@@ -154,7 +154,9 @@ class OrcSprite {
     const index = this.calculateNextIndex(type);
     const sprites = this.getAnimationSprite(type);
 
-    sprites[`${type}${direction}${index}`].drawAtCenter(ctx, x, y);
+    if (sprites[`${type}${direction}${index}`]) {
+      sprites[`${type}${direction}${index}`].drawAtCenter(ctx, x, y);
+    }
 
     if (this.deadIndex > 1 && Math.floor(this.deadIndex) % ((Object.keys(this.deadSprites).length / 2)) === 0) {
       this.orc.kill();

@@ -174,7 +174,9 @@ class ZombieSprite {
     const index = this.calculateNextIndex(type);
     const sprites = this.getAnimationSprite(type);
 
-    sprites[`${type}${direction}${index}`].drawAtCenter(ctx, x, y);
+    if (sprites[`${type}${direction}${index}`]) {
+      sprites[`${type}${direction}${index}`].drawAtCenter(ctx, x, y);
+    }
 
     if (this.hurtIndex > 1 && Math.floor(this.hurtIndex) % ((Object.keys(this.hurtSprites).length / 2) * 2) === 0) {
       this.zombie.isHurt = false;
