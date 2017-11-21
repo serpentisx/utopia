@@ -87,9 +87,10 @@ class Zombie extends Entity {
       }
     }
 
-    if(collidesWithKnight && !this.knight.isAttacking) {
+    if(collidesWithKnight) {
         this.isIdle = false;
-        this.knight.health.removeLifePoint();
+        this.isAttacking = true;
+        this.knight.health.depleteLifePoints();
     }
 
   }
