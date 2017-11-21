@@ -3,13 +3,14 @@ class Zombie extends Entity {
   constructor(x, y) {
     super();
 
-    this.sprite = new ZombieSprite();
+    this.sprite = new ZombieSprite(this);
     this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
 
-    this.lives = 3;
+    this.lives = 5;
     this.isIdle = true;
     this.isAttacking = false;
     this.isDead = false;
+    this.isHurt = false;
 
     this.x = x;
     this.y = y;
@@ -122,6 +123,7 @@ class Zombie extends Entity {
       //Check lives
       if(this.collidesWithKnight() && this.knight.isAttacking) {
         this.lives--;
+        this.isHurt = true;
         if(this.knight.x < this.x) {
           this.x += 50;
         } else {
@@ -135,7 +137,7 @@ class Zombie extends Entity {
 
   render(ctx, xView, yView) {
     if(!this.isDeadNow) {
-      this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isAttacking, this.isIdle, this.isDead);
+      this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isAttacking, this.isIdle, this.isHurt, this.isDead);
     }
   }
 

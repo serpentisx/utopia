@@ -1,6 +1,6 @@
 class ZombieSprite {
 
-  constructor() {
+  constructor(zombie) {
     this.walkSprites = {};
     this.runSprites = {};
     this.hurtSprites = {};
@@ -16,7 +16,7 @@ class ZombieSprite {
     this.idleIndex = 0;
 
     this.attackRate = 0.08;
-    this.hurtRate = 0.08;
+    this.hurtRate = 0.05;
     this.deadRate = 0.08;
     this.walkRate = 0.08;
     this.runRate = 0.07;
@@ -24,6 +24,10 @@ class ZombieSprite {
 
     this.width = 120;
     this.height = 100;
+
+    this.zombie = zombie;
+
+    console.log(this.zombie)
 
     this.loadSprites();
   }
@@ -173,11 +177,16 @@ class ZombieSprite {
     const sprites = this.getAnimationSprite(type);
 
     sprites[`${type}${direction}${index}`].drawAtCenter(ctx, x, y);
+
+    if (this.hurtIndex > 1 && Math.floor(this.hurtIndex) % ((Object.keys(this.hurtSprites).length / 2) * 3) === 0) {
+      this.zombie.isHurt = false;
+    }
   }
 
-  render(ctx, x, y, dir, attacking, isIdle, isDead) {
-
-    if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
+  render(ctx, x, y, dir, attacking, isIdle, isHurt, isDead) {
+    if (isHurt && dir > 0) this.renderAnimation(ctx, x, y, 'hurt', 'right');
+    else if (isHurt && dir < 0) this.renderAnimation(ctx, x, y, 'hurt', 'left');
+    else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
     else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
     else if (attacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
     else if (attacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
