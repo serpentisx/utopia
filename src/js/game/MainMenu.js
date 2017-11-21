@@ -50,9 +50,9 @@ class MainMenu extends Scene {
 
   loadSprites() {
     let requiredImages = {
-      background: 'assets/game_background_1/layers/sky.png',
-      cloud: 'assets/game_background_1/layers/clouds_2.png',
-      rocks: 'assets/game_background_1/layers/rocks_1.png'
+      background: 'assets/game_background_1/Layers/sky.png',
+      cloud: 'assets/game_background_1/Layers/clouds_2.png',
+      rocks: 'assets/game_background_1/Layers/rocks_1.png'
     };
     imagesPreload(requiredImages, this.sprites, this.init.bind(this));
   }
