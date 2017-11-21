@@ -6,6 +6,7 @@ class TokenManager {
     this.sprites = {};
 
     this.loadSprites();
+    console.log(this.sprites.backpack)
   }
 
   loadSprites() {
