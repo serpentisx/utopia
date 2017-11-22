@@ -49,9 +49,7 @@ class Knight extends Entity {
     return (this.sprite.width / 2) * 0.9;
   }
 
-
   handleCollisions(du) {
-
     const halfWidth = this.sprite.width / 2;
     const halfHeight = this.sprite.height / 2;
 
@@ -60,15 +58,15 @@ class Knight extends Entity {
     let collisions = this.detectCollisionsWithPlatform();
     this.collisions = collisions;
 
-    let offSet = 3;
+    let offSet = 0;
 
-    if(collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
+    if (collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
       return;
     }
 
-    if(collisions["lava"] && !collisions["bottom"]) {
+    if (collisions["lava"] && !collisions["bottom"]) {
 
-      if(!this.isInLava) {
+      if (!this.isInLava) {
         this.isInLava = true;
         this.burningSound.play();
       }
@@ -82,7 +80,8 @@ class Knight extends Entity {
       }
 
       return;
-    } else {
+    }
+    else {
       this.isInLava = false;
       this.burningSound.pause();
     }
@@ -95,15 +94,22 @@ class Knight extends Entity {
     }
 
     if (collisions["top"]) {
+      if (Math.abs(this.velY) > 0 && (Math.abs(collisions["top"].x - this.x + halfWidth) == 81 || Math.abs(collisions["top"].x - this.x + halfWidth) == 128)) {
+        return;
+      }
       this.velY = 0.01;
       this.y = halfHeight + collisions["top"].y + collisions["top"].h;
     }
 
     if (collisions["bottom"] && this.velY > 0) {
+      // hard coded
+      if (Math.abs(this.velY) > 0 && (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 81 || Math.abs(collisions["bottom"].x - this.x + halfWidth) == 128)) {
+        this.y = collisions["bottom"].y - halfHeight + 1;
+        return;
+      }
       this.velY = 0;
       this.y = collisions["bottom"].y - halfHeight + 1;
     }
-
   }
 
   checkForLava() {
@@ -158,9 +164,6 @@ class Knight extends Entity {
       this.checkForGameOver();
     }
     else this.x += this.velX*du;
-
-
-
   }
 
   setCoords(x, y) {
@@ -173,9 +176,7 @@ class Knight extends Entity {
   }
 
   render(ctx, xView, yView) {
-    //this.drawCollisions(this.collisions);
     this.tokenManager.render(ctx, xView, yView);
     this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle, this.isAttacking);
-
   }
 }
