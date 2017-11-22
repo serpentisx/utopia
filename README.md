@@ -1,4 +1,7 @@
-Final project in **Game development (TÖL308G)** at University of Iceland.
+# Utopia
+
+Final project in **Computer Game Programming (TÖL308G)** at University of Iceland.  <br />
+**Play live at: &nbsp;  https://serpentisx.github.io/utopia/src/index.html**
 
 ***
 
