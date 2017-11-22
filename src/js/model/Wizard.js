@@ -184,6 +184,17 @@ class Wizard extends Entity {
     this.projectiles.forEach(projectile => projectile.render(ctx, xView, yView));
   }
 
+  renderHealth(ctx, x, y) {
+    let healthBarWidth = 120;
+    let pr = (this.lives / 150) * healthBarWidth;
+
+    if (pr < 0) return;
+
+    ctx.fillStyle = "#25ce3b";
+    ctx.fillRect(x, y, pr, 8);
+    ctx.fillStyle = "black";
+  }
+
   updateDirection() {
      this.knight.x > this.x ? this.dirX = 1 : this.dirX = -1;
   }
@@ -219,6 +230,7 @@ class Wizard extends Entity {
       this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isAttacking, this.isIdle, this.isDead);
       this.renderBullets(ctx, xView, yView);
       this.renderProjectiles(ctx, xView, yView);
+      this.renderHealth(ctx, this.x - xView - this.sprite.width / 2, this.y - yView - this.sprite.height / 2 - 30);
   }
 
 
