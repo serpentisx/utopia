@@ -14,6 +14,7 @@ class Knight extends Entity {
     this.GO_LEFT = KEY_A;
     this.GO_RIGHT = KEY_D;
     this.JUMP = KEY_W;
+    this.ATTACK_KEY = KEY_SPACE;
 
     this.dirX = 0;
 
@@ -41,6 +42,9 @@ class Knight extends Entity {
     this.winSound = new Audio();
     this.winSound.src = 'sounds/win.mp3';
     this.winSound.volume = 0.5;
+
+    this.attackSound = new Audio();
+    this.attackSound.src = 'sounds/sword-slash.mp3';
 
     this.isPipeFalling = false;
 
@@ -131,6 +135,8 @@ class Knight extends Entity {
       this.y = collisions["bottom"].y - halfHeight + 1;
     }
   }
+
+
 
   checkForLava() {
     if(this.isInLava) {
