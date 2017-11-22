@@ -42,6 +42,9 @@ class TokenManager {
 
     this.hearts.push(new Token(this.sprites.life, 2376, 462));
     this.hearts.push(new Token(this.sprites.life, 2870, 2762));
+    this.hearts.push(new Token(this.sprites.life, 180, 1742));
+    this.hearts.push(new Token(this.sprites.life, 5180, 1998));
+    this.hearts.push(new Token(this.sprites.life, 2360, 1727));
 
     this.counterToken = this.generateCounterToken();
   }
