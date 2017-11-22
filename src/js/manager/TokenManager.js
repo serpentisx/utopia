@@ -42,8 +42,15 @@ class TokenManager {
 
     this.hearts.push(new Token(this.sprites.life, 2376, 462));
     this.hearts.push(new Token(this.sprites.life, 2870, 2762));
+    this.hearts.push(new Token(this.sprites.life, 180, 1742));
+    this.hearts.push(new Token(this.sprites.life, 5180, 1998));
+    this.hearts.push(new Token(this.sprites.life, 2360, 1727));
 
     this.counterToken = this.generateCounterToken();
+  }
+
+  createLiveToken(x, y) {
+    this.hearts.push(new Token(this.sprites.life, x, y));
   }
 
   hasCollectedAll() {
@@ -85,6 +92,7 @@ class TokenManager {
     if(this.hasLoaded) {
       this.tokens.forEach(token => token.render(ctx, xView, yView));
       this.hearts.forEach(token => token.render(ctx, xView, yView));
+
       ctx.font = '800 40px Amatic SC';
       ctx.fillStyle = '#0099cc';
       ctx.fillText(this.score + " / 7", canvas.width/2+50, 80);

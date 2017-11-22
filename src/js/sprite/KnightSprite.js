@@ -145,6 +145,7 @@ class KnightSprite {
       case 'attack':
         if((this.attackIndex % 23) == 0) {
           this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
+          this.knight.attackSound.play();
           this.knight.isAttacking = false;
         }
         return Math.floor(this.attackIndex += this.attackRate) % (Object.keys(this.attackSprites).length / 2);
@@ -185,7 +186,7 @@ class KnightSprite {
     const sheet = this.getAnimationSprite(type);
     const sprite = sheet[`${type}${direction}${index}`];
     this.width = sprite.width;
-    this.height = sprite.height;
+    this.height = sprite.height - 8;
 
     sprite.drawAtCenter(ctx, x, y);
   }

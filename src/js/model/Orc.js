@@ -34,6 +34,30 @@ class Orc extends Entity{
 
     let offSet = 3;
 
+    if (collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
+      return;
+    }
+
+    if (collisions["lava"] && !collisions["bottom"]) {
+
+      if (!this.isInLava) {
+        this.isInLava = true;
+      }
+      this.velY = 0;
+
+      if (collisions["col"].solid.right) {
+        this.x = collisions["right"].x - halfWidth - offSet;
+      }
+      else if (collisions["col"].solid.left) {
+        this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
+      }
+
+      return;
+    }
+    else {
+      this.isInLava = false;
+    }
+
     if (collisions["left"]) {
       this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
     }
@@ -106,8 +130,18 @@ class Orc extends Entity{
     }
   }
 
+  checkForLava() {
+    if(this.isInLava) {
+      this.lives -= 0.1;
+    }
+
+    if(this.lives < 0) {
+      this.isDead = true;
+    }
+  }
+
   update(du) {
-    if(!this.isDeadNow) {
+    if(!this.isDead) {
       this.isIdle = true;
       this.isAttacking = false;
       const diffXabs = Math.abs(this.knight.x - this.x),
@@ -141,6 +175,8 @@ class Orc extends Entity{
       if (this.velY === 0) {
         this.isJumping = false; // might want to change this later
       }
+
+      this.checkForLava();
       this.checkDeath();
     }
   }

@@ -26,7 +26,6 @@ class HollowKnightGame extends Scene {
     this.camera.setWorldDimensions(this.sprites.background.width, this.sprites.background.height);
 
     this.coinManager = new CoinManager(this.knight);
-    this.tokenManager = new TokenManager(this.knight);
     this.isStarted = true;
   }
 
@@ -54,6 +53,7 @@ class HollowKnightGame extends Scene {
         this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
         this.map.renderForeground(ctx, this.camera.xView, this.camera.yView);
         this.coinManager.render(ctx, this.camera.xView, this.camera.yView);
+        this.knight.renderTokens(ctx, this.camera.xView, this.camera.yView);
         this.knight.renderHealth(ctx);
       }
     }

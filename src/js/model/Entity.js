@@ -17,6 +17,13 @@ class Entity {
         top: null
       },
 
+      mario: {
+        right: null,
+        left: null,
+        bottom: null,
+        top: null
+      },
+
       lava: {
         right: null,
         left: null,
@@ -60,7 +67,10 @@ class Entity {
     const halfWidth = this.sprite.width / 2;
     const halfHeight = this.sprite.height / 2;
 
-    if (this.y - halfHeight < 0) this.y = halfHeight;
+    if (this.y - halfHeight < 0) {
+      this.y = halfHeight;
+      this.velY = 0.01;
+    }
     if (this.y + halfHeight > this.map.height) this.y = this.map.height - halfHeight;
     if (this.x - halfWidth < 0) this.x = halfWidth;
     if (this.x + halfWidth > this.map.width) this.x = this.map.width - halfWidth;

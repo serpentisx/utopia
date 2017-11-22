@@ -42,6 +42,11 @@ class Knight extends Entity {
     this.winSound.src = 'sounds/win.mp3';
     this.winSound.volume = 0.5;
 
+    this.attackSound = new Audio();
+    this.attackSound.src = 'sounds/sword-slash.mp3';
+
+    this.isPipeFalling = false;
+
     this.bossIsDead = false;
   }
 
@@ -49,9 +54,7 @@ class Knight extends Entity {
     return (this.sprite.width / 2) * 0.9;
   }
 
-
   handleCollisions(du) {
-
     const halfWidth = this.sprite.width / 2;
     const halfHeight = this.sprite.height / 2;
 
@@ -60,15 +63,33 @@ class Knight extends Entity {
     let collisions = this.detectCollisionsWithPlatform();
     this.collisions = collisions;
 
-    let offSet = 3;
+    let offSet = 0;
 
-    if(collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
+    if (collisions["col"].solid.bottom ||
+        collisions["col"].solid.left ||
+        collisions["col"].solid.top ||
+        collisions["col"].solid.right) {
+      this.isPipeFalling = false;
+    }
+
+    if (collisions["col"].mario.bottom && Math.abs(collisions["col"].mario.bottom.x + 64 - this.x) < this.sprite.width /  2) {
+      this.isPipeFalling = true;
+    }
+
+    if ((collisions["col"].mario.bottom ||
+      collisions["col"].mario.left ||
+      collisions["col"].mario.top ||
+      collisions["col"].mario.right) && this.isPipeFalling) {
       return;
     }
 
-    if(collisions["lava"] && !collisions["bottom"]) {
+    if (collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
+      return;
+    }
 
-      if(!this.isInLava) {
+    if (collisions["lava"] && !collisions["bottom"]) {
+
+      if (!this.isInLava) {
         this.isInLava = true;
         this.burningSound.play();
       }
@@ -82,7 +103,8 @@ class Knight extends Entity {
       }
 
       return;
-    } else {
+    }
+    else {
       this.isInLava = false;
       this.burningSound.pause();
     }
@@ -95,16 +117,25 @@ class Knight extends Entity {
     }
 
     if (collisions["top"]) {
+      if (Math.abs(this.velY) > 0 && (Math.abs(collisions["top"].x - this.x + halfWidth) == 81 || Math.abs(collisions["top"].x - this.x + halfWidth) == 128)) {
+        return;
+      }
       this.velY = 0.01;
       this.y = halfHeight + collisions["top"].y + collisions["top"].h;
     }
 
     if (collisions["bottom"] && this.velY > 0) {
+      // hard coded
+      if (Math.abs(this.velY) > 0 && (Math.abs(collisions["bottom"].x - this.x + halfWidth) == 81 || Math.abs(collisions["bottom"].x - this.x + halfWidth) == 128)) {
+        this.y = collisions["bottom"].y - halfHeight + 1;
+        return;
+      }
       this.velY = 0;
       this.y = collisions["bottom"].y - halfHeight + 1;
     }
-
   }
+
+
 
   checkForLava() {
     if(this.isInLava) {
@@ -158,9 +189,6 @@ class Knight extends Entity {
       this.checkForGameOver();
     }
     else this.x += this.velX*du;
-
-
-
   }
 
   setCoords(x, y) {
@@ -172,10 +200,11 @@ class Knight extends Entity {
     this.health.render(ctx);
   }
 
-  render(ctx, xView, yView) {
-    //this.drawCollisions(this.collisions);
+  renderTokens(tx, xView, yView) {
     this.tokenManager.render(ctx, xView, yView);
-    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle, this.isAttacking);
+  }
 
+  render(ctx, xView, yView) {
+    this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle, this.isAttacking);
   }
 }

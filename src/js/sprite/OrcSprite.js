@@ -160,6 +160,10 @@ class OrcSprite {
 
     if (this.deadIndex > 1 && Math.floor(this.deadIndex) % ((Object.keys(this.deadSprites).length / 2)) === 0) {
       this.orc.kill();
+
+      if (Math.random() < 0.2) {
+        this.orc.knight.tokenManager.createLiveToken(this.orc.x, this.orc.y);
+      }
     }
   }
 
