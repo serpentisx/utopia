@@ -36,6 +36,30 @@ class Zombie extends Entity {
 
     let offSet = 3;
 
+    if (collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
+      return;
+    }
+
+    if (collisions["lava"] && !collisions["bottom"]) {
+
+      if (!this.isInLava) {
+        this.isInLava = true;
+      }
+      this.velY = 0;
+
+      if (collisions["col"].solid.right) {
+        this.x = collisions["right"].x - halfWidth - offSet;
+      }
+      else if (collisions["col"].solid.left) {
+        this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
+      }
+
+      return;
+    }
+    else {
+      this.isInLava = false;
+    }
+
     if (collisions["left"]) {
       this.x = halfWidth + collisions["left"].x + collisions["left"].w + offSet;
     }
@@ -107,6 +131,16 @@ class Zombie extends Entity {
      }
    }
 
+  checkForLava() {
+    if(this.isInLava) {
+      this.lives -= 0.1;
+    }
+
+    if(this.lives < 0) {
+      this.isDead = true;
+    }
+  }
+
   update(du) {
     if(!this.isDeadNow) {
       this.isIdle = true;
@@ -136,7 +170,7 @@ class Zombie extends Entity {
           }
         }
       }
-
+      this.checkForLava();
       this.handleBoundary();
       this.checkDeath();
     }
