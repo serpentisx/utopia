@@ -201,8 +201,11 @@ class Knight extends Entity {
     this.health.render(ctx);
   }
 
-  render(ctx, xView, yView) {
+  renderTokens(tx, xView, yView) {
     this.tokenManager.render(ctx, xView, yView);
+  }
+
+  render(ctx, xView, yView) {
     this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isJumping, this.isIdle, this.isAttacking);
   }
 }
