@@ -141,7 +141,7 @@ class Orc extends Entity{
   }
 
   update(du) {
-    if(!this.isDeadNow) {
+    if(!this.isDead) {
       this.isIdle = true;
       this.isAttacking = false;
       const diffXabs = Math.abs(this.knight.x - this.x),

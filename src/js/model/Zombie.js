@@ -119,7 +119,6 @@ class Zombie extends Entity {
         this.isAttacking = true;
         this.knight.health.depleteLifePoints();
     }
-
   }
 
   /**
@@ -142,7 +141,7 @@ class Zombie extends Entity {
   }
 
   update(du) {
-    if(!this.isDeadNow) {
+    if(!this.isDead) {
       this.isIdle = true;
       this.isAttacking = false;
       const diffXabs = Math.abs(this.knight.x - this.x),
@@ -159,7 +158,7 @@ class Zombie extends Entity {
       let collision = this.collidesWithKnight();
 
       //Knight attacks zombie
-      if (collision && this.knight.isAttacking) {
+      if (collision && this.knight.isAttacking ) {
         if (this.knight.facingDirection == collision) {
           this.lives--;
           this.isHurt = true;
