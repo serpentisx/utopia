@@ -42,6 +42,8 @@ class Knight extends Entity {
     this.winSound.src = 'sounds/win.mp3';
     this.winSound.volume = 0.5;
 
+    this.isPipeFalling = false;
+
     this.bossIsDead = false;
   }
 
@@ -59,6 +61,24 @@ class Knight extends Entity {
     this.collisions = collisions;
 
     let offSet = 0;
+
+    if (collisions["col"].solid.bottom ||
+        collisions["col"].solid.left ||
+        collisions["col"].solid.top ||
+        collisions["col"].solid.right) {
+      this.isPipeFalling = false;
+    }
+
+    if (collisions["col"].mario.bottom && Math.abs(collisions["col"].mario.bottom.x + 64 - this.x) < this.sprite.width /  2) {
+      this.isPipeFalling = true;
+    }
+
+    if ((collisions["col"].mario.bottom ||
+      collisions["col"].mario.left ||
+      collisions["col"].mario.top ||
+      collisions["col"].mario.right) && this.isPipeFalling) {
+      return;
+    }
 
     if (collisions["lava"] && collisions["bottom"] && !collisions["solid"]) {
       return;
