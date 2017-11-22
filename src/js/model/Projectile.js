@@ -16,7 +16,6 @@ class Projectile extends Entity {
     this.sprite = new Sprite(bulletImage);
 
     this.gravity = 0.2;
-    console.log(this.yVel)
   }
 
   collidesWithKnight() {

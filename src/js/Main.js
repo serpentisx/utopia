@@ -1,9 +1,9 @@
+/**
+ * The main method that loads everything
+ * once the document is ready.
+ */
 
- /**
-  * The main method that loads everthing
-  * once the document is ready.
-  */
- (() => {
+window.onload = function () {
 	//Set canvas size
   ctx.canvas.width  = window.innerWidth
   ctx.canvas.height = window.innerHeight
@@ -21,4 +21,4 @@
 	const controls = new Controls();
 
 	gameManager.requestNextIteration();
-})();
+};

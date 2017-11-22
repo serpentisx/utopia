@@ -14,7 +14,6 @@ class Knight extends Entity {
     this.GO_LEFT = KEY_A;
     this.GO_RIGHT = KEY_D;
     this.JUMP = KEY_W;
-    this.ATTACK_KEY = KEY_SPACE;
 
     this.dirX = 0;
 

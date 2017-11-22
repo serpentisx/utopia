@@ -1,8 +1,8 @@
 /**Some constants**/
 
 //For the canvas and ctx
-const canvas = document.getElementById("myCanvas")
-const ctx = canvas.getContext("2d")
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 
 //For keys
 const KEYS = {
@@ -11,7 +11,8 @@ const KEYS = {
   82: "r",
   81: "q",
   32: 'space'
-}
+};
+
 const KEY_A = 'A'.charCodeAt(0);
 const KEY_D = 'D'.charCodeAt(0);
 const KEY_W = 'W'.charCodeAt(0);

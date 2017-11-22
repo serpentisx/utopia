@@ -62,7 +62,7 @@ class Camera {
   getCord(e) {
     var x = e.clientX - ctx.canvas.offsetLeft + this.xView;
     var y = e.clientY - ctx.canvas.offsetTop + this.yView;
-    console.log("x: " + x + "  y: " + y);
+    // console.log("x: " + x + "  y: " + y);
   }
 
   update() {

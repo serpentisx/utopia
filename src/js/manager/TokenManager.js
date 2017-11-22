@@ -49,6 +49,10 @@ class TokenManager {
     this.counterToken = this.generateCounterToken();
   }
 
+  createLiveToken(x, y) {
+    this.hearts.push(new Token(this.sprites.life, x, y));
+  }
+
   hasCollectedAll() {
     if(this.tokens.length == 0) {
       return true;
@@ -88,6 +92,7 @@ class TokenManager {
     if(this.hasLoaded) {
       this.tokens.forEach(token => token.render(ctx, xView, yView));
       this.hearts.forEach(token => token.render(ctx, xView, yView));
+
       ctx.font = '800 40px Amatic SC';
       ctx.fillStyle = '#0099cc';
       ctx.fillText(this.score + " / 7", canvas.width/2+50, 80);
