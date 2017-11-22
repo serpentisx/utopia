@@ -184,6 +184,10 @@ class ZombieSprite {
 
     if (this.deadIndex > 1 && Math.floor(this.deadIndex) % ((Object.keys(this.deadSprites).length / 2)) === 0) {
       this.zombie.kill();
+
+      if (Math.random() < 0.2) {
+        this.zombie.knight.tokenManager.createLiveToken(this.zombie.x, this.zombie.y);
+      }
     }
   }
 
