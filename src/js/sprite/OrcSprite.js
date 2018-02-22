@@ -25,6 +25,8 @@ class OrcSprite {
     this.orc = orc;
 
     this.loadSprites();
+    this.spritesLoaded = false;
+    this.spritesNumber = 5;
   }
 
   loadSprites() {
@@ -116,11 +118,17 @@ class OrcSprite {
       deadLeft6: 'assets/model/ork/left/DIE_006.png'
 
     };
-    imagesPreload(idleSprites, this.idleSprites, function empty() {});
-    imagesPreload(walkSprites, this.walkSprites, function empty() {});
-    imagesPreload(jumpSprites, this.jumpSprites, function empty() {});
-    imagesPreload(deadSprites, this.deadSprites, function empty() {});
-    imagesPreload(attackSprites, this.attackSprites, function empty() {});
+    imagesPreload(idleSprites, this.idleSprites, this.loaded.bind(this));
+    imagesPreload(walkSprites, this.walkSprites, this.loaded.bind(this));
+    imagesPreload(jumpSprites, this.jumpSprites, this.loaded.bind(this));
+    imagesPreload(deadSprites, this.deadSprites, this.loaded.bind(this));
+    imagesPreload(attackSprites, this.attackSprites, this.loaded.bind(this));
+  }
+
+  loaded() {
+    if (--this.spritesNumber <= 0) {
+      this.spritesLoaded = true;
+    }
   }
 
   calculateNextIndex(type) {
@@ -168,16 +176,18 @@ class OrcSprite {
   }
 
   render(ctx, x, y, dir, isAttacking, isIdle, isDead) {
-    if (isDead && dir > 0) this.renderAnimation(ctx, x, y, 'dead', 'right');
-    else if (isDead && dir < 0) this.renderAnimation(ctx, x, y, 'dead', 'left');
-    else if (isAttacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
-    else if (isAttacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
-    else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
-    else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
-    else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
-    else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
+    if (this.spritesLoaded) {
+      if (isDead && dir > 0) this.renderAnimation(ctx, x, y, 'dead', 'right');
+      else if (isDead && dir < 0) this.renderAnimation(ctx, x, y, 'dead', 'left');
+      else if (isAttacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
+      else if (isAttacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
+      else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
+      else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
+      else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
+      else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
 
-    else this.renderAnimation(ctx, x, y, 'idle', 'right');
+      else this.renderAnimation(ctx, x, y, 'idle', 'right');
+    }
   }
 
 

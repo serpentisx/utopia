@@ -180,6 +180,4 @@ class Zombie extends Entity {
       this.sprite.render(ctx, this.x - xView, this.y - yView, this.dirX, this.isAttacking, this.isIdle, this.isHurt, this.isDead);
     }
   }
-
-
 }

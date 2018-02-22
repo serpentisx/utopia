@@ -25,6 +25,8 @@ class WizardSprite {
     this.wizard = wizard;
 
     this.loadSprites();
+    this.spritesLoaded = false;
+    this.spritesNumber = 4;
   }
 
   loadSprites() {
@@ -82,10 +84,16 @@ class WizardSprite {
       deadLeft4: 'assets/model/wizard/left/7_DIE_008.png'
     };
 
-    imagesPreload(idleSprites, this.idleSprites, function empty() {});
-    imagesPreload(walkSprites, this.walkSprites, function empty() {});
-    imagesPreload(attackSprites, this.attackSprites, function empty() {});
-    imagesPreload(deadSprites, this.deadSprites, function empty() {});
+    imagesPreload(idleSprites, this.idleSprites, this.loaded.bind(this));
+    imagesPreload(walkSprites, this.walkSprites, this.loaded.bind(this));
+    imagesPreload(attackSprites, this.attackSprites, this.loaded.bind(this));
+    imagesPreload(deadSprites, this.deadSprites, this.loaded.bind(this));
+  }
+
+  loaded() {
+    if (--this.spritesNumber <= 0) {
+      this.spritesLoaded = true;
+    }
   }
 
   calculateNextIndex(type) {
@@ -143,16 +151,18 @@ class WizardSprite {
   }
 
   render(ctx, x, y, dir, attacking, isIdle, isDead) {
-    if (isDead && dir > 0) this.renderAnimation(ctx, x, y, 'dead', 'right');
-    else if (isDead && dir < 0) this.renderAnimation(ctx, x, y, 'dead', 'left');
-    else if (attacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
-    else if (attacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
-    else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
-    else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
-    else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
-    else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
+    if (this.spritesLoaded) {
+      if (isDead && dir > 0) this.renderAnimation(ctx, x, y, 'dead', 'right');
+      else if (isDead && dir < 0) this.renderAnimation(ctx, x, y, 'dead', 'left');
+      else if (attacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
+      else if (attacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
+      else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
+      else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
+      else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
+      else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
 
-    else this.renderAnimation(ctx, x, y, 'idle', 'right');
+      else this.renderAnimation(ctx, x, y, 'idle', 'right');
+    }
   }
 
 

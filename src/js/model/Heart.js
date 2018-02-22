@@ -9,6 +9,7 @@ class Heart {
 
     this.startPosX = canvas.width-100;
     this.posY = 50;
+    this.spritesLoaded = false;
   }
 
   loadSprites() {
@@ -16,7 +17,7 @@ class Heart {
       heart: 'assets/itch/pngs/face_on_heart.png'
 
     };
-    imagesPreload(requiredImages, this.sprites, function empty() {});
+    imagesPreload(requiredImages, this.sprites, () => this.spritesLoaded = true);
   }
 
   depleteLifePoints() {
@@ -28,8 +29,10 @@ class Heart {
   }
 
   render(ctx) {
-    for(var i = 0; i < this.lifePoints; i++) {
-        this.sprite.drawAtCenter(ctx, this.startPosX - (i*50), this.posY);
+    if (this.spritesLoaded) {
+      for(var i = 0; i < this.lifePoints; i++) {
+          this.sprite.drawAtCenter(ctx, this.startPosX - (i*50), this.posY);
+      }
     }
   }
 }

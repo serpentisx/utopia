@@ -26,13 +26,15 @@ class Coin {
       coin8: 'assets/model/coin/Gold_8.png',
       coin9: 'assets/model/coin/Gold_9.png'
     };
-    imagesPreload(requiredImages, this.sprites, function empty() {});
+    imagesPreload(requiredImages, this.sprites, () => this.spritesLoaded = true);
   }
 
   render(ctx, xView, yView) {
-    let index = Math.floor(this.index += this.updateRate) % this.numSprite;
-    this.w = this.sprites[`coin${index}`].width;
-    this.h = this.sprites[`coin${index}`].height;
-    this.sprites[`coin${index}`].drawAtCenter(ctx, this.x - xView, this.y - yView);
+    if (this.spritesLoaded) {
+      let index = Math.floor(this.index += this.updateRate) % this.numSprite;
+      this.w = this.sprites[`coin${index}`].width;
+      this.h = this.sprites[`coin${index}`].height;
+      this.sprites[`coin${index}`].drawAtCenter(ctx, this.x - xView, this.y - yView);
+    }
   }
 }

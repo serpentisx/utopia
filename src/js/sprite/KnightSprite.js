@@ -19,7 +19,8 @@ class KnightSprite {
 
 
     this.loadSprites();
-
+    this.spritesLoaded = false;
+    this.spritesNumber = 4;
   }
 
   loadSprites() {
@@ -93,9 +94,6 @@ class KnightSprite {
       attackRight21: 'assets/model/character/attack/right/2.png',
       attackRight22: 'assets/model/character/attack/right/1.png',
 
-
-
-
       attackLeft0: 'assets/model/character/attack/left/1.png',
       attackLeft1: 'assets/model/character/attack/left/2.png',
       attackLeft2: 'assets/model/character/attack/left/3.png',
@@ -119,16 +117,18 @@ class KnightSprite {
       attackLeft20: 'assets/model/character/attack/left/3.png',
       attackLeft21: 'assets/model/character/attack/left/2.png',
       attackLeft22: 'assets/model/character/attack/left/1.png'
-
     };
 
-    imagesPreload(idleImages, this.idleSprites, function empty() {});
-    imagesPreload(walkImages, this.walkSprites, function empty() {});
-    imagesPreload(jumpImages, this.jumpSprites, function empty() {});
-    imagesPreload(attackImages, this.attackSprites, function empty() {});
+    imagesPreload(idleImages, this.idleSprites, this.loaded.bind(this));
+    imagesPreload(walkImages, this.walkSprites, this.loaded.bind(this));
+    imagesPreload(jumpImages, this.jumpSprites, this.loaded.bind(this));
+    imagesPreload(attackImages, this.attackSprites, this.loaded.bind(this));
+  }
 
-
-
+  loaded() {
+    if (--this.spritesNumber <= 0) {
+      this.spritesLoaded = true;
+    }
   }
 
   calculateNextIndex(type) {
@@ -192,24 +192,27 @@ class KnightSprite {
   }
 
   render(ctx, x, y, dir, jumping, isIdle, isAttacking) {
-    if (isAttacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
-    else if (isAttacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
-    else if (jumping && dir > 0) this.renderAnimation(ctx, x, y, 'jump', 'right');
-    else if (jumping && dir < 0) this.renderAnimation(ctx, x, y, 'jump', 'left');
-    else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
-    else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
+    if (this.spritesLoaded) {
+      if (isAttacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
+      else if (isAttacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
+      else if (jumping && dir > 0) this.renderAnimation(ctx, x, y, 'jump', 'right');
+      else if (jumping && dir < 0) this.renderAnimation(ctx, x, y, 'jump', 'left');
+      else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
+      else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
 
-    else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
-    else if (dir < 0) this.renderAnimation(ctx, x, y, 'walk', 'left');
+      else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
+      else if (dir < 0) this.renderAnimation(ctx, x, y, 'walk', 'left');
 
-    else this.renderAnimation(ctx, x, y, 'idle', 'right');
+      else this.renderAnimation(ctx, x, y, 'idle', 'right');
 
-    if(dir < 0) {
-      this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
-      this.knight.facingDirection = 'left';
-    } else {
-      this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
-      this.knight.facingDirection = 'right';
+      if(dir < 0) {
+        this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
+        this.knight.facingDirection = 'left';
+      } else {
+        this.knight = GameManager.getInstance().sceneManager.getSceneByID('game').knight;
+        this.knight.facingDirection = 'right';
+      }
     }
   }
+
 }

@@ -28,6 +28,8 @@ class ZombieSprite {
     this.zombie = zombie;
 
     this.loadSprites();
+    this.spritesLoaded = false;
+    this.spritesNumber = 6;
   }
 
   loadSprites() {
@@ -133,12 +135,18 @@ class ZombieSprite {
       deadLeft7: 'assets/model/zombie/left/Dead8_.png'
     };
 
-    imagesPreload(idleSprites, this.idleSprites, function empty() {});
-    imagesPreload(walkSprites, this.walkSprites, function empty() {});
-    imagesPreload(runSprites, this.runSprites, function empty() {});
-    imagesPreload(attackSprites, this.attackSprites, function empty() {});
-    imagesPreload(hurtSprites, this.hurtSprites, function empty() {});
-    imagesPreload(deadSprites, this.deadSprites, function empty() {});
+    imagesPreload(idleSprites, this.idleSprites, this.loaded.bind(this));
+    imagesPreload(walkSprites, this.walkSprites, this.loaded.bind(this));
+    imagesPreload(runSprites, this.runSprites, this.loaded.bind(this));
+    imagesPreload(attackSprites, this.attackSprites, this.loaded.bind(this));
+    imagesPreload(hurtSprites, this.hurtSprites, this.loaded.bind(this));
+    imagesPreload(deadSprites, this.deadSprites, this.loaded.bind(this));
+  }
+
+  loaded() {
+    if (--this.spritesNumber <= 0) {
+      this.spritesLoaded = true;
+    }
   }
 
   calculateNextIndex(type) {
@@ -192,18 +200,20 @@ class ZombieSprite {
   }
 
   render(ctx, x, y, dir, attacking, isIdle, isHurt, isDead) {
-    if (isDead && dir > 0) this.renderAnimation(ctx, x, y, 'dead', 'right');
-    else if (isDead && dir < 0) this.renderAnimation(ctx, x, y, 'dead', 'left');
-    else if (isHurt && dir > 0) this.renderAnimation(ctx, x, y, 'hurt', 'right');
-    else if (isHurt && dir < 0) this.renderAnimation(ctx, x, y, 'hurt', 'left');
-    else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
-    else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
-    else if (attacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
-    else if (attacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
-    else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
-    else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
+    if (this.spritesLoaded) {
+      if (isDead && dir > 0) this.renderAnimation(ctx, x, y, 'dead', 'right');
+      else if (isDead && dir < 0) this.renderAnimation(ctx, x, y, 'dead', 'left');
+      else if (isHurt && dir > 0) this.renderAnimation(ctx, x, y, 'hurt', 'right');
+      else if (isHurt && dir < 0) this.renderAnimation(ctx, x, y, 'hurt', 'left');
+      else if (isIdle && dir > 0) this.renderAnimation(ctx, x, y, 'idle', 'right');
+      else if (isIdle && dir < 0) this.renderAnimation(ctx, x, y, 'idle', 'left');
+      else if (attacking && dir < 0) this.renderAnimation(ctx, x, y, 'attack', 'left');
+      else if (attacking && dir > 0) this.renderAnimation(ctx, x, y, 'attack', 'right');
+      else if (dir > 0) this.renderAnimation(ctx, x, y, 'walk', 'right');
+      else if (dir < 0)this.renderAnimation(ctx, x, y, 'walk', 'left');
 
-    else this.renderAnimation(ctx, x, y, 'idle', 'right');
+      else this.renderAnimation(ctx, x, y, 'idle', 'right');
+    }
   }
 
 
