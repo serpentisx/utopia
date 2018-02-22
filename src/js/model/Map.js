@@ -325,39 +325,42 @@ class Map {
 
 
   drawGrid(ctx, layers, xView, yView) {
+    if (this.hasLoaded) {
+      let isPlayerNearLava = false;
 
-    let isPlayerNearLava = false;
+      let cameraWidth = ctx.canvas.width + 200,
+        cameraHeight = ctx.canvas.height + 200;
 
-    let cameraWidth = ctx.canvas.width + 200,
-      cameraHeight = ctx.canvas.height + 200;
+      let startCol = Math.floor(xView / this.tsize);
+      let endCol = startCol + (cameraWidth / this.tsize);
 
-    let startCol = Math.floor(xView / this.tsize);
-    let endCol = startCol + (cameraWidth / this.tsize);
+      let startRow = Math.floor(yView / this.tsize);
+      let endRow = startRow + (cameraHeight / this.tsize);
+      let offsetX = -xView + startCol * this.tsize;
+      let offsetY = -yView + startRow * this.tsize;
 
-    let startRow = Math.floor(yView / this.tsize);
-    let endRow = startRow + (cameraHeight / this.tsize);
-    let offsetX = -xView + startCol * this.tsize;
-    let offsetY = -yView + startRow * this.tsize;
+      for (let r = startRow; r <= endRow; r++) {
+        for (let c = startCol; c <= endCol; c++) {
+          var tile = this.getTile(layers, r, c);
+          var x = (c - startCol) * this.tsize + offsetX;
+          var y = (r - startRow) * this.tsize + offsetY;
+          //Draw Grid
+          //ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
+          if (tile != 0) { // 0 => empty tile
+            this.sprites[`tile_${tile-1}`].drawAtCorner(ctx, x, y);
+            if ((tile == 3 || tile == 8) && layers == 1) isPlayerNearLava = true;
+          }
 
-    for (let r = startRow; r <= endRow; r++) {
-      for (let c = startCol; c <= endCol; c++) {
-        var tile = this.getTile(layers, r, c);
-        var x = (c - startCol) * this.tsize + offsetX;
-        var y = (r - startRow) * this.tsize + offsetY;
-        //Draw Grid
-        //ctx.strokeRect(Math.round(x), Math.round(y), 128, 128);
-        if (tile != 0) { // 0 => empty tile
-          this.sprites[`tile_${tile-1}`].drawAtCorner(ctx, x, y);
-          if ((tile == 3 || tile == 8) && layers == 1) isPlayerNearLava = true;
         }
-
+      }
+      if (isPlayerNearLava && !this.isBeingPlayed && layers == 1) {
+        this.lavaSound.play();
+      } else if (layers == 1) {
+        this.isBeingPlayed = false;
+        this.lavaSound.pause();
       }
     }
-    if (isPlayerNearLava && !this.isBeingPlayed && layers == 1) {
-      this.lavaSound.play();
-    } else if (layers == 1) {
-      this.isBeingPlayed = false;
-      this.lavaSound.pause();
-    }
   }
+
+  
 }
