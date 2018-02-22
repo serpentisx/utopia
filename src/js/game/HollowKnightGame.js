@@ -37,7 +37,7 @@ class HollowKnightGame extends Scene {
   }
 
   update(du) {
-    if (this.isStarted) {
+    if (this.isStarted && this.map.hasLoaded) {
       if (!this.isPaused) {
         this.entityManager.update(du, this.camera.worldRect.width, this.camera.worldRect.height, this.map);
         this.coinManager.update(du);
@@ -47,7 +47,7 @@ class HollowKnightGame extends Scene {
   }
 
   render(ctx) {
-    if (this.isStarted) {
+    if (this.isStarted && this.map.hasLoaded) {
       if (!this.isPaused) {
         this.map.render(ctx, this.camera.xView, this.camera.yView);
         this.entityManager.render(ctx, this.camera.xView, this.camera.yView);
