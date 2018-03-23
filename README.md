@@ -7,7 +7,7 @@ Final project in **Computer Game Programming (TÖL308G)** at University of Icela
 
 ## Authors
 
-\- [Alexandra Mjöll Young](https://github.com/meatyminx) <br>
+\- [Alexandra Mjöll Young](https://github.com/flexayoung) <br>
 \- [Huy Van Nguyen](https://github.com/serpentisx/) <br>
 \- [Nu Phan Quynh Do](https://github.com/mimiqkz/) <br>
 
